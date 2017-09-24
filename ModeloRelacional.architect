@@ -200,7 +200,7 @@
     <column id="COL52" populated="true" UUID="e4b3c49c-c72c-47d3-90a8-0449b82ec0e2" autoIncrement="false" autoIncrementSequenceName="escala_nota_seq" defaultValue="" name="inferior" nullable="0" physicalName="inferior" precision="5" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
      <remarks></remarks>
     </column>
-    <column id="COL53" populated="true" UUID="258ead65-ed58-4581-a2a3-d0f25ea6b585" autoIncrement="false" autoIncrementSequenceName="escala_nota_seq" defaultValue="" name="superior" nullable="0" physicalName="superior" precision="5" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
+    <column id="COL53" populated="true" UUID="258ead65-ed58-4581-a2a3-d0f25ea6b585" autoIncrement="false" autoIncrementSequenceName="escala_nota_seq_1" defaultValue="" name="superior" nullable="0" physicalName="superior" precision="5" referenceCount="1" scale="2" sourceDataTypeName="UserDefinedSQLType" type="2" userDefinedTypeUUID="115245ce-612c-4d6a-b559-6dd903dd959a" >
      <remarks></remarks>
     </column>
     <column id="COL54" populated="true" UUID="1538bea0-02fa-4c22-a765-df1526ca69ce" autoIncrement="false" autoIncrementSequenceName="classe_severidade_id_doenca_seq" defaultValue="" name="id_doenca" nullable="0" physicalName="id_doenca" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -235,7 +235,7 @@
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
  <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">

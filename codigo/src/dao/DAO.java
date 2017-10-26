@@ -1,15 +1,22 @@
 package dao;
 
 import java.util.ArrayList;
+import util.ConectaBanco;
 
-public interface DAO {
+public abstract class DAO {
 
-    ArrayList ler();
+    private final ConectaBanco conecta = ConectaBanco.getInstance();
 
-    boolean inserir();
+    public ConectaBanco getConecta() {
+        return conecta;
+    }
 
-    boolean alterar();
+    public abstract ArrayList ler();
 
-    boolean apagar();
+    public abstract boolean inserir(Object obj);
+
+    public abstract boolean alterar(Object obj);
+
+    public abstract boolean apagar(Object obj);
 
 }

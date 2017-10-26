@@ -1,10 +1,12 @@
 package visao;
 
 import dao.ConcreteDAOCreator;
+import dao.CulturaDAO;
 import dao.DAO;
 import static java.awt.event.KeyEvent.*;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import util.ModeloTabela;
 
 /**
  *
@@ -171,7 +173,7 @@ public class TelaCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        //new TelaNovaCategoria().setVisible(true);
+        TelaManterCultura.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

@@ -2,6 +2,14 @@ package modelo;
 
 public class Grao extends Cultura {
 
-    private char cor;
+    private String cor;
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
 
 }

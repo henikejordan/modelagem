@@ -1,5 +1,6 @@
 package visao;
 
+import util.AtualizaHora;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -47,7 +48,13 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelFundo = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
+        jMenuCadAmostragem = new javax.swing.JMenuItem();
+        jMenuCadCamera = new javax.swing.JMenuItem();
+        jMenuCadClasse = new javax.swing.JMenuItem();
         jMenuCadCultura = new javax.swing.JMenuItem();
+        jMenuCadDoenca = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -103,6 +110,33 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.setText("Cadastro");
         jMenuCadastros.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
+        jMenuCadAmostragem.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadAmostragem.setText("Amostragem");
+        jMenuCadAmostragem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadAmostragemActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadAmostragem);
+
+        jMenuCadCamera.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadCamera.setText("Câmera");
+        jMenuCadCamera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadCameraActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadCamera);
+
+        jMenuCadClasse.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadClasse.setText("Classe Severidade");
+        jMenuCadClasse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadClasseActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadClasse);
+
         jMenuCadCultura.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuCadCultura.setText("Cultura");
         jMenuCadCultura.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +146,26 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuCadCultura);
 
+        jMenuCadDoenca.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadDoenca.setText("Doença");
+        jMenuCadDoenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadDoencaActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadDoenca);
+
         jMenuBar.add(jMenuCadastros);
+
+        jMenu2.setMnemonic('O');
+        jMenu2.setText("Opções");
+        jMenu2.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
+        jMenuBar.add(jMenu2);
+
+        jMenu1.setMnemonic('R');
+        jMenu1.setText("Relatórios");
+        jMenu1.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
+        jMenuBar.add(jMenu1);
 
         jMenuSair.setText("Sair");
         jMenuSair.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -156,10 +209,6 @@ public class TelaInicial extends javax.swing.JFrame {
         //conex.desconecta();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuCadCulturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCulturaActionPerformed
-        TelaCultura.getInstance().setVisible(true);
-    }//GEN-LAST:event_jMenuCadCulturaActionPerformed
-
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             //conex.desconecta();
@@ -167,14 +216,40 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuSairMouseClicked
 
+    private void jMenuCadAmostragemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAmostragemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCadAmostragemActionPerformed
+
+    private void jMenuCadCameraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCameraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCadCameraActionPerformed
+
+    private void jMenuCadClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadClasseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCadClasseActionPerformed
+
+    private void jMenuCadCulturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCulturaActionPerformed
+        TelaCultura.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuCadCulturaActionPerformed
+
+    private void jMenuCadDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadDoencaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCadDoencaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelHorario;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuCadAmostragem;
+    private javax.swing.JMenuItem jMenuCadCamera;
+    private javax.swing.JMenuItem jMenuCadClasse;
     private javax.swing.JMenuItem jMenuCadCultura;
+    private javax.swing.JMenuItem jMenuCadDoenca;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables

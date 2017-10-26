@@ -2,23 +2,23 @@ package modelo;
 
 public abstract class Cultura {
 
-    private char nome;
+    private String nome;
 
-    private char descricao;
+    private String descricao;
 
-    public char getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(char nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public char getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(char descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

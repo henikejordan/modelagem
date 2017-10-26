@@ -4,7 +4,7 @@ import visao.TelaInicial;
 
 /**
  *
- * @author henike
+ * @author Henike
  */
 public class Principal {
 

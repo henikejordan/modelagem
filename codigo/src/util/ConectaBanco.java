@@ -37,6 +37,10 @@ public final class ConectaBanco {
         return instance;
     }
 
+    public Connection getConnection() {
+        return conn;
+    }
+
     public ResultSet executaSQL(String sql) {
         try {
             stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);

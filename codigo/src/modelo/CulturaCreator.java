@@ -2,6 +2,6 @@ package modelo;
 
 public interface CulturaCreator {
 
-    public Cultura factoryMethod();
+    public Cultura factoryMethod(String tipo);
 
 }

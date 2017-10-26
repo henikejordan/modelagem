@@ -3,11 +3,7 @@ package visao;
 import dao.ConcreteDAOCreator;
 import dao.DAO;
 import javax.swing.JOptionPane;
-import modelo.ConcreteCulturaCreator;
 import modelo.Cultura;
-import modelo.Folha;
-import modelo.Fruto;
-import modelo.Grao;
 
 /**
  *
@@ -41,27 +37,11 @@ public class TelaManterCultura extends javax.swing.JFrame {
     public void preencherCampos(int id) {
         opcao = "alterar";
         DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
-        Object cultura = daoCultura.ler(id);
-
-        if (cultura instanceof Folha) {
-            Folha folha = (Folha) cultura;
-            jTextFieldNome.setText(folha.getNome());
-            jComboBoxTipo.setSelectedItem("Folha");
-            jTextFieldCor.setText("");
-            jTextAreaDesc.setText(folha.getDescricao());
-        } else if (cultura instanceof Fruto) {
-            Fruto fruto = (Fruto) cultura;
-            jTextFieldNome.setText(fruto.getNome());
-            jComboBoxTipo.setSelectedItem("Fruto");
-            jTextFieldCor.setText(fruto.getCor());
-            jTextAreaDesc.setText(fruto.getDescricao());
-        } else {
-            Grao grao = (Grao) cultura;
-            jTextFieldNome.setText(grao.getNome());
-            jComboBoxTipo.setSelectedItem("Grão");
-            jTextFieldCor.setText(grao.getCor());
-            jTextAreaDesc.setText(grao.getDescricao());
-        }
+        Cultura cultura = (Cultura) daoCultura.ler(id);
+        jTextFieldNome.setText(cultura.getNome());
+        jComboBoxTipo.setSelectedItem(cultura.getTipo());
+        jTextFieldCor.setText(cultura.getCor());
+        jTextAreaDesc.setText(cultura.getDescricao());
     }
 
     public void limparCampos() {
@@ -226,18 +206,11 @@ public class TelaManterCultura extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
-        Cultura cultura = new ConcreteCulturaCreator().factoryMethod(jComboBoxTipo.getSelectedItem().toString());
+        Cultura cultura = new Cultura();
         cultura.setNome(jTextFieldNome.getText());
+        cultura.setTipo(jComboBoxTipo.getSelectedItem().toString());
+        cultura.setCor(jTextFieldCor.getText());
         cultura.setDescricao(jTextAreaDesc.getText());
-
-        if (cultura instanceof Fruto) {
-            Fruto fruto = (Fruto) cultura;
-            fruto.setCor(jTextFieldCor.getText());
-        } else if (cultura instanceof Grao) {
-            Grao grao = (Grao) cultura;
-            grao.setCor(jTextFieldCor.getText());
-        }
-
         if ("criar".equals(opcao)) {
             if (daoCultura.inserir(cultura)) {
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");

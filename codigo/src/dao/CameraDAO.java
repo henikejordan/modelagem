@@ -5,7 +5,13 @@ import java.util.ArrayList;
 public class CameraDAO extends DAO {
 
     @Override
-    public ArrayList ler() {
+    public ArrayList lerTodos() {
+        ArrayList dados = new ArrayList();
+        return dados;
+    }
+
+    @Override
+    public Object ler(int id) {
         return null;
     }
 

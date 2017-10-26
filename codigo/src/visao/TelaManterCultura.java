@@ -5,6 +5,7 @@ import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.ConcreteCulturaCreator;
 import modelo.Cultura;
+import modelo.Folha;
 import modelo.Fruto;
 import modelo.Grao;
 
@@ -15,7 +16,7 @@ import modelo.Grao;
 public class TelaManterCultura extends javax.swing.JFrame {
 
     private static TelaManterCultura instance;
-    private Cultura cultura;
+    private String opcao;
 
     private TelaManterCultura() {
         initComponents();
@@ -35,6 +36,40 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jComboBoxTipo.addItem("Folha");
         jComboBoxTipo.addItem("Fruto");
         jComboBoxTipo.addItem("Grão");
+    }
+
+    public void preencherCampos(int id) {
+        opcao = "alterar";
+        DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
+        Object cultura = daoCultura.ler(id);
+
+        if (cultura instanceof Folha) {
+            Folha folha = (Folha) cultura;
+            jTextFieldNome.setText(folha.getNome());
+            jComboBoxTipo.setSelectedItem("Folha");
+            jTextFieldCor.setText("");
+            jTextAreaDesc.setText(folha.getDescricao());
+        } else if (cultura instanceof Fruto) {
+            Fruto fruto = (Fruto) cultura;
+            jTextFieldNome.setText(fruto.getNome());
+            jComboBoxTipo.setSelectedItem("Fruto");
+            jTextFieldCor.setText(fruto.getCor());
+            jTextAreaDesc.setText(fruto.getDescricao());
+        } else {
+            Grao grao = (Grao) cultura;
+            jTextFieldNome.setText(grao.getNome());
+            jComboBoxTipo.setSelectedItem("Grão");
+            jTextFieldCor.setText(grao.getCor());
+            jTextAreaDesc.setText(grao.getDescricao());
+        }
+    }
+
+    public void limparCampos() {
+        opcao = "criar";
+        jTextFieldNome.setText("");
+        jComboBoxTipo.setSelectedItem("");
+        jTextFieldCor.setText("");
+        jTextAreaDesc.setText("");
     }
 
     /**
@@ -71,7 +106,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Nova cultura");
+        jLabel1.setText("Manter cultura");
 
         jTextAreaDesc.setColumns(20);
         jTextAreaDesc.setLineWrap(true);
@@ -106,10 +141,6 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +163,17 @@ public class TelaManterCultura extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jComboBoxTipo, 0, 172, Short.MAX_VALUE))))
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jTextFieldCor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +226,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
-        cultura = new ConcreteCulturaCreator().factoryMethod(jComboBoxTipo.getSelectedItem().toString());
+        Cultura cultura = new ConcreteCulturaCreator().factoryMethod(jComboBoxTipo.getSelectedItem().toString());
         cultura.setNome(jTextFieldNome.getText());
         cultura.setDescricao(jTextAreaDesc.getText());
 
@@ -203,8 +238,14 @@ public class TelaManterCultura extends javax.swing.JFrame {
             grao.setCor(jTextFieldCor.getText());
         }
 
-        if (daoCultura.inserir(cultura)) {
-            JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!");
+        if ("criar".equals(opcao)) {
+            if (daoCultura.inserir(cultura)) {
+                JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
+            }
+        } else {
+            if (daoCultura.alterar(cultura)) {
+                JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
+            }
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

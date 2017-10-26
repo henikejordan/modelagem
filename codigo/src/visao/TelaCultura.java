@@ -1,7 +1,6 @@
 package visao;
 
 import dao.ConcreteDAOCreator;
-import dao.CulturaDAO;
 import dao.DAO;
 import static java.awt.event.KeyEvent.*;
 import javax.swing.JTable;
@@ -13,15 +12,15 @@ import util.ModeloTabela;
  * @author Henike
  */
 public class TelaCultura extends javax.swing.JFrame {
-
+    
     private static TelaCultura instance;
-
+    
     private TelaCultura() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
         this.preencherTabela();
     }
-
+    
     public static TelaCultura getInstance() {
         if (instance == null) {
             instance = new TelaCultura();
@@ -173,6 +172,7 @@ public class TelaCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        TelaManterCultura.getInstance().limparCampos();
         TelaManterCultura.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
@@ -182,12 +182,11 @@ public class TelaCultura extends javax.swing.JFrame {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
-            String nome = "" + tabela.getValueAt(tabela.getSelectedRow(), 0);
-            if (nome != null) {
-                //new TelaAlterarCategoria(nome).setVisible(true);
-            }
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+            TelaManterCultura.getInstance().preencherCampos(id);
+            TelaManterCultura.getInstance().setVisible(true);
         } catch (ArrayIndexOutOfBoundsException ex) {
-
+            
         }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
@@ -205,7 +204,7 @@ public class TelaCultura extends javax.swing.JFrame {
 
     private void tabelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaKeyPressed
         if (evt.getKeyCode() == VK_ENTER) {
-
+            
         } else if (evt.getKeyCode() == VK_ESCAPE) {
             jTextFieldPesqCat.requestFocus();
         }
@@ -213,21 +212,23 @@ public class TelaCultura extends javax.swing.JFrame {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         if (jTextFieldPesqCat.getText().equals("")) {
-
+            
         } else {
-
+            
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
-
+    
     private void preencherTabela() {
         DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
-        ModeloTabela modelotabela = new ModeloTabela(daoCultura.ler(), new String[]{"Nome", "Tipo"});
-
+        ModeloTabela modelotabela = new ModeloTabela(daoCultura.lerTodos(), new String[]{"Id Cultura", "Nome", "Tipo"});
+        
         tabela.setModel(modelotabela);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(203);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(202);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
         tabela.getColumnModel().getColumn(0).setResizable(false);
         tabela.getColumnModel().getColumn(1).setResizable(false);
+        tabela.getColumnModel().getColumn(2).setResizable(false);
         tabela.getTableHeader().setReorderingAllowed(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

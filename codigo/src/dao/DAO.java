@@ -11,7 +11,9 @@ public abstract class DAO {
         return conecta;
     }
 
-    public abstract ArrayList ler();
+    public abstract ArrayList lerTodos();
+
+    public abstract Object ler(int id);
 
     public abstract boolean inserir(Object obj);
 

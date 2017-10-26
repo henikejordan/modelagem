@@ -1,5 +1,8 @@
 package modelo;
 
+import dao.ClasseSeveridadeDAO;
+import dao.DAOCreator;
+
 public class ClasseSeveridade extends MedicaoVisual {
 
     private char descricao;

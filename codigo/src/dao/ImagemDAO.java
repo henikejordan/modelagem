@@ -1,9 +1,11 @@
-package modelo;
+package dao;
 
-public class AmostragemDAO extends DAO {
+import java.util.ArrayList;
 
-    public boolean ler() {
-        return false;
+public class ImagemDAO implements DAO {
+
+    public ArrayList ler() {
+        return null;
     }
 
     public boolean inserir() {

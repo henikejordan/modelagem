@@ -1,5 +1,8 @@
 package modelo;
 
+import dao.CameraDAO;
+import dao.DAOCreator;
+
 public class Camera {
 
     private float marca;

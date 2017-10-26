@@ -1,5 +1,8 @@
 package modelo;
 
+import dao.DAOCreator;
+import dao.AmostragemDAO;
+
 public class Amostragem {
 
     private char tipo;

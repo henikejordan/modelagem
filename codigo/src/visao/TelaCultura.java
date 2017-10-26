@@ -1,7 +1,8 @@
 package visao;
 
+import dao.ConcreteDAOCreator;
+import dao.DAO;
 import static java.awt.event.KeyEvent.*;
-import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -11,14 +12,19 @@ import javax.swing.ListSelectionModel;
  */
 public class TelaCultura extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TelaCadastroCategoria
-     */
-    public TelaCultura() {
+    private static TelaCultura instance;
+
+    private TelaCultura() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
+        this.preencherTabela();
+    }
 
-        this.preencherTabela(null);
+    public static TelaCultura getInstance() {
+        if (instance == null) {
+            instance = new TelaCultura();
+        }
+        return instance;
     }
 
     /**
@@ -211,52 +217,19 @@ public class TelaCultura extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
-    private void preencherTabela(String sql) {
-        ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Nome"};
-        //do {
-        dados.add(new Object[]{"Qualquer"});
-        //} while (false);
+    private void preencherTabela() {
+        DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
+        ModeloTabela modelotabela = new ModeloTabela(daoCultura.ler(), new String[]{"Nome", "Tipo"});
 
-        ModeloTabela modelotabela = new ModeloTabela(dados, colunas);
         tabela.setModel(modelotabela);
-        //if (false) {
-        //tabela.getColumnModel().getColumn(0).setPreferredWidth(390);
-        //} else {
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(406);
-        //}
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(203);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(202);
         tabela.getColumnModel().getColumn(0).setResizable(false);
+        tabela.getColumnModel().getColumn(1).setResizable(false);
         tabela.getTableHeader().setReorderingAllowed(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCultura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new TelaCultura().setVisible(true);
-        });
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;

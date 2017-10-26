@@ -10,7 +10,9 @@ import javax.swing.JOptionPane;
  */
 public class TelaInicial extends javax.swing.JFrame {
 
-    public TelaInicial() {
+    private static TelaInicial instance;
+
+    private TelaInicial() {
         initComponents();
 
         //pegar resolução da tela
@@ -20,6 +22,13 @@ public class TelaInicial extends javax.swing.JFrame {
         //setar a posição e tamanho da label
         jLabelFundo.setBounds(0, 0, d.width - 12, d.height - 112);
         AtualizaHora.start(jLabelHorario);
+    }
+
+    public static TelaInicial getInstance() {
+        if (instance == null) {
+            instance = new TelaInicial();
+        }
+        return instance;
     }
 
     /**
@@ -38,7 +47,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelFundo = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
-        jMenuCadItemProd = new javax.swing.JMenuItem();
+        jMenuCadCultura = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -94,14 +103,14 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.setText("Cadastro");
         jMenuCadastros.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jMenuCadItemProd.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuCadItemProd.setText("Produto");
-        jMenuCadItemProd.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadCultura.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jMenuCadCultura.setText("Cultura");
+        jMenuCadCultura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCadItemProdActionPerformed(evt);
+                jMenuCadCulturaActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuCadItemProd);
+        jMenuCadastros.add(jMenuCadCultura);
 
         jMenuBar.add(jMenuCadastros);
 
@@ -147,9 +156,9 @@ public class TelaInicial extends javax.swing.JFrame {
         //conex.desconecta();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuCadItemProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadItemProdActionPerformed
-        //new TelaCadastroProduto().setVisible(true);
-    }//GEN-LAST:event_jMenuCadItemProdActionPerformed
+    private void jMenuCadCulturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCulturaActionPerformed
+        TelaCultura.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuCadCulturaActionPerformed
 
     private void jMenuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSairMouseClicked
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
@@ -158,35 +167,6 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuSairMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new TelaInicial().setVisible(true);
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -194,7 +174,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFundo;
     private javax.swing.JLabel jLabelHorario;
     private javax.swing.JMenuBar jMenuBar;
-    private javax.swing.JMenuItem jMenuCadItemProd;
+    private javax.swing.JMenuItem jMenuCadCultura;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables

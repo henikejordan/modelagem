@@ -6,10 +6,20 @@ public abstract class Cultura {
 
     private char descricao;
 
-    private Doenca[] doenca;
+    public char getNome() {
+        return nome;
+    }
 
-    private CulturaDAO culturaDAO;
+    public void setNome(char nome) {
+        this.nome = nome;
+    }
 
-    private DAOCreator dAOCreator;
+    public char getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(char descricao) {
+        this.descricao = descricao;
+    }
 
 }

@@ -1,5 +1,8 @@
 package modelo;
 
+import dao.DAOCreator;
+import dao.ImagemDAO;
+
 public abstract class Imagem {
 
     private char nome;

@@ -1,7 +1,7 @@
 package modelo;
 
 import dao.DoencaDAO;
-import dao.DAOCreator;
+import dao.CreatorDAO;
 
 public class Doenca {
 
@@ -17,7 +17,7 @@ public class Doenca {
 
     private DoencaDAO doencaDAO;
 
-    private DAOCreator dAOCreator;
+    private CreatorDAO dAOCreator;
 
     private Quantificacao[] quantificacao;
 

@@ -1,6 +1,6 @@
 package visao;
 
-import dao.ConcreteDAOCreator;
+import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
@@ -12,7 +12,7 @@ import modelo.Cultura;
 public class TelaManterCultura extends javax.swing.JFrame {
 
     private static TelaManterCultura instance;
-    private String opcao;
+    private int id;
 
     private TelaManterCultura() {
         initComponents();
@@ -35,9 +35,9 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }
 
     public void preencherCampos(int id) {
-        opcao = "alterar";
-        DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
-        Cultura cultura = (Cultura) daoCultura.ler(id);
+        this.id = id;
+        DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        Cultura cultura = (Cultura) culturaDao.ler(id);
         jTextFieldNome.setText(cultura.getNome());
         jComboBoxTipo.setSelectedItem(cultura.getTipo());
         jTextFieldCor.setText(cultura.getCor());
@@ -45,7 +45,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }
 
     public void limparCampos() {
-        opcao = "criar";
+        id = 0;
         jTextFieldNome.setText("");
         jComboBoxTipo.setSelectedItem("");
         jTextFieldCor.setText("");
@@ -68,7 +68,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDesc = new javax.swing.JTextArea();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jComboBoxTipo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -93,10 +93,10 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jTextAreaDesc.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDesc);
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -104,12 +104,6 @@ public class TelaManterCultura extends javax.swing.JFrame {
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);
-            }
-        });
-
-        jComboBoxTipo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jComboBoxTipoMouseExited(evt);
             }
         });
 
@@ -133,7 +127,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonSalvar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonCancelar))
+                                .addComponent(jButtonSair))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -179,7 +173,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonSair))
                 .addContainerGap())
         );
 
@@ -205,37 +199,30 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        DAO daoCultura = new ConcreteDAOCreator().factoryMethod("Cultura");
+        DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
         Cultura cultura = new Cultura();
+        cultura.setIdCultura(id);
         cultura.setNome(jTextFieldNome.getText());
         cultura.setTipo(jComboBoxTipo.getSelectedItem().toString());
         cultura.setCor(jTextFieldCor.getText());
         cultura.setDescricao(jTextAreaDesc.getText());
-        if ("criar".equals(opcao)) {
-            if (daoCultura.inserir(cultura)) {
+        if (id == 0) {
+            if (culturaDao.inserir(cultura)) {
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
         } else {
-            if (daoCultura.alterar(cultura)) {
+            if (culturaDao.alterar(cultura)) {
                 JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
             }
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jComboBoxTipoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMouseExited
-        if (jComboBoxTipo.getSelectedItem().toString().equals("Folha")) {
-            jTextFieldCor.setEnabled(false);
-        } else {
-            jTextFieldCor.setEnabled(true);
-        }
-    }//GEN-LAST:event_jComboBoxTipoMouseExited
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxTipo;
     private javax.swing.JLabel jLabel1;

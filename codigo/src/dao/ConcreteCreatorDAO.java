@@ -1,6 +1,6 @@
 package dao;
 
-public class ConcreteDAOCreator implements DAOCreator {
+public class ConcreteCreatorDAO implements CreatorDAO {
 
     @Override
     public DAO factoryMethod(String tipo) {

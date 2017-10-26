@@ -26,7 +26,7 @@ public class ImagemDAO extends DAO {
     }
 
     @Override
-    public boolean apagar(Object obj) {
+    public boolean apagar(int id) {
         return false;
     }
 

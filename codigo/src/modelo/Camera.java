@@ -1,7 +1,7 @@
 package modelo;
 
 import dao.CameraDAO;
-import dao.DAOCreator;
+import dao.CreatorDAO;
 
 public class Camera {
 
@@ -21,6 +21,6 @@ public class Camera {
 
     private CameraDAO cameraDAO;
 
-    private DAOCreator dAOCreator;
+    private CreatorDAO dAOCreator;
 
 }

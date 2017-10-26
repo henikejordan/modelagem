@@ -1,7 +1,7 @@
 package modelo;
 
-import dao.DAOCreator;
 import dao.AmostragemDAO;
+import dao.CreatorDAO;
 
 public class Amostragem {
 
@@ -19,6 +19,6 @@ public class Amostragem {
 
     private AmostragemDAO amostragemDAO;
 
-    private DAOCreator dAOCreator;
+    private CreatorDAO dAOCreator;
 
 }

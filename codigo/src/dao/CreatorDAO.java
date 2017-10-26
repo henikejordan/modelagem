@@ -1,6 +1,6 @@
 package dao;
 
-public interface DAOCreator {
+public interface CreatorDAO {
 
     public DAO factoryMethod(String tipo);
 

@@ -1,7 +1,7 @@
 package modelo;
 
 import dao.ClasseSeveridadeDAO;
-import dao.DAOCreator;
+import dao.CreatorDAO;
 
 public class ClasseSeveridade extends MedicaoVisual {
 
@@ -13,6 +13,6 @@ public class ClasseSeveridade extends MedicaoVisual {
 
     private ClasseSeveridadeDAO classeSeveridadeDAO;
 
-    private DAOCreator dAOCreator;
+    private CreatorDAO dAOCreator;
 
 }

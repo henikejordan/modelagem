@@ -1,7 +1,7 @@
 package modelo;
 
-import dao.DAOCreator;
 import dao.ImagemDAO;
+import dao.CreatorDAO;
 
 public abstract class Imagem {
 
@@ -21,7 +21,7 @@ public abstract class Imagem {
 
     private ImagemDAO imagemDAO;
 
-    private DAOCreator dAOCreator;
+    private CreatorDAO dAOCreator;
 
     public void carregaImagem() {
 

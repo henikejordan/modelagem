@@ -17,10 +17,10 @@ public class CulturaDAO extends DAO {
             do {
                 dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
             } while (resultado.next());
-            return dados;
         } catch (SQLException ex) {
-            return null;
+            //
         }
+        return dados;
     }
 
     @Override
@@ -33,10 +33,11 @@ public class CulturaDAO extends DAO {
             cultura.setTipo(resultado.getString("tipo"));
             cultura.setCor(resultado.getString("cor"));
             cultura.setDescricao(resultado.getString("descricao"));
-            return cultura;
+
         } catch (SQLException ex) {
-            return null;
+            //
         }
+        return cultura;
     }
 
     @Override
@@ -58,12 +59,33 @@ public class CulturaDAO extends DAO {
 
     @Override
     public boolean alterar(Object obj) {
-        return false;
+        Cultura cultura = (Cultura) obj;
+        PreparedStatement pst;
+        try {
+            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
+            pst.setString(1, cultura.getNome());
+            pst.setString(2, cultura.getTipo());
+            pst.setString(3, cultura.getCor());
+            pst.setString(4, cultura.getDescricao());
+            pst.setInt(5, cultura.getIdCultura());
+            pst.execute();
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
     }
 
     @Override
-    public boolean apagar(Object obj) {
-        return false;
+    public boolean apagar(int id) {
+        PreparedStatement pst;
+        try {
+            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            pst.setInt(1, id);
+            pst.execute();
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
     }
 
 }

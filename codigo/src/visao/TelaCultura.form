@@ -66,8 +66,10 @@
                                       <Component id="jButtonNovo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButtonAlterar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButtonExcluir" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButtonSair" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane2" alignment="0" min="-2" pref="412" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -105,7 +107,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonNovo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -137,20 +140,15 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaMouseClicked"/>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaMouseEntered"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tabelaKeyPressed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButtonCancelar">
+        <Component class="javax.swing.JButton" name="jButtonSair">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSairActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAlterar">
@@ -180,8 +178,13 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonExcluir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Excluir"/>
+          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPesquisarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

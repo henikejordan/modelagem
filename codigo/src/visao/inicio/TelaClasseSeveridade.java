@@ -15,11 +15,13 @@ import visao.manter.TelaManterCultura;
 public class TelaClasseSeveridade extends javax.swing.JFrame {
 
     private static TelaClasseSeveridade instance;
+    private final DAO dao;
 
     private TelaClasseSeveridade() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        this.preencherTabela();
+        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        preencherTabela();
     }
 
     public static TelaClasseSeveridade getInstance() {
@@ -181,11 +183,10 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        if (JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             try {
                 int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-                DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
-                dao.apagar(id);
+                dao.excluir(id);
                 this.preencherTabela();
             } catch (ArrayIndexOutOfBoundsException ex) {
 
@@ -198,10 +199,8 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    public void preencherTabela() {
-        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
-        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{"Id Cultura", "Nome", "Tipo"});
-
+    public final void preencherTabela() {
+        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);

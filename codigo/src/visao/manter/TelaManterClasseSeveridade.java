@@ -13,11 +13,13 @@ import visao.inicio.TelaClasseSeveridade;
 public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     private static TelaManterClasseSeveridade instance;
+    private final DAO dao;
     private int id;
 
     private TelaManterClasseSeveridade() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
+        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
         preencherComboBox();
     }
 
@@ -37,7 +39,6 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
         Cultura cultura = (Cultura) dao.ler(id);
         jTextFieldNome.setText(cultura.getNome());
         jComboBoxTipo.setSelectedItem(cultura.getTipo());
@@ -200,7 +201,6 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
         Cultura cultura = new Cultura();
         cultura.setIdCultura(id);
         cultura.setNome(jTextFieldNome.getText());

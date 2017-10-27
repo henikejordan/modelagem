@@ -76,7 +76,7 @@ public class AmostragemDAO extends DAO {
     }
 
     @Override
-    public boolean apagar(int id) {
+    public boolean excluir(int id) {
         PreparedStatement pst;
         try {
             pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");

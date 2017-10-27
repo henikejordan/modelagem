@@ -1,28 +1,29 @@
-package visao;
+package visao.manter;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
+import visao.inicio.TelaCamera;
 
 /**
  *
  * @author Henike
  */
-public class TelaManterCultura extends javax.swing.JFrame {
+public class TelaManterCamera extends javax.swing.JFrame {
 
-    private static TelaManterCultura instance;
+    private static TelaManterCamera instance;
     private int id;
 
-    private TelaManterCultura() {
+    private TelaManterCamera() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
         preencherComboBox();
     }
 
-    public static TelaManterCultura getInstance() {
+    public static TelaManterCamera getInstance() {
         if (instance == null) {
-            instance = new TelaManterCultura();
+            instance = new TelaManterCamera();
         }
         return instance;
     }
@@ -36,8 +37,8 @@ public class TelaManterCultura extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
-        Cultura cultura = (Cultura) culturaDao.ler(id);
+        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        Cultura cultura = (Cultura) dao.ler(id);
         jTextFieldNome.setText(cultura.getNome());
         jComboBoxTipo.setSelectedItem(cultura.getTipo());
         jTextFieldCor.setText(cultura.getCor());
@@ -199,7 +200,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
         Cultura cultura = new Cultura();
         cultura.setIdCultura(id);
         cultura.setNome(jTextFieldNome.getText());
@@ -207,11 +208,13 @@ public class TelaManterCultura extends javax.swing.JFrame {
         cultura.setCor(jTextFieldCor.getText());
         cultura.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
-            if (culturaDao.inserir(cultura)) {
+            if (dao.inserir(cultura)) {
+                TelaCamera.getInstance().preencherTabela();
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
         } else {
-            if (culturaDao.alterar(cultura)) {
+            if (dao.alterar(cultura)) {
+                TelaCamera.getInstance().preencherTabela();
                 JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
             }
         }

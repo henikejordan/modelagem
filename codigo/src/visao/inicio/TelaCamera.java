@@ -1,4 +1,4 @@
-package visao;
+package visao.inicio;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
@@ -6,24 +6,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import util.ModeloTabela;
+import visao.manter.TelaManterCultura;
 
 /**
  *
  * @author Henike
  */
-public class TelaCultura extends javax.swing.JFrame {
+public class TelaCamera extends javax.swing.JFrame {
 
-    private static TelaCultura instance;
+    private static TelaCamera instance;
 
-    private TelaCultura() {
+    private TelaCamera() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
         this.preencherTabela();
     }
 
-    public static TelaCultura getInstance() {
+    public static TelaCamera getInstance() {
         if (instance == null) {
-            instance = new TelaCultura();
+            instance = new TelaCamera();
         }
         return instance;
     }
@@ -183,9 +184,9 @@ public class TelaCultura extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente sair?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             try {
                 int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-                DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
-                culturaDao.apagar(id);
-                JOptionPane.showMessageDialog(null, "Cultura excluída com sucesso!");
+                DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+                dao.apagar(id);
+                this.preencherTabela();
             } catch (ArrayIndexOutOfBoundsException ex) {
 
             }
@@ -197,9 +198,9 @@ public class TelaCultura extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private void preencherTabela() {
-        DAO culturaDao = new ConcreteCreatorDAO().factoryMethod("Cultura");
-        ModeloTabela modelotabela = new ModeloTabela(culturaDao.lerTodos(), new String[]{"Id Cultura", "Nome", "Tipo"});
+    public void preencherTabela() {
+        DAO dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{"Id Cultura", "Nome", "Tipo"});
 
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);

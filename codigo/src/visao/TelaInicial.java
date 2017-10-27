@@ -1,9 +1,14 @@
 package visao;
 
+import visao.inicio.TelaCultura;
 import util.AtualizaHora;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import visao.inicio.TelaAmostragem;
+import visao.inicio.TelaCamera;
+import visao.inicio.TelaClasseSeveridade;
+import visao.inicio.TelaDoenca;
 
 /**
  *
@@ -217,15 +222,15 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairMouseClicked
 
     private void jMenuCadAmostragemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAmostragemActionPerformed
-        // TODO add your handling code here:
+        TelaAmostragem.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadAmostragemActionPerformed
 
     private void jMenuCadCameraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCameraActionPerformed
-        // TODO add your handling code here:
+        TelaCamera.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadCameraActionPerformed
 
     private void jMenuCadClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadClasseActionPerformed
-        // TODO add your handling code here:
+        TelaClasseSeveridade.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadClasseActionPerformed
 
     private void jMenuCadCulturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadCulturaActionPerformed
@@ -233,7 +238,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadCulturaActionPerformed
 
     private void jMenuCadDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadDoencaActionPerformed
-        // TODO add your handling code here:
+        TelaDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

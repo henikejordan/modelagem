@@ -7,13 +7,13 @@ public class ConcreteCreatorDAO implements CreatorDAO {
         switch (tipo) {
             case "Amostragem":
                 return new AmostragemDAO();
-            case "Camera":
+            case "Câmera":
                 return new CameraDAO();
             case "ClasseSeveridade":
                 return new ClasseSeveridadeDAO();
             case "Cultura":
                 return new CulturaDAO();
-            case "Doenca":
+            case "Doença":
                 return new DoencaDAO();
             case "Imagem":
                 return new ImagemDAO();

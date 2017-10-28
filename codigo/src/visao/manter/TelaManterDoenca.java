@@ -2,8 +2,10 @@ package visao.manter;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
+import modelo.Doenca;
 import visao.inicio.TelaDoenca;
 
 /**
@@ -11,46 +13,51 @@ import visao.inicio.TelaDoenca;
  * @author Henike
  */
 public class TelaManterDoenca extends javax.swing.JFrame {
-
+    
     private static TelaManterDoenca instance;
-    private final DAO dao;
+    private final DAO daoDoenca, daoCultura;
+    private final ArrayList<Cultura> culturas;
     private int id;
-
+    
     private TelaManterDoenca() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        daoDoenca = new ConcreteCreatorDAO().factoryMethod("Doença");
+        daoCultura = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        culturas = daoCultura.lerTodos();
         preencherComboBox();
     }
-
+    
     public static TelaManterDoenca getInstance() {
         if (instance == null) {
             instance = new TelaManterDoenca();
         }
         return instance;
     }
-
+    
     private void preencherComboBox() {
-        jComboBoxTipo.addItem("");
-        jComboBoxTipo.addItem("Folha");
-        jComboBoxTipo.addItem("Fruto");
-        jComboBoxTipo.addItem("Grão");
+        jComboBoxCultura.addItem("");
+        for (Cultura cultura : culturas) {
+            jComboBoxCultura.addItem(cultura.getNome());
+        }
     }
-
+    
     public void preencherCampos(int id) {
         this.id = id;
-        Cultura cultura = (Cultura) dao.ler(id);
-        jTextFieldNome.setText(cultura.getNome());
-        jComboBoxTipo.setSelectedItem(cultura.getTipo());
-        jTextFieldCor.setText(cultura.getCor());
-        jTextAreaDesc.setText(cultura.getDescricao());
+        Doenca doenca = (Doenca) daoDoenca.ler(id);
+        jTextFieldNome.setText(doenca.getNome());
+        jTextFieldTipo.setText(doenca.getTipo());
+        jTextFieldCarac.setText(doenca.getCaracteristica());
+        jComboBoxCultura.setSelectedItem(doenca.getCultura().getNome());
+        jTextAreaDesc.setText(doenca.getDescricao());
     }
-
+    
     public void limparCampos() {
         id = 0;
         jTextFieldNome.setText("");
-        jComboBoxTipo.setSelectedItem("");
-        jTextFieldCor.setText("");
+        jTextFieldTipo.setText("");
+        jTextFieldCarac.setText("");
+        jComboBoxCultura.setSelectedItem("");
         jTextAreaDesc.setText("");
     }
 
@@ -72,13 +79,15 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         jTextAreaDesc = new javax.swing.JTextArea();
         jButtonSair = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
-        jComboBoxTipo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldCor = new javax.swing.JTextField();
+        jTextFieldCarac = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jTextFieldTipo = new javax.swing.JTextField();
+        jComboBoxCultura = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nova cultura");
+        setTitle("Manter doença");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -88,7 +97,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Manter cultura");
+        jLabel1.setText("Manter doença");
 
         jTextAreaDesc.setColumns(20);
         jTextAreaDesc.setLineWrap(true);
@@ -111,7 +120,9 @@ public class TelaManterDoenca extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
-        jLabel4.setText("Cor:");
+        jLabel4.setText("Característica:");
+
+        jLabel6.setText("Cultura:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,8 +132,8 @@ public class TelaManterDoenca extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addContainerGap(342, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,17 +150,22 @@ public class TelaManterDoenca extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jComboBoxTipo, 0, 172, Short.MAX_VALUE))))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldCor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jTextFieldTipo)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldCarac, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxCultura, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(26, 26, 26))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 140, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,11 +179,15 @@ public class TelaManterDoenca extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCarac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCultura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,21 +221,22 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        Cultura cultura = new Cultura();
-        cultura.setIdCultura(id);
-        cultura.setNome(jTextFieldNome.getText());
-        cultura.setTipo(jComboBoxTipo.getSelectedItem().toString());
-        cultura.setCor(jTextFieldCor.getText());
-        cultura.setDescricao(jTextAreaDesc.getText());
+        Doenca doenca = new Doenca();
+        doenca.setIdDoenca(id);
+        doenca.setNome(jTextFieldNome.getText());
+        doenca.setTipo(jTextFieldTipo.getText());
+        doenca.setCaracteristica(jTextFieldCarac.getText());
+        doenca.setCultura(culturas.get(jComboBoxCultura.getSelectedIndex()));
+        doenca.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
-            if (dao.inserir(cultura)) {
+            if (daoDoenca.inserir(doenca)) {
                 TelaDoenca.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
+                JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
             }
         } else {
-            if (dao.alterar(cultura)) {
+            if (daoDoenca.alterar(doenca)) {
                 TelaDoenca.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
+                JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
             }
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -227,17 +248,19 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBoxTipo;
+    private javax.swing.JComboBox<String> jComboBoxCultura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDesc;
-    private javax.swing.JTextField jTextFieldCor;
+    private javax.swing.JTextField jTextFieldCarac;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldTipo;
     // End of variables declaration//GEN-END:variables
 
 }

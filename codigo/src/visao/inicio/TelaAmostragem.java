@@ -5,7 +5,7 @@ import dao.DAO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import util.ModeloTabela;
+import util.tabela.ModeloTabela;
 import visao.manter.TelaManterCultura;
 
 /**
@@ -47,7 +47,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonNovo = new javax.swing.JButton();
-        jTextFieldPesqCat = new javax.swing.JTextField();
+        jTextFieldPesq = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonPesquisar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
@@ -116,7 +116,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
                                     .addComponent(jButtonSair))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTextFieldPesqCat, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButtonPesquisar)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -133,7 +133,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesqCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,7 +223,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextFieldPesqCat;
+    private javax.swing.JTextField jTextFieldPesq;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 

@@ -1,7 +1,8 @@
-package util;
+package util.tabela;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import modelo.Cultura;
 
 /**
  *
@@ -13,24 +14,16 @@ public class ModeloTabela extends AbstractTableModel {
     private String[] colunas = null;
 
     public ModeloTabela(ArrayList lin, String[] col) {
-        this.setLinhas(lin);
-        this.setColunas(col);
+        this.linhas = lin;
+        this.colunas = col;
     }
 
     public ArrayList getLinhas() {
         return linhas;
     }
 
-    private void setLinhas(ArrayList linhas) {
-        this.linhas = linhas;
-    }
-
     public String[] getColunas() {
         return colunas;
-    }
-
-    private void setColunas(String[] colunas) {
-        this.colunas = colunas;
     }
 
     @Override

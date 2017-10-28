@@ -10,12 +10,12 @@ public class CulturaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList dados = new ArrayList();
+        ArrayList<Cultura> dados = new ArrayList();
         ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
         try {
             resultado.first();
             do {
-                dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
+                dados.add((Cultura) ler(resultado.getInt("id_cultura")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
@@ -29,6 +29,7 @@ public class CulturaDAO extends DAO {
         ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
         try {
             resultado.first();
+            cultura.setIdCultura(resultado.getInt("id_cultura"));
             cultura.setNome(resultado.getString("nome"));
             cultura.setTipo(resultado.getString("tipo"));
             cultura.setCor(resultado.getString("cor"));

@@ -73,7 +73,7 @@
                                   </Group>
                                   <Component id="jScrollPane2" alignment="0" min="-2" pref="412" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jTextFieldPesqCat" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldPesq" min="-2" pref="200" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButtonPesquisar" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -98,7 +98,7 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldPesqCat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPesq" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -167,7 +167,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNovoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldPesqCat">
+        <Component class="javax.swing.JTextField" name="jTextFieldPesq">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

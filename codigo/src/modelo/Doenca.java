@@ -1,24 +1,60 @@
 package modelo;
 
-import dao.DoencaDAO;
-import dao.CreatorDAO;
-
 public class Doenca {
 
-    private char nome;
+    private int idDoenca;
+    private String nome;
+    private String tipo;
+    private String descricao;
+    private String caracteristica;
+    private Cultura cultura;
 
-    private char tipo;
+    public int getIdDoenca() {
+        return idDoenca;
+    }
 
-    private char descricao;
+    public void setIdDoenca(int idDoenca) {
+        this.idDoenca = idDoenca;
+    }
 
-    private char caracteristica;
+    public String getNome() {
+        return nome;
+    }
 
-    private Cultura[] cultura;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    private DoencaDAO doencaDAO;
+    public String getTipo() {
+        return tipo;
+    }
 
-    private CreatorDAO dAOCreator;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    private Quantificacao[] quantificacao;
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCaracteristica() {
+        return caracteristica;
+    }
+
+    public void setCaracteristica(String caracteristica) {
+        this.caracteristica = caracteristica;
+    }
+
+    public Cultura getCultura() {
+        return cultura;
+    }
+
+    public void setCultura(Cultura cultura) {
+        this.cultura = cultura;
+    }
 
 }

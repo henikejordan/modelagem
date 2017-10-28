@@ -5,17 +5,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Cultura;
+import modelo.Doenca;
 
 public class DoencaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList dados = new ArrayList();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
+        ArrayList<Doenca> dados = new ArrayList();
+        ResultSet resultado = super.getConecta().executaSQL("select * from doenca");
         try {
             resultado.first();
             do {
-                dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
+                dados.add((Doenca) ler(resultado.getInt("id_doenca")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
@@ -25,31 +26,41 @@ public class DoencaDAO extends DAO {
 
     @Override
     public Object ler(int id) {
-        Cultura cultura = new Cultura();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
+        Doenca doenca = new Doenca();
+        ResultSet resultDoenca = super.getConecta().executaSQL("select * from doenca where id_doenca='" + id + "'");
         try {
-            resultado.first();
-            cultura.setNome(resultado.getString("nome"));
-            cultura.setTipo(resultado.getString("tipo"));
-            cultura.setCor(resultado.getString("cor"));
-            cultura.setDescricao(resultado.getString("descricao"));
-
+            resultDoenca.first();
+            doenca.setIdDoenca(resultDoenca.getInt("id_doenca"));
+            doenca.setNome(resultDoenca.getString("nome"));
+            doenca.setTipo(resultDoenca.getString("tipo"));
+            doenca.setCaracteristica(resultDoenca.getString("caracteristica"));
+            doenca.setDescricao(resultDoenca.getString("descricao"));
+            Cultura cultura = new Cultura();
+            ResultSet resultCultura = super.getConecta().executaSQL("select * from cultura where id_cultura='" + resultDoenca.getInt("id_cultura") + "'");
+            resultCultura.first();
+            cultura.setIdCultura(resultCultura.getInt("id_cultura"));
+            cultura.setNome(resultCultura.getString("nome"));
+            cultura.setTipo(resultCultura.getString("tipo"));
+            cultura.setCor(resultCultura.getString("cor"));
+            cultura.setDescricao(resultCultura.getString("descricao"));
+            doenca.setCultura(cultura);
         } catch (SQLException ex) {
             //
         }
-        return cultura;
+        return doenca;
     }
 
     @Override
     public boolean inserir(Object obj) {
-        Cultura cultura = (Cultura) obj;
+        Doenca doenca = (Doenca) obj;
         PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
+            pst = super.getConecta().getConnection().prepareStatement("insert into doenca(nome, tipo, caracteristica, descricao, id_cultura) values(?,?,?,?,?)");
+            pst.setString(1, doenca.getNome());
+            pst.setString(2, doenca.getTipo());
+            pst.setString(3, doenca.getCaracteristica());
+            pst.setString(4, doenca.getDescricao());
+            pst.setInt(5, doenca.getCultura().getIdCultura());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -59,15 +70,16 @@ public class DoencaDAO extends DAO {
 
     @Override
     public boolean alterar(Object obj) {
-        Cultura cultura = (Cultura) obj;
+        Doenca doenca = (Doenca) obj;
         PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
-            pst.setInt(5, cultura.getIdCultura());
+            pst = super.getConecta().getConnection().prepareStatement("update doenca set nome=?, tipo=?, caracteristica=?, descricao=?, id_cultura=? where id_doenca=?");
+            pst.setString(1, doenca.getNome());
+            pst.setString(2, doenca.getTipo());
+            pst.setString(3, doenca.getCaracteristica());
+            pst.setString(4, doenca.getDescricao());
+            pst.setInt(5, doenca.getCultura().getIdCultura());
+            pst.setInt(6, doenca.getIdDoenca());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -79,7 +91,7 @@ public class DoencaDAO extends DAO {
     public boolean excluir(int id) {
         PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            pst = super.getConecta().getConnection().prepareStatement("delete from doenca where id_doenca=?");
             pst.setInt(1, id);
             pst.execute();
             return true;

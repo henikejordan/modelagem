@@ -5,8 +5,9 @@ import dao.DAO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import util.ModeloTabela;
-import visao.manter.TelaManterCultura;
+import util.tabela.ModeloTabela;
+import util.tabela.ModeloTabelaDoenca;
+import visao.manter.TelaManterDoenca;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TelaDoenca extends javax.swing.JFrame {
     private TelaDoenca() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new ConcreteCreatorDAO().factoryMethod("Doença");
         preencherTabela();
     }
 
@@ -47,19 +48,19 @@ public class TelaDoenca extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonNovo = new javax.swing.JButton();
-        jTextFieldPesqCat = new javax.swing.JTextField();
+        jTextFieldPesq = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonPesquisar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar cultura");
+        setTitle("Cadastrar doença");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastrar cultura");
+        jLabel1.setText("Cadastrar doença");
 
         jScrollPane2.setViewportView(tabela);
 
@@ -84,7 +85,7 @@ public class TelaDoenca extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pesquisar cultura:");
+        jLabel2.setText("Pesquisar doença:");
 
         jButtonPesquisar.setText("Pesquisar");
 
@@ -116,7 +117,7 @@ public class TelaDoenca extends javax.swing.JFrame {
                                     .addComponent(jButtonSair))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTextFieldPesqCat, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jButtonPesquisar)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -133,7 +134,7 @@ public class TelaDoenca extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesqCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,15 +169,15 @@ public class TelaDoenca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        TelaManterCultura.getInstance().limparCampos();
-        TelaManterCultura.getInstance().setVisible(true);
+        TelaManterDoenca.getInstance().limparCampos();
+        TelaManterDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
             int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-            TelaManterCultura.getInstance().preencherCampos(id);
-            TelaManterCultura.getInstance().setVisible(true);
+            TelaManterDoenca.getInstance().preencherCampos(id);
+            TelaManterDoenca.getInstance().setVisible(true);
         } catch (ArrayIndexOutOfBoundsException ex) {
 
         }
@@ -200,7 +201,7 @@ public class TelaDoenca extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {
-        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
+        ModeloTabela modelotabela = new ModeloTabelaDoenca(dao.lerTodos(), new String[]{null, "Nome", "Cultura"});
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
@@ -223,7 +224,7 @@ public class TelaDoenca extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextFieldPesqCat;
+    private javax.swing.JTextField jTextFieldPesq;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 

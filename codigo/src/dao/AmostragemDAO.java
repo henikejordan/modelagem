@@ -4,18 +4,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cultura;
+import modelo.Camera;
+import modelo.Amostragem;
 
 public class AmostragemDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList dados = new ArrayList();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
+        ArrayList<Amostragem> dados = new ArrayList();
+        ResultSet resultado = super.getConecta().executaSQL("select * from amostragem");
         try {
             resultado.first();
             do {
-                dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
+                dados.add((Amostragem) ler(resultado.getInt("id_amostragem")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
@@ -25,30 +26,44 @@ public class AmostragemDAO extends DAO {
 
     @Override
     public Object ler(int id) {
-        Cultura cultura = new Cultura();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
+        Amostragem amostragem = new Amostragem();
+        Camera camera = new Camera();
+        ResultSet resultAmostragem = super.getConecta().executaSQL("select * from amostragem where id_amostragem='" + id + "'");
         try {
-            resultado.first();
-            cultura.setNome(resultado.getString("nome"));
-            cultura.setTipo(resultado.getString("tipo"));
-            cultura.setCor(resultado.getString("cor"));
-            cultura.setDescricao(resultado.getString("descricao"));
+            resultAmostragem.first();
+            amostragem.setIdAmostragem(resultAmostragem.getInt("id_amostragem"));
+            amostragem.setTipo(resultAmostragem.getString("tipo"));
+            amostragem.setTamanho(resultAmostragem.getInt("tamanho"));
+            amostragem.setLocal(resultAmostragem.getString("local"));
+            amostragem.setEpoca(resultAmostragem.getString("epoca"));
+            amostragem.setObjetivo(resultAmostragem.getString("objetivo"));
+            ResultSet resultCamera = super.getConecta().executaSQL("select * from camera where id_camera='" + resultAmostragem.getInt("id_camera") + "'");
+            resultCamera.first();
+            camera.setIdCamera(resultCamera.getInt("id_camera"));
+            camera.setMarca(resultCamera.getString("marca"));
+            camera.setModelo(resultCamera.getString("modelo"));
+            camera.setDistanciaFocal(resultCamera.getFloat("distancia_focal"));
+            camera.setLarguraResolucao(resultCamera.getInt("largura_resolucao"));
+            camera.setAlturaResolucao(resultCamera.getInt("altura_resolucao"));
+            camera.setTipoLente(resultCamera.getString("tipo_lente"));
+            amostragem.setCamera(camera);
         } catch (SQLException ex) {
             //
         }
-        return cultura;
+        return amostragem;
     }
 
     @Override
     public boolean inserir(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        Amostragem amostragem = (Amostragem) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("insert into amostragem(tipo, tamanho, local, epoca, objetivo, id_camera) values(?,?,?,?,?,?)");
+            pst.setString(1, amostragem.getTipo());
+            pst.setInt(2, amostragem.getTamanho());
+            pst.setString(3, amostragem.getLocal());
+            pst.setString(4, amostragem.getEpoca());
+            pst.setString(5, amostragem.getObjetivo());
+            pst.setInt(6, amostragem.getCamera().getIdCamera());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -58,15 +73,16 @@ public class AmostragemDAO extends DAO {
 
     @Override
     public boolean alterar(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        Amostragem amostragem = (Amostragem) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
-            pst.setInt(5, cultura.getIdCultura());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("update amostragem set tipo=?, tamanho=?, local=?, epoca=?, objetivo=?, id_camera=? where id_amostragem=?");
+            pst.setString(1, amostragem.getTipo());
+            pst.setInt(2, amostragem.getTamanho());
+            pst.setString(3, amostragem.getLocal());
+            pst.setString(4, amostragem.getEpoca());
+            pst.setString(5, amostragem.getObjetivo());
+            pst.setInt(6, amostragem.getCamera().getIdCamera());
+            pst.setInt(7, amostragem.getIdAmostragem());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -76,9 +92,8 @@ public class AmostragemDAO extends DAO {
 
     @Override
     public boolean excluir(int id) {
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("delete from amostragem where id_amostragem=?");
             pst.setInt(1, id);
             pst.execute();
             return true;

@@ -6,7 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import util.tabela.ModeloTabela;
-import visao.manter.TelaManterCultura;
+import util.tabela.ModeloTabelaAmostragem;
+import visao.manter.TelaManterAmostragem;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
     private TelaAmostragem() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new ConcreteCreatorDAO().factoryMethod("Amostragem");
         preencherTabela();
     }
 
@@ -53,13 +54,13 @@ public class TelaAmostragem extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar cultura");
+        setTitle("Cadastrar amostragem");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastrar cultura");
+        jLabel1.setText("Cadastrar amostragem");
 
         jScrollPane2.setViewportView(tabela);
 
@@ -84,7 +85,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pesquisar cultura:");
+        jLabel2.setText("Pesquisar amostragem:");
 
         jButtonPesquisar.setText("Pesquisar");
 
@@ -100,29 +101,28 @@ public class TelaAmostragem extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButtonNovo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonAlterar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonExcluir)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonSair))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonPesquisar)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButtonNovo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonAlterar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonExcluir)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonSair))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonPesquisar))))
                 .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,15 +168,15 @@ public class TelaAmostragem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        TelaManterCultura.getInstance().limparCampos();
-        TelaManterCultura.getInstance().setVisible(true);
+        TelaManterAmostragem.getInstance().limparCampos();
+        TelaManterAmostragem.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
             int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-            TelaManterCultura.getInstance().preencherCampos(id);
-            TelaManterCultura.getInstance().setVisible(true);
+            TelaManterAmostragem.getInstance().preencherCampos(id);
+            TelaManterAmostragem.getInstance().setVisible(true);
         } catch (ArrayIndexOutOfBoundsException ex) {
 
         }
@@ -185,7 +185,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             try {
-                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");;
+                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
                 dao.excluir(id);
                 this.preencherTabela();
             } catch (ArrayIndexOutOfBoundsException ex) {
@@ -200,7 +200,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {
-        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
+        ModeloTabela modelotabela = new ModeloTabelaAmostragem(dao.lerTodos(), new String[]{null, "Tipo", "Objetivo"});
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);

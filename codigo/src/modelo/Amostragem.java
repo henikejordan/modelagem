@@ -1,24 +1,69 @@
 package modelo;
 
-import dao.AmostragemDAO;
-import dao.CreatorDAO;
-
 public class Amostragem {
 
-    private char tipo;
-
+    private int idAmostragem;
+    private String tipo;
     private int tamanho;
+    private String local;
+    private String epoca;
+    private String objetivo;
+    private Camera camera;
 
-    private char local;
+    public int getIdAmostragem() {
+        return idAmostragem;
+    }
 
-    private int epoca;
+    public void setIdAmostragem(int idAmostragem) {
+        this.idAmostragem = idAmostragem;
+    }
 
-    private char objetivo;
+    public String getTipo() {
+        return tipo;
+    }
 
-    private Imagem[] imagem;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    private AmostragemDAO amostragemDAO;
+    public int getTamanho() {
+        return tamanho;
+    }
 
-    private CreatorDAO dAOCreator;
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getEpoca() {
+        return epoca;
+    }
+
+    public void setEpoca(String epoca) {
+        this.epoca = epoca;
+    }
+
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public void setCamera(Camera camera) {
+        this.camera = camera;
+    }
 
 }

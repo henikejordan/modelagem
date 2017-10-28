@@ -2,7 +2,6 @@ package util.tabela;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import modelo.Cultura;
 
 /**
  *

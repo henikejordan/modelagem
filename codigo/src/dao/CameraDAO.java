@@ -4,18 +4,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cultura;
+import modelo.Camera;
 
 public class CameraDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList dados = new ArrayList();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
+        ArrayList<Camera> dados = new ArrayList();
+        ResultSet resultado = super.getConecta().executaSQL("select * from camera");
         try {
             resultado.first();
             do {
-                dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
+                dados.add((Camera) ler(resultado.getInt("id_camera")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
@@ -25,31 +25,35 @@ public class CameraDAO extends DAO {
 
     @Override
     public Object ler(int id) {
-        Cultura cultura = new Cultura();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
+        Camera camera = new Camera();
         try {
+            ResultSet resultado = super.getConecta().executaSQL("select * from camera where id_camera='" + id + "'");
             resultado.first();
-            cultura.setNome(resultado.getString("nome"));
-            cultura.setTipo(resultado.getString("tipo"));
-            cultura.setCor(resultado.getString("cor"));
-            cultura.setDescricao(resultado.getString("descricao"));
-
+            camera.setIdCamera(resultado.getInt("id_camera"));
+            camera.setMarca(resultado.getString("marca"));
+            camera.setModelo(resultado.getString("modelo"));
+            camera.setDistanciaFocal(resultado.getFloat("distancia_focal"));
+            camera.setLarguraResolucao(resultado.getInt("largura_resolucao"));
+            camera.setAlturaResolucao(resultado.getInt("altura_resolucao"));
+            camera.setTipoLente(resultado.getString("tipo_lente"));
         } catch (SQLException ex) {
             //
         }
-        return cultura;
+        return camera;
     }
 
     @Override
     public boolean inserir(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        Camera camera = (Camera) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("insert into camera(marca, modelo, distancia_focal,"
+                    + " largura_resolucao, altura_resolucao, tipo_lente) values(?,?,?,?,?,?)");
+            pst.setString(1, camera.getMarca());
+            pst.setString(2, camera.getModelo());
+            pst.setFloat(3, camera.getDistanciaFocal());
+            pst.setInt(4, camera.getLarguraResolucao());
+            pst.setInt(5, camera.getAlturaResolucao());
+            pst.setString(6, camera.getTipoLente());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -59,15 +63,17 @@ public class CameraDAO extends DAO {
 
     @Override
     public boolean alterar(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        Camera camera = (Camera) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
-            pst.setInt(5, cultura.getIdCultura());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("update camera set marca=?, modelo=?, distancia_focal=?,"
+                    + " largura_resolucao=?, altura_resolucao=?, tipo_lente=? where id_camera=?");
+            pst.setString(1, camera.getMarca());
+            pst.setString(2, camera.getModelo());
+            pst.setFloat(3, camera.getDistanciaFocal());
+            pst.setInt(4, camera.getLarguraResolucao());
+            pst.setInt(5, camera.getAlturaResolucao());
+            pst.setString(6, camera.getTipoLente());
+            pst.setInt(7, camera.getIdCamera());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -77,9 +83,8 @@ public class CameraDAO extends DAO {
 
     @Override
     public boolean excluir(int id) {
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("delete from camera where id_camera=?");
             pst.setInt(1, id);
             pst.execute();
             return true;

@@ -26,15 +26,14 @@ public class CulturaDAO extends DAO {
     @Override
     public Object ler(int id) {
         Cultura cultura = new Cultura();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
         try {
+            ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
             resultado.first();
             cultura.setIdCultura(resultado.getInt("id_cultura"));
             cultura.setNome(resultado.getString("nome"));
             cultura.setTipo(resultado.getString("tipo"));
             cultura.setCor(resultado.getString("cor"));
             cultura.setDescricao(resultado.getString("descricao"));
-
         } catch (SQLException ex) {
             //
         }
@@ -44,9 +43,8 @@ public class CulturaDAO extends DAO {
     @Override
     public boolean inserir(Object obj) {
         Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
             pst.setString(1, cultura.getNome());
             pst.setString(2, cultura.getTipo());
             pst.setString(3, cultura.getCor());
@@ -61,9 +59,8 @@ public class CulturaDAO extends DAO {
     @Override
     public boolean alterar(Object obj) {
         Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
             pst.setString(1, cultura.getNome());
             pst.setString(2, cultura.getTipo());
             pst.setString(3, cultura.getCor());
@@ -78,9 +75,8 @@ public class CulturaDAO extends DAO {
 
     @Override
     public boolean excluir(int id) {
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
             pst.setInt(1, id);
             pst.execute();
             return true;

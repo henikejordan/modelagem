@@ -6,7 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import util.tabela.ModeloTabela;
-import visao.manter.TelaManterCultura;
+import util.tabela.ModeloTabelaCamera;
+import visao.manter.TelaManterCamera;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TelaCamera extends javax.swing.JFrame {
     private TelaCamera() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new ConcreteCreatorDAO().factoryMethod("Câmera");
         preencherTabela();
     }
 
@@ -53,13 +54,13 @@ public class TelaCamera extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar cultura");
+        setTitle("Cadastrar câmera");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastrar cultura");
+        jLabel1.setText("Cadastrar câmera");
 
         jScrollPane2.setViewportView(tabela);
 
@@ -84,7 +85,7 @@ public class TelaCamera extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pesquisar cultura:");
+        jLabel2.setText("Pesquisar câmera:");
 
         jButtonPesquisar.setText("Pesquisar");
 
@@ -168,15 +169,15 @@ public class TelaCamera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        TelaManterCultura.getInstance().limparCampos();
-        TelaManterCultura.getInstance().setVisible(true);
+        TelaManterCamera.getInstance().limparCampos();
+        TelaManterCamera.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         try {
             int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-            TelaManterCultura.getInstance().preencherCampos(id);
-            TelaManterCultura.getInstance().setVisible(true);
+            TelaManterCamera.getInstance().preencherCampos(id);
+            TelaManterCamera.getInstance().setVisible(true);
         } catch (ArrayIndexOutOfBoundsException ex) {
 
         }
@@ -185,7 +186,7 @@ public class TelaCamera extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             try {
-                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
                 dao.excluir(id);
                 this.preencherTabela();
             } catch (ArrayIndexOutOfBoundsException ex) {
@@ -200,11 +201,11 @@ public class TelaCamera extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {
-        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
+        ModeloTabela modelotabela = new ModeloTabelaCamera(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(195);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(195);
         tabela.getColumnModel().getColumn(0).setResizable(false);
         tabela.getColumnModel().getColumn(1).setResizable(false);
         tabela.getColumnModel().getColumn(2).setResizable(false);

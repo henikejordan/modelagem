@@ -33,7 +33,6 @@ public class ImagemDAO extends DAO {
             cultura.setTipo(resultado.getString("tipo"));
             cultura.setCor(resultado.getString("cor"));
             cultura.setDescricao(resultado.getString("descricao"));
-
         } catch (SQLException ex) {
             //
         }

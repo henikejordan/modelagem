@@ -27,6 +27,7 @@ public class DoencaDAO extends DAO {
     @Override
     public Object ler(int id) {
         Doenca doenca = new Doenca();
+        Cultura cultura = new Cultura();
         ResultSet resultDoenca = super.getConecta().executaSQL("select * from doenca where id_doenca='" + id + "'");
         try {
             resultDoenca.first();
@@ -35,7 +36,6 @@ public class DoencaDAO extends DAO {
             doenca.setTipo(resultDoenca.getString("tipo"));
             doenca.setCaracteristica(resultDoenca.getString("caracteristica"));
             doenca.setDescricao(resultDoenca.getString("descricao"));
-            Cultura cultura = new Cultura();
             ResultSet resultCultura = super.getConecta().executaSQL("select * from cultura where id_cultura='" + resultDoenca.getInt("id_cultura") + "'");
             resultCultura.first();
             cultura.setIdCultura(resultCultura.getInt("id_cultura"));
@@ -53,9 +53,8 @@ public class DoencaDAO extends DAO {
     @Override
     public boolean inserir(Object obj) {
         Doenca doenca = (Doenca) obj;
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into doenca(nome, tipo, caracteristica, descricao, id_cultura) values(?,?,?,?,?)");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("insert into doenca(nome, tipo, caracteristica, descricao, id_cultura) values(?,?,?,?,?)");
             pst.setString(1, doenca.getNome());
             pst.setString(2, doenca.getTipo());
             pst.setString(3, doenca.getCaracteristica());
@@ -71,9 +70,8 @@ public class DoencaDAO extends DAO {
     @Override
     public boolean alterar(Object obj) {
         Doenca doenca = (Doenca) obj;
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update doenca set nome=?, tipo=?, caracteristica=?, descricao=?, id_cultura=? where id_doenca=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("update doenca set nome=?, tipo=?, caracteristica=?, descricao=?, id_cultura=? where id_doenca=?");
             pst.setString(1, doenca.getNome());
             pst.setString(2, doenca.getTipo());
             pst.setString(3, doenca.getCaracteristica());
@@ -89,9 +87,8 @@ public class DoencaDAO extends DAO {
 
     @Override
     public boolean excluir(int id) {
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from doenca where id_doenca=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("delete from doenca where id_doenca=?");
             pst.setInt(1, id);
             pst.execute();
             return true;

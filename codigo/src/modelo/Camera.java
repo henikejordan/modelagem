@@ -1,26 +1,69 @@
 package modelo;
 
-import dao.CameraDAO;
-import dao.CreatorDAO;
-
 public class Camera {
 
-    private float marca;
+    private int idCamera;
+    private String marca;
+    private String modelo;
+    private float distanciaFocal;
+    private int larguraResolucao;
+    private int alturaResolucao;
+    private String tipoLente;
 
-    private char modelo;
+    public int getIdCamera() {
+        return idCamera;
+    }
 
-    private float distancia_focal;
+    public void setIdCamera(int idCamera) {
+        this.idCamera = idCamera;
+    }
 
-    private int largura_resolucao;
+    public String getMarca() {
+        return marca;
+    }
 
-    private int altura_resolucao;
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
-    private char tipo_lente;
+    public String getModelo() {
+        return modelo;
+    }
 
-    private Amostragem[] amostragem;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
-    private CameraDAO cameraDAO;
+    public float getDistanciaFocal() {
+        return distanciaFocal;
+    }
 
-    private CreatorDAO dAOCreator;
+    public void setDistanciaFocal(float distanciaFocal) {
+        this.distanciaFocal = distanciaFocal;
+    }
+
+    public int getLarguraResolucao() {
+        return larguraResolucao;
+    }
+
+    public void setLarguraResolucao(int larguraResolucao) {
+        this.larguraResolucao = larguraResolucao;
+    }
+
+    public int getAlturaResolucao() {
+        return alturaResolucao;
+    }
+
+    public void setAlturaResolucao(int alturaResolucao) {
+        this.alturaResolucao = alturaResolucao;
+    }
+
+    public String getTipoLente() {
+        return tipoLente;
+    }
+
+    public void setTipoLente(String tipoLente) {
+        this.tipoLente = tipoLente;
+    }
 
 }

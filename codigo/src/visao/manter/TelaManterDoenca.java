@@ -13,12 +13,12 @@ import visao.inicio.TelaDoenca;
  * @author Henike
  */
 public class TelaManterDoenca extends javax.swing.JFrame {
-    
+
     private static TelaManterDoenca instance;
     private final DAO daoDoenca, daoCultura;
     private final ArrayList<Cultura> culturas;
     private int id;
-    
+
     private TelaManterDoenca() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
@@ -27,21 +27,21 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         culturas = daoCultura.lerTodos();
         preencherComboBox();
     }
-    
+
     public static TelaManterDoenca getInstance() {
         if (instance == null) {
             instance = new TelaManterDoenca();
         }
         return instance;
     }
-    
+
     private void preencherComboBox() {
         jComboBoxCultura.addItem("");
         for (Cultura cultura : culturas) {
             jComboBoxCultura.addItem(cultura.getNome());
         }
     }
-    
+
     public void preencherCampos(int id) {
         this.id = id;
         Doenca doenca = (Doenca) daoDoenca.ler(id);
@@ -51,7 +51,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         jComboBoxCultura.setSelectedItem(doenca.getCultura().getNome());
         jTextAreaDesc.setText(doenca.getDescricao());
     }
-    
+
     public void limparCampos() {
         id = 0;
         jTextFieldNome.setText("");
@@ -226,7 +226,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         doenca.setNome(jTextFieldNome.getText());
         doenca.setTipo(jTextFieldTipo.getText());
         doenca.setCaracteristica(jTextFieldCarac.getText());
-        doenca.setCultura(culturas.get(jComboBoxCultura.getSelectedIndex()));
+        doenca.setCultura(culturas.get(jComboBoxCultura.getSelectedIndex() - 1));
         doenca.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
             if (daoDoenca.inserir(doenca)) {

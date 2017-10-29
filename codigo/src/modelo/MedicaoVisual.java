@@ -1,5 +1,5 @@
 package modelo;
 
-public class MedicaoVisual extends Severidade {
+public abstract class MedicaoVisual extends Severidade {
 
 }

@@ -9,7 +9,7 @@ public class ConcreteCreatorDAO implements CreatorDAO {
                 return new AmostragemDAO();
             case "Câmera":
                 return new CameraDAO();
-            case "ClasseSeveridade":
+            case "Classe Severidade":
                 return new ClasseSeveridadeDAO();
             case "Cultura":
                 return new CulturaDAO();

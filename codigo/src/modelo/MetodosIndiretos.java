@@ -1,5 +1,5 @@
 package modelo;
 
-public class MetodosIndiretos extends Quantificacao {
+public abstract class MetodosIndiretos extends Quantificacao {
 
 }

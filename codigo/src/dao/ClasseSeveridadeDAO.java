@@ -4,51 +4,61 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cultura;
+import modelo.ClasseSeveridade;
+import modelo.Doenca;
+import modelo.QuantificacaoCreator;
 
 public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList dados = new ArrayList();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
+        ArrayList<ClasseSeveridade> classes = new ArrayList();
+        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade");
         try {
             resultado.first();
             do {
-                dados.add(new Object[]{resultado.getInt("id_cultura"), resultado.getString("nome"), resultado.getString("descricao")});
+                classes.add((ClasseSeveridade) ler(resultado.getInt("id_classe_severidade")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
         }
-        return dados;
+        return classes;
     }
 
     @Override
     public Object ler(int id) {
-        Cultura cultura = new Cultura();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where id_cultura='" + id + "'");
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) new QuantificacaoCreator().factoryMethod("Classe Severidade");
+        Doenca doenca = new Doenca();
+        ResultSet resultClasse = super.getConecta().executaSQL("select * from classe_severidade where id_classe_severidade='" + id + "'");
         try {
-            resultado.first();
-            cultura.setNome(resultado.getString("nome"));
-            cultura.setTipo(resultado.getString("tipo"));
-            cultura.setCor(resultado.getString("cor"));
-            cultura.setDescricao(resultado.getString("descricao"));
+            resultClasse.first();
+            classeSeveridade.setIdClasseSeveridade(resultClasse.getInt("id_classe_severidade"));
+            classeSeveridade.setDescricao(resultClasse.getString("descricao"));
+            classeSeveridade.setInferior(resultClasse.getFloat("inferior"));
+            classeSeveridade.setSuperior(resultClasse.getFloat("superior"));
+            ResultSet resultDoenca = super.getConecta().executaSQL("select * from doenca where id_doenca='" + resultClasse.getInt("id_doenca") + "'");
+            resultDoenca.first();
+            doenca.setIdDoenca(resultDoenca.getInt("id_doenca"));
+            doenca.setNome(resultDoenca.getString("nome"));
+            doenca.setTipo(resultDoenca.getString("tipo"));
+            doenca.setCaracteristica(resultDoenca.getString("caracteristica"));
+            doenca.setDescricao(resultDoenca.getString("descricao"));
+            classeSeveridade.setDoenca(doenca);
         } catch (SQLException ex) {
             //
         }
-        return cultura;
+        return classeSeveridade;
     }
 
     @Override
     public boolean inserir(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("insert into cultura(nome, tipo, cor, descricao) values(?,?,?,?)");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("insert into classe_severidade(descricao, inferior, superior, id_doenca) values(?,?,?,?)");
+            pst.setString(1, classeSeveridade.getDescricao());
+            pst.setFloat(2, classeSeveridade.getInferior());
+            pst.setFloat(3, classeSeveridade.getSuperior());
+            pst.setInt(4, classeSeveridade.getDoenca().getIdDoenca());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -58,15 +68,14 @@ public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public boolean alterar(Object obj) {
-        Cultura cultura = (Cultura) obj;
-        PreparedStatement pst;
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) obj;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("update cultura set nome=?, tipo=?, cor=?, descricao=? where id_cultura=?");
-            pst.setString(1, cultura.getNome());
-            pst.setString(2, cultura.getTipo());
-            pst.setString(3, cultura.getCor());
-            pst.setString(4, cultura.getDescricao());
-            pst.setInt(5, cultura.getIdCultura());
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("update classe_severidade set descricao=?, inferior=?, superior=?, id_doenca=? where id_classe_severidade=?");
+            pst.setString(1, classeSeveridade.getDescricao());
+            pst.setFloat(2, classeSeveridade.getInferior());
+            pst.setFloat(3, classeSeveridade.getSuperior());
+            pst.setInt(4, classeSeveridade.getDoenca().getIdDoenca());
+            pst.setInt(5, classeSeveridade.getIdClasseSeveridade());
             pst.execute();
             return true;
         } catch (SQLException ex) {
@@ -76,9 +85,8 @@ public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public boolean excluir(int id) {
-        PreparedStatement pst;
         try {
-            pst = super.getConecta().getConnection().prepareStatement("delete from cultura where id_cultura=?");
+            PreparedStatement pst = super.getConecta().getConnection().prepareStatement("delete from classe_severidade where id_classe_severidade=?");
             pst.setInt(1, id);
             pst.execute();
             return true;
@@ -86,4 +94,5 @@ public class ClasseSeveridadeDAO extends DAO {
             return false;
         }
     }
+
 }

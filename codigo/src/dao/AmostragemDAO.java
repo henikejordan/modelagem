@@ -11,17 +11,17 @@ public class AmostragemDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Amostragem> dados = new ArrayList();
+        ArrayList<Amostragem> amostragens = new ArrayList();
         ResultSet resultado = super.getConecta().executaSQL("select * from amostragem");
         try {
             resultado.first();
             do {
-                dados.add((Amostragem) ler(resultado.getInt("id_amostragem")));
+                amostragens.add((Amostragem) ler(resultado.getInt("id_amostragem")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
         }
-        return dados;
+        return amostragens;
     }
 
     @Override

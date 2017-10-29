@@ -11,17 +11,17 @@ public class DoencaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Doenca> dados = new ArrayList();
+        ArrayList<Doenca> doencas = new ArrayList();
         ResultSet resultado = super.getConecta().executaSQL("select * from doenca");
         try {
             resultado.first();
             do {
-                dados.add((Doenca) ler(resultado.getInt("id_doenca")));
+                doencas.add((Doenca) ler(resultado.getInt("id_doenca")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
         }
-        return dados;
+        return doencas;
     }
 
     @Override

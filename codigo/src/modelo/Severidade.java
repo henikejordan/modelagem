@@ -1,5 +1,5 @@
 package modelo;
 
-public class Severidade extends MetodosDiretos {
+public abstract class Severidade extends MetodosDiretos {
 
 }

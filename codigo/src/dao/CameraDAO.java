@@ -10,17 +10,17 @@ public class CameraDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Camera> dados = new ArrayList();
+        ArrayList<Camera> cameras = new ArrayList();
         ResultSet resultado = super.getConecta().executaSQL("select * from camera");
         try {
             resultado.first();
             do {
-                dados.add((Camera) ler(resultado.getInt("id_camera")));
+                cameras.add((Camera) ler(resultado.getInt("id_camera")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
         }
-        return dados;
+        return cameras;
     }
 
     @Override

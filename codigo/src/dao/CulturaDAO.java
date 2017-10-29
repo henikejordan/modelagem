@@ -10,17 +10,17 @@ public class CulturaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Cultura> dados = new ArrayList();
+        ArrayList<Cultura> culturas = new ArrayList();
         ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
         try {
             resultado.first();
             do {
-                dados.add((Cultura) ler(resultado.getInt("id_cultura")));
+                culturas.add((Cultura) ler(resultado.getInt("id_cultura")));
             } while (resultado.next());
         } catch (SQLException ex) {
             //
         }
-        return dados;
+        return culturas;
     }
 
     @Override

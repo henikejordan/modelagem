@@ -15,9 +15,9 @@ import visao.inicio.TelaDoenca;
  * @author Henike
  */
 public class TelaInicial extends javax.swing.JFrame {
-    
+
     private static TelaInicial instance;
-    
+
     private TelaInicial() {
         initComponents();
 
@@ -29,7 +29,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelFundo.setBounds(0, 0, d.width - 12, d.height - 112);
         AtualizaHora.start(jLabelHorario);
     }
-    
+
     public static TelaInicial getInstance() {
         if (instance == null) {
             instance = new TelaInicial();
@@ -179,6 +179,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItem1.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
         jMenuItem1.setText("Corrigir Imagem");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuBar.add(jMenu2);
@@ -258,8 +263,12 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
     private void jMenuOpcCarregarImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcCarregarImgActionPerformed
-        new TelaBrowser().setVisible(true);
+        new TelaBrowser("Quantificar").setVisible(true);
     }//GEN-LAST:event_jMenuOpcCarregarImgActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new TelaBrowser("Corrigir").setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;

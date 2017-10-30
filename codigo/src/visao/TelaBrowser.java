@@ -15,11 +15,15 @@ import javax.swing.JFileChooser;
 public class TelaBrowser extends javax.swing.JFrame {
 
     private final String dirImg = "img/image.jpg";
+    private String opc;
 
     /**
      * Creates new form Browser
+     *
+     * @param opc
      */
-    public TelaBrowser() {
+    public TelaBrowser(String opc) {
+        this.opc = opc;
         initComponents();
         txtDiretorio.setText(arquivos.getCurrentDirectory().getAbsolutePath());
         arquivos.setCurrentDirectory(null);
@@ -128,7 +132,11 @@ public class TelaBrowser extends javax.swing.JFrame {
         setVisible(false);
         if (JFileChooser.APPROVE_SELECTION.equals(evt.getActionCommand())) {
             carregaImagem(arquivos.getSelectedFile().toString());
-            TelaEditor.getInstance().setVisible(true);
+            if ("Quantificar".equals(opc)) {
+                TelaEditor.getInstance().setVisible(true);
+            } else {
+                TelaCorrecao.getInstance().setVisible(true);
+            }
         }
     }//GEN-LAST:event_arquivosActionPerformed
 

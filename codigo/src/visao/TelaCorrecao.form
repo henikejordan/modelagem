@@ -37,7 +37,7 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="drawingPanel1" max="32767" attributes="0"/>
+                      <Component id="panelImagem" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -48,7 +48,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="drawingPanel1" max="32767" attributes="0"/>
+              <Component id="panelImagem" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonRuido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRuidoActionPerformed"/>
       </Events>
     </Component>
-    <Container class="visao.DrawingPanel" name="drawingPanel1">
+    <Container class="visao.DrawingPanel" name="panelImagem">
 
       <Layout>
         <DimensionLayout dim="0">

@@ -1,27 +1,61 @@
 package modelo;
 
-import dao.ImagemDAO;
-import dao.CreatorDAO;
-
 public abstract class Imagem {
 
-    private char nome;
-
-    private char extensao;
-
-    private char caminho;
-
+    private String nome;
+    private String extensao;
+    private String caminho;
     private float tamanho;
-
     private int altura;
-
     private int largura;
 
-    private CreatorCorrecao[] correcaoCreator;
+    public String getNome() {
+        return nome;
+    }
 
-    private ImagemDAO imagemDAO;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    private CreatorDAO dAOCreator;
+    public String getExtensao() {
+        return extensao;
+    }
+
+    public void setExtensao(String extensao) {
+        this.extensao = extensao;
+    }
+
+    public String getCaminho() {
+        return caminho;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
+
+    public float getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(float tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    public int getLargura() {
+        return largura;
+    }
+
+    public void setLargura(int largura) {
+        this.largura = largura;
+    }
 
     public void carregaImagem() {
 

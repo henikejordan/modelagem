@@ -1,8 +1,8 @@
 package visao;
 
-import org.bytedeco.javacpp.opencv_core.*;
-import static org.bytedeco.javacpp.opencv_imgcodecs.*;
-import static org.bytedeco.javacpp.opencv_imgproc.*;
+import modelo.Correcao;
+import modelo.CorrecaoFiltro;
+import modelo.CorrecaoRuido;
 
 /**
  *
@@ -11,7 +11,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
 public class TelaCorrecao extends javax.swing.JFrame {
 
     private static TelaCorrecao instance;
-    private final String input = "img/image.jpg";
+    private Correcao correcao;
 
     /**
      * Creates new form NovoJFrame
@@ -112,16 +112,14 @@ public class TelaCorrecao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRuidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRuidoActionPerformed
-        Mat image = imread(input);
-        cvtColor(image, image, CV_BGR2GRAY);
-        imwrite(input, image);
+        correcao = new CorrecaoRuido();
+        correcao.corrigirImagem();
         drawingPanel1.repaint();
     }//GEN-LAST:event_jButtonRuidoActionPerformed
 
     private void jButtonFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltroActionPerformed
-        Mat image = imread(input);
-        threshold(image, image, 127, 255, CV_THRESH_BINARY);
-        imwrite(input, image);
+        correcao = new CorrecaoFiltro();
+        correcao.corrigirImagem();
         drawingPanel1.repaint();
     }//GEN-LAST:event_jButtonFiltroActionPerformed
 

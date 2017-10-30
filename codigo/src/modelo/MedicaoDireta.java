@@ -3,11 +3,8 @@ package modelo;
 public class MedicaoDireta extends Severidade {
 
     private int numeroLesoes;
-
     private float diametroMedioLesoes;
-
     private float areaInfectada;
-
     private float indiceInfeccao;
 
     public float calculaAreaInfectada() {

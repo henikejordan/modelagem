@@ -1,7 +1,13 @@
 package modelo;
 
-public interface Correcao {
+public abstract class Correcao {
 
-    void corrigirImagem();
+    private final String input = "img/image.jpg";
+
+    public String getInput() {
+        return input;
+    }
+
+    public abstract void corrigirImagem();
 
 }

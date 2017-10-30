@@ -117,7 +117,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.setText("Cadastro");
         jMenuCadastros.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jMenuCadAmostragem.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadAmostragem.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuCadAmostragem.setText("Amostragem");
         jMenuCadAmostragem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuCadAmostragem);
 
-        jMenuCadCamera.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadCamera.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuCadCamera.setText("Câmera");
         jMenuCadCamera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +135,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuCadCamera);
 
-        jMenuCadClasse.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadClasse.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuCadClasse.setText("Classe Severidade");
         jMenuCadClasse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuCadCultura);
 
-        jMenuCadDoenca.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuCadDoenca.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuCadDoenca.setText("Doença");
         jMenuCadDoenca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,9 +166,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu2.setMnemonic('O');
         jMenu2.setText("Opções");
-        jMenu2.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jMenuOpcCarregarImg.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuOpcCarregarImg.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuOpcCarregarImg.setText("Quantificar Doença");
         jMenuOpcCarregarImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +177,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuOpcCarregarImg);
 
-        jMenuItem1.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuItem1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jMenuItem1.setText("Corrigir Imagem");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,7 +190,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu1.setMnemonic('R');
         jMenu1.setText("Relatórios");
-        jMenu1.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jMenuBar.add(jMenu1);
 
         jMenuSair.setText("Sair");

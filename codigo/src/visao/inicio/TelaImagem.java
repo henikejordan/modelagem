@@ -1,12 +1,13 @@
 package visao.inicio;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import util.tabela.ModeloTabela;
-import visao.manter.TelaManterCultura;
+import util.tabela.ModeloTabelaDoenca;
+import visao.manter.TelaManterDoenca;
 
 /**
  *
@@ -20,7 +21,7 @@ public class TelaImagem extends javax.swing.JFrame {
     private TelaImagem() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new CreatorDAO().factoryMethod("Doença");
         preencherTabela();
     }
 
@@ -53,13 +54,13 @@ public class TelaImagem extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar cultura");
+        setTitle("Cadastrar doença");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Cadastrar cultura");
+        jLabel1.setText("Cadastrar doença");
 
         jScrollPane2.setViewportView(tabela);
 
@@ -84,7 +85,7 @@ public class TelaImagem extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pesquisar cultura:");
+        jLabel2.setText("Pesquisar doença:");
 
         jButtonPesquisar.setText("Pesquisar");
 
@@ -168,39 +169,30 @@ public class TelaImagem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        TelaManterCultura.getInstance().limparCampos();
-        TelaManterCultura.getInstance().setVisible(true);
+        TelaManterDoenca.getInstance().limparCampos();
+        TelaManterDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try {
-            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-            TelaManterCultura.getInstance().preencherCampos(id);
-            TelaManterCultura.getInstance().setVisible(true);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-
-        }
+        int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+        TelaManterDoenca.getInstance().preencherCampos(id);
+        TelaManterDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
-            try {
-                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-                dao.excluir(id);
-                this.preencherTabela();
-            } catch (ArrayIndexOutOfBoundsException ex) {
-
-            }
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+            dao.excluir(id);
+            preencherTabela();
         }
-
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {
-        ModeloTabela modelotabela = new ModeloTabela(dao.lerTodos(), new String[]{null, "Nome", "Tipo"});
+        ModeloTabela modelotabela = new ModeloTabelaDoenca(dao.lerTodos(), new String[]{null, "Nome", "Cultura"});
         tabela.setModel(modelotabela);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);

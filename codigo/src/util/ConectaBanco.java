@@ -26,7 +26,7 @@ public final class ConectaBanco {
             System.setProperty("jdbc.Drivers", driver);
             conn = DriverManager.getConnection(caminho, usuario, senha);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de conexão!\n Erro:" + ex.getMessage());
+            //
         }
     }
 
@@ -46,7 +46,7 @@ public final class ConectaBanco {
             stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return stm.executeQuery(sql);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro no executaSQL!\n Erro:" + ex.getMessage());
+            //
         }
         return null;
     }
@@ -55,7 +55,7 @@ public final class ConectaBanco {
         try {
             conn.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão!\n Erro:" + ex.getMessage());
+            //
         }
     }
 }

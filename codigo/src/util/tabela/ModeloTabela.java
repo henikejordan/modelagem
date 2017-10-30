@@ -42,7 +42,7 @@ public class ModeloTabela extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int numLin, int numCol) {
-        Object[] linha = (Object[]) getLinhas().get(numLin);
+        Object[] linha = (Object[]) linhas.get(numLin);
         return linha[numCol];
     }
 

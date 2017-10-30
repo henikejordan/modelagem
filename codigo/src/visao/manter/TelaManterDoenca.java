@@ -1,6 +1,6 @@
 package visao.manter;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -22,8 +22,8 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     private TelaManterDoenca() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        daoDoenca = new ConcreteCreatorDAO().factoryMethod("Doença");
-        daoCultura = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        daoDoenca = new CreatorDAO().factoryMethod("Doença");
+        daoCultura = new CreatorDAO().factoryMethod("Cultura");
         culturas = daoCultura.lerTodos();
         preencherComboBox();
     }
@@ -242,7 +242,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

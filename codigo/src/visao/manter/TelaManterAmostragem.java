@@ -1,6 +1,6 @@
 package visao.manter;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -22,8 +22,8 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     private TelaManterAmostragem() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        daoAmostragem = new ConcreteCreatorDAO().factoryMethod("Amostragem");
-        daoCamera = new ConcreteCreatorDAO().factoryMethod("Câmera");
+        daoAmostragem = new CreatorDAO().factoryMethod("Amostragem");
+        daoCamera = new CreatorDAO().factoryMethod("Câmera");
         cameras = daoCamera.lerTodos();
         preencherComboBox();
     }
@@ -246,7 +246,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

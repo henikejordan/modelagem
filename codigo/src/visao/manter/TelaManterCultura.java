@@ -1,6 +1,6 @@
 package visao.manter;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
@@ -19,7 +19,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
     private TelaManterCultura() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new CreatorDAO().factoryMethod("Cultura");
         preencherComboBox();
     }
 
@@ -221,7 +221,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

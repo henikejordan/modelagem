@@ -17,7 +17,7 @@ public abstract class Imagem {
 
     private int largura;
 
-    private CorrecaoCreator[] correcaoCreator;
+    private CreatorCorrecao[] correcaoCreator;
 
     private ImagemDAO imagemDAO;
 

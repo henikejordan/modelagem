@@ -1,6 +1,6 @@
 package visao.inicio;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,7 +21,7 @@ public class TelaCamera extends javax.swing.JFrame {
     private TelaCamera() {
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new ConcreteCreatorDAO().factoryMethod("Câmera");
+        dao = new CreatorDAO().factoryMethod("Câmera");
         preencherTabela();
     }
 
@@ -174,30 +174,22 @@ public class TelaCamera extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        try {
-            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
-            TelaManterCamera.getInstance().preencherCampos(id);
-            TelaManterCamera.getInstance().setVisible(true);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-
-        }
+        int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+        TelaManterCamera.getInstance().preencherCampos(id);
+        TelaManterCamera.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
-            try {
-                int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
-                dao.excluir(id);
-                this.preencherTabela();
-            } catch (ArrayIndexOutOfBoundsException ex) {
-
-            }
+            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+            dao.excluir(id);
+            preencherTabela();
         }
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {

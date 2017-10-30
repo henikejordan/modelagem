@@ -1,10 +1,10 @@
 package visao.manter;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
-import visao.inicio.TelaImagem;
+import visao.inicio.TelaCultura;
 
 /**
  *
@@ -19,7 +19,7 @@ public class TelaManterImagem extends javax.swing.JFrame {
     private TelaManterImagem() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new ConcreteCreatorDAO().factoryMethod("Cultura");
+        dao = new CreatorDAO().factoryMethod("Cultura");
         preencherComboBox();
     }
 
@@ -78,7 +78,7 @@ public class TelaManterImagem extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nova cultura");
+        setTitle("Manter cultura");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -209,19 +209,19 @@ public class TelaManterImagem extends javax.swing.JFrame {
         cultura.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
             if (dao.inserir(cultura)) {
-                TelaImagem.getInstance().preencherTabela();
+                TelaCultura.getInstance().preencherTabela();
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
         } else {
             if (dao.alterar(cultura)) {
-                TelaImagem.getInstance().preencherTabela();
+                TelaCultura.getInstance().preencherTabela();
                 JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
             }
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

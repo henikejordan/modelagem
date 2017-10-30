@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.ClasseSeveridade;
 import modelo.Doenca;
-import modelo.QuantificacaoCreator;
+import modelo.CreatorQuantificacao;
 
 public class ClasseSeveridadeDAO extends DAO {
 
@@ -27,7 +27,7 @@ public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public Object ler(int id) {
-        ClasseSeveridade classeSeveridade = (ClasseSeveridade) new QuantificacaoCreator().factoryMethod("Classe Severidade");
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) new CreatorQuantificacao().factoryMethod("Classe Severidade");
         Doenca doenca = new Doenca();
         ResultSet resultClasse = super.getConecta().executaSQL("select * from classe_severidade where id_classe_severidade='" + id + "'");
         try {

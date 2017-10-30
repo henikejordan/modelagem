@@ -15,9 +15,9 @@ import visao.inicio.TelaDoenca;
  * @author Henike
  */
 public class TelaInicial extends javax.swing.JFrame {
-
+    
     private static TelaInicial instance;
-
+    
     private TelaInicial() {
         initComponents();
 
@@ -29,7 +29,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabelFundo.setBounds(0, 0, d.width - 12, d.height - 112);
         AtualizaHora.start(jLabelHorario);
     }
-
+    
     public static TelaInicial getInstance() {
         if (instance == null) {
             instance = new TelaInicial();
@@ -59,6 +59,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadCultura = new javax.swing.JMenuItem();
         jMenuCadDoenca = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuOpcCarregarImg = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenu();
 
@@ -165,6 +166,15 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setMnemonic('O');
         jMenu2.setText("Opções");
         jMenu2.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
+
+        jMenuOpcCarregarImg.setText("Carregar Imagem");
+        jMenuOpcCarregarImg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuOpcCarregarImgActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuOpcCarregarImg);
+
         jMenuBar.add(jMenu2);
 
         jMenu1.setMnemonic('R');
@@ -241,6 +251,10 @@ public class TelaInicial extends javax.swing.JFrame {
         TelaDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
+    private void jMenuOpcCarregarImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcCarregarImgActionPerformed
+        new TelaBrowser().setVisible(true);
+    }//GEN-LAST:event_jMenuOpcCarregarImgActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -256,6 +270,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadCultura;
     private javax.swing.JMenuItem jMenuCadDoenca;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuOpcCarregarImg;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
 

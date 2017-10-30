@@ -1,6 +1,6 @@
 package visao.manter;
 
-import dao.ConcreteCreatorDAO;
+import dao.CreatorDAO;
 import dao.DAO;
 import javax.swing.JOptionPane;
 import modelo.Camera;
@@ -19,7 +19,7 @@ public class TelaManterCamera extends javax.swing.JFrame {
     private TelaManterCamera() {
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new ConcreteCreatorDAO().factoryMethod("Câmera");
+        dao = new CreatorDAO().factoryMethod("Câmera");
     }
 
     public static TelaManterCamera getInstance() {
@@ -238,7 +238,7 @@ public class TelaManterCamera extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

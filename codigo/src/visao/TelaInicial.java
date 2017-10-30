@@ -60,6 +60,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadDoenca = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuOpcCarregarImg = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenu();
 
@@ -167,13 +168,18 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setText("Opções");
         jMenu2.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 12)); // NOI18N
 
-        jMenuOpcCarregarImg.setText("Carregar Imagem");
+        jMenuOpcCarregarImg.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuOpcCarregarImg.setText("Quantificar Doença");
         jMenuOpcCarregarImg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuOpcCarregarImgActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuOpcCarregarImg);
+
+        jMenuItem1.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jMenuItem1.setText("Corrigir Imagem");
+        jMenu2.add(jMenuItem1);
 
         jMenuBar.add(jMenu2);
 
@@ -270,6 +276,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadCultura;
     private javax.swing.JMenuItem jMenuCadDoenca;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuOpcCarregarImg;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables

@@ -104,7 +104,6 @@ public class TelaEditor extends javax.swing.JFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         opencv_core.Mat image = imread(input);
-
         if (image != null) {
             threshold(image, image, 200, 255, CV_THRESH_BINARY);
             cvtColor(image, image, CV_BGR2GRAY);
@@ -119,7 +118,7 @@ public class TelaEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

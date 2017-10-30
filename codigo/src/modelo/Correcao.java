@@ -1,7 +1,7 @@
 package modelo;
 
-public abstract class Correcao {
+public interface Correcao {
 
-    public abstract void corrigirImagem();
+    void corrigirImagem();
 
 }

@@ -17,6 +17,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
 
     private static TelaAmostragem instance;
     private final DAO dao;
+    private ModeloTabela modelotabela;
 
     private TelaAmostragem() {
         initComponents();
@@ -173,7 +174,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+        int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
         TelaManterAmostragem.getInstance().preencherCampos(id);
         TelaManterAmostragem.getInstance().setVisible(true);
 
@@ -181,7 +182,7 @@ public class TelaAmostragem extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
-            int id = Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0) + "");
+            int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
             dao.excluir(id);
             preencherTabela();
         }
@@ -192,14 +193,13 @@ public class TelaAmostragem extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     public final void preencherTabela() {
-        ModeloTabela modelotabela = new ModeloTabelaAmostragem(dao.lerTodos(), new String[]{null, "Tipo", "Objetivo"});
+        modelotabela = new ModeloTabelaAmostragem(dao.lerTodos(), new String[]{null, "Tipo", "Objetivo"});
         tabela.setModel(modelotabela);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
-        tabela.getColumnModel().getColumn(0).setResizable(false);
         tabela.getColumnModel().getColumn(1).setResizable(false);
         tabela.getColumnModel().getColumn(2).setResizable(false);
+        tabela.removeColumn(tabela.getColumnModel().getColumn(0));
         tabela.getTableHeader().setReorderingAllowed(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

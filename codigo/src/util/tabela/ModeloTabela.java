@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Henike
  */
-public class ModeloTabela extends AbstractTableModel {
+public abstract class ModeloTabela extends AbstractTableModel {
 
     private ArrayList linhas = null;
     private String[] colunas = null;
@@ -39,11 +39,5 @@ public class ModeloTabela extends AbstractTableModel {
     public String getColumnName(int numCol) {
         return colunas[numCol];
     }
-
-    @Override
-    public Object getValueAt(int numLin, int numCol) {
-        Object[] linha = (Object[]) linhas.get(numLin);
-        return linha[numCol];
-    }
-
+    
 }

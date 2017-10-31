@@ -1,6 +1,6 @@
 package modelo;
 
-public abstract class Correcao {
+public abstract class Filtro {
 
     private final String input = "img/image.jpg";
 
@@ -8,6 +8,6 @@ public abstract class Correcao {
         return input;
     }
 
-    public abstract void corrigirImagem();
+    public abstract void aplicarFiltro();
 
 }

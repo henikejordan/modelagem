@@ -59,8 +59,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadCultura = new javax.swing.JMenuItem();
         jMenuCadDoenca = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuOpcCarregarImg = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuOpcQuantificar = new javax.swing.JMenuItem();
+        jMenuOpcFiltro = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuSair = new javax.swing.JMenu();
 
@@ -168,23 +168,23 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setText("Opções");
         jMenu2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jMenuOpcCarregarImg.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuOpcCarregarImg.setText("Quantificar Doença");
-        jMenuOpcCarregarImg.addActionListener(new java.awt.event.ActionListener() {
+        jMenuOpcQuantificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jMenuOpcQuantificar.setText("Quantificar Doença");
+        jMenuOpcQuantificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuOpcCarregarImgActionPerformed(evt);
+                jMenuOpcQuantificarActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuOpcCarregarImg);
+        jMenu2.add(jMenuOpcQuantificar);
 
-        jMenuItem1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuItem1.setText("Corrigir Imagem");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuOpcFiltro.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jMenuOpcFiltro.setText("Aplicar Filtro");
+        jMenuOpcFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuOpcFiltroActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(jMenuOpcFiltro);
 
         jMenuBar.add(jMenu2);
 
@@ -262,13 +262,13 @@ public class TelaInicial extends javax.swing.JFrame {
         TelaDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
-    private void jMenuOpcCarregarImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcCarregarImgActionPerformed
+    private void jMenuOpcQuantificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcQuantificarActionPerformed
         new TelaBrowser("Quantificar").setVisible(true);
-    }//GEN-LAST:event_jMenuOpcCarregarImgActionPerformed
+    }//GEN-LAST:event_jMenuOpcQuantificarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuOpcFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcFiltroActionPerformed
         new TelaBrowser("Corrigir").setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
@@ -285,8 +285,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadCultura;
     private javax.swing.JMenuItem jMenuCadDoenca;
     private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuOpcCarregarImg;
+    private javax.swing.JMenuItem jMenuOpcFiltro;
+    private javax.swing.JMenuItem jMenuOpcQuantificar;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
 

@@ -57,8 +57,6 @@ public abstract class Imagem {
         this.largura = largura;
     }
 
-    public void carregaImagem() {
-
-    }
+    public abstract void carregarImagem();
 
 }

@@ -1,27 +1,29 @@
 package visao;
 
-import modelo.CorrecaoContext;
-import modelo.CorrecaoFiltro;
-import modelo.CorrecaoRuido;
+import modelo.FiltroBilateral;
+import modelo.FiltroContext;
+import modelo.FiltroNormalizado;
+import modelo.FiltroGaussiano;
+import modelo.FiltroMediano;
 
 /**
  *
  * @author henik
  */
-public class TelaCorrecao extends javax.swing.JFrame {
+public class TelaFiltro extends javax.swing.JFrame {
 
-    private static TelaCorrecao instance;
+    private static TelaFiltro instance;
 
     /**
      * Creates new form NovoJFrame
      */
-    private TelaCorrecao() {
+    private TelaFiltro() {
         initComponents();
     }
 
-    public static TelaCorrecao getInstance() {
+    public static TelaFiltro getInstance() {
         if (instance == null) {
-            instance = new TelaCorrecao();
+            instance = new TelaFiltro();
         }
         return instance;
     }
@@ -35,18 +37,20 @@ public class TelaCorrecao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonRuido = new javax.swing.JButton();
+        jButtonNormal = new javax.swing.JButton();
         panelImagem = new visao.DrawingPanel();
-        jButtonFiltro = new javax.swing.JButton();
+        jButtonGauss = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButtonMediano = new javax.swing.JButton();
+        jButtonBilateral = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Imagem");
 
-        jButtonRuido.setText("Ruído");
-        jButtonRuido.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNormal.setText("Normalizado");
+        jButtonNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRuidoActionPerformed(evt);
+                jButtonNormalActionPerformed(evt);
             }
         });
 
@@ -58,13 +62,13 @@ public class TelaCorrecao extends javax.swing.JFrame {
         );
         panelImagemLayout.setVerticalGroup(
             panelImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+            .addGap(0, 259, Short.MAX_VALUE)
         );
 
-        jButtonFiltro.setText("Filtro");
-        jButtonFiltro.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGauss.setText("Gaussiano");
+        jButtonGauss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFiltroActionPerformed(evt);
+                jButtonGaussActionPerformed(evt);
             }
         });
 
@@ -72,6 +76,20 @@ public class TelaCorrecao extends javax.swing.JFrame {
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jButtonMediano.setText("Mediano");
+        jButtonMediano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMedianoActionPerformed(evt);
+            }
+        });
+
+        jButtonBilateral.setText("Bilateral");
+        jButtonBilateral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBilateralActionPerformed(evt);
             }
         });
 
@@ -84,10 +102,14 @@ public class TelaCorrecao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jButtonRuido)
-                        .addGap(90, 90, 90)
-                        .addComponent(jButtonFiltro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                        .addComponent(jButtonNormal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonGauss)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonMediano)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBilateral)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
@@ -101,35 +123,51 @@ public class TelaCorrecao extends javax.swing.JFrame {
                 .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRuido)
-                    .addComponent(jButtonFiltro)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonNormal)
+                    .addComponent(jButtonGauss)
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonMediano)
+                    .addComponent(jButtonBilateral))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonRuidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRuidoActionPerformed
-        CorrecaoContext context = new CorrecaoContext(new CorrecaoRuido());
+    private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
+        FiltroContext context = new FiltroContext(new FiltroNormalizado());
         context.corrigirImagem();
         panelImagem.repaint();
-    }//GEN-LAST:event_jButtonRuidoActionPerformed
+    }//GEN-LAST:event_jButtonNormalActionPerformed
 
-    private void jButtonFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltroActionPerformed
-        CorrecaoContext context = new CorrecaoContext(new CorrecaoFiltro());
+    private void jButtonGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGaussActionPerformed
+        FiltroContext context = new FiltroContext(new FiltroGaussiano());
         context.corrigirImagem();
         panelImagem.repaint();
-    }//GEN-LAST:event_jButtonFiltroActionPerformed
+    }//GEN-LAST:event_jButtonGaussActionPerformed
+
+    private void jButtonMedianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedianoActionPerformed
+        FiltroContext context = new FiltroContext(new FiltroMediano());
+        context.corrigirImagem();
+        panelImagem.repaint();
+    }//GEN-LAST:event_jButtonMedianoActionPerformed
+
+    private void jButtonBilateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBilateralActionPerformed
+        FiltroContext context = new FiltroContext(new FiltroBilateral());
+        context.corrigirImagem();
+        panelImagem.repaint();
+    }//GEN-LAST:event_jButtonBilateralActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBilateral;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonFiltro;
-    private javax.swing.JButton jButtonRuido;
+    private javax.swing.JButton jButtonGauss;
+    private javax.swing.JButton jButtonMediano;
+    private javax.swing.JButton jButtonNormal;
     private visao.DrawingPanel panelImagem;
     // End of variables declaration//GEN-END:variables
 }

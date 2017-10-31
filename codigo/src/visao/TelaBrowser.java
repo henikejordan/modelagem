@@ -135,7 +135,7 @@ public class TelaBrowser extends javax.swing.JFrame {
             if ("Quantificar".equals(opc)) {
                 TelaEditor.getInstance().setVisible(true);
             } else {
-                TelaCorrecao.getInstance().setVisible(true);
+                TelaFiltro.getInstance().setVisible(true);
             }
         }
     }//GEN-LAST:event_arquivosActionPerformed

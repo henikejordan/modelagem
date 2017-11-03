@@ -148,32 +148,6 @@ public class TelaBrowser extends javax.swing.JFrame {
         return arquivos;
     }
 
-    /*
-    private void carregaImagem(String diretorio) {
-        try {
-            FileInputStream origem;
-            FileOutputStream destino;
-
-            FileChannel fcOrigem;
-            FileChannel fcDestino;
-
-            origem = new FileInputStream(diretorio);
-            destino = new FileOutputStream(dirImg);
-
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-
-            origem.close();
-            destino.close();
-        } catch (FileNotFoundException ex) {
-            //
-        } catch (IOException ex) {
-            //
-        }
-    }*/
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser arquivos;
     private javax.swing.JPanel corpo;

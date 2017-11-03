@@ -13,6 +13,7 @@ import modelo.FiltroMediano;
 public class TelaFiltro extends javax.swing.JFrame {
 
     private final String dir;
+    private final String dirOut = "img/image.jpg";
 
     /**
      * Creates new form NovoJFrame
@@ -36,7 +37,7 @@ public class TelaFiltro extends javax.swing.JFrame {
         jButtonNormal = new javax.swing.JButton();
         panelImagem = new visao.DrawingPanel();
         jButtonGauss = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         jButtonMediano = new javax.swing.JButton();
         jButtonBilateral = new javax.swing.JButton();
 
@@ -70,10 +71,10 @@ public class TelaFiltro extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -108,7 +109,7 @@ public class TelaFiltro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonBilateral)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar)
+                        .addComponent(jButtonSair)
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,7 +124,7 @@ public class TelaFiltro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNormal)
                     .addComponent(jButtonGauss)
-                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonSair)
                     .addComponent(jButtonMediano)
                     .addComponent(jButtonBilateral))
                 .addContainerGap())
@@ -137,7 +138,7 @@ public class TelaFiltro extends javax.swing.JFrame {
         filtroNormalizado.setDir(dir);
         FiltroContext context = new FiltroContext(filtroNormalizado);
         context.corrigirImagem();
-        panelImagem.setDir("img/image.jpg");
+        panelImagem.setDir(dirOut);
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonNormalActionPerformed
 
@@ -146,7 +147,7 @@ public class TelaFiltro extends javax.swing.JFrame {
         filtroGaussiano.setDir(dir);
         FiltroContext context = new FiltroContext(filtroGaussiano);
         context.corrigirImagem();
-        panelImagem.setDir("img/image.jpg");
+        panelImagem.setDir(dirOut);
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonGaussActionPerformed
 
@@ -155,7 +156,7 @@ public class TelaFiltro extends javax.swing.JFrame {
         filtroMediano.setDir(dir);
         FiltroContext context = new FiltroContext(filtroMediano);
         context.corrigirImagem();
-        panelImagem.setDir("img/image.jpg");
+        panelImagem.setDir(dirOut);
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonMedianoActionPerformed
 
@@ -164,20 +165,20 @@ public class TelaFiltro extends javax.swing.JFrame {
         filtroBilateral.setDir(dir);
         FiltroContext context = new FiltroContext(filtroBilateral);
         context.corrigirImagem();
-        panelImagem.setDir("img/image.jpg");
+        panelImagem.setDir(dirOut);
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonBilateralActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBilateral;
-    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGauss;
     private javax.swing.JButton jButtonMediano;
     private javax.swing.JButton jButtonNormal;
+    private javax.swing.JButton jButtonSair;
     private visao.DrawingPanel panelImagem;
     // End of variables declaration//GEN-END:variables
 }

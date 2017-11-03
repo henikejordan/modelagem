@@ -235,6 +235,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         if (id == 0) {
             if (daoAmostragem.inserir(amostragem)) {
                 TelaAmostragem.getInstance().preencherTabela();
+                limparCampos();
                 JOptionPane.showMessageDialog(null, "Amostragem cadastrada com sucesso!");
             }
         } else {

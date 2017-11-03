@@ -213,6 +213,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         if (id == 0) {
             if (daoClasseSeveridade.inserir(classeSeveridade)) {
                 TelaClasseSeveridade.getInstance().preencherTabela();
+                limparCampos();
                 JOptionPane.showMessageDialog(null, "Classe criada com sucesso!");
             }
         } else {

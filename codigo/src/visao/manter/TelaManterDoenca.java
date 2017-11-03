@@ -231,6 +231,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         if (id == 0) {
             if (daoDoenca.inserir(doenca)) {
                 TelaDoenca.getInstance().preencherTabela();
+                limparCampos();
                 JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
             }
         } else {

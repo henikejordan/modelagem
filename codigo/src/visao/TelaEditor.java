@@ -1,5 +1,6 @@
 package visao;
 
+import javax.swing.JOptionPane;
 import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
@@ -11,6 +12,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
 public class TelaEditor extends javax.swing.JFrame {
 
     private final String dir;
+    private final String dirOut = "img/image.jpg";
 
     /**
      * Creates new form NovoJFrame
@@ -32,7 +34,7 @@ public class TelaEditor extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonConfirmar = new javax.swing.JButton();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         panelImagem = new visao.DrawingPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -45,10 +47,10 @@ public class TelaEditor extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonSairActionPerformed(evt);
             }
         });
 
@@ -72,8 +74,8 @@ public class TelaEditor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jButtonConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(jButtonSair)
                 .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -88,7 +90,7 @@ public class TelaEditor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonSair))
                 .addContainerGap())
         );
 
@@ -96,25 +98,25 @@ public class TelaEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        Mat image = imread(dir);
+        Mat image = imread(dirOut);
         threshold(image, image, 200, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
 
-        image = imread(dir);
+        image = imread(dirOut);
         threshold(image, image, 127, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-        System.out.println("Porcentagem de doença:" + (float) doente / total * 100 + "%");
+        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + (float) doente / total * 100 + "%");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonSair;
     private visao.DrawingPanel panelImagem;
     // End of variables declaration//GEN-END:variables
 }

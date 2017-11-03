@@ -210,6 +210,7 @@ public class TelaManterImagem extends javax.swing.JFrame {
         if (id == 0) {
             if (dao.inserir(cultura)) {
                 TelaCultura.getInstance().preencherTabela();
+                limparCampos();
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
         } else {

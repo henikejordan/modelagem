@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Cultura;
 import modelo.Doenca;
+import modelo.iterator.DoencaLista;
 
 public class DoencaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Doenca> doencas = new ArrayList();
+        DoencaLista doencas = new DoencaLista();
         ResultSet resultado = super.getConecta().executaSQL("select * from doenca");
         try {
             resultado.first();

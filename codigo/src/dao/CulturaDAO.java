@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Cultura;
+import modelo.iterator.CulturaLista;
 
 public class CulturaDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Cultura> culturas = new ArrayList();
+        CulturaLista culturas = new CulturaLista();
         ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
         try {
             resultado.first();

@@ -2,10 +2,10 @@ package visao.manter;
 
 import dao.CreatorDAO;
 import dao.DAO;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.ClasseSeveridade;
-import modelo.Doenca;
+import modelo.iterator.DoencaIterator;
+import modelo.iterator.DoencaLista;
 import visao.inicio.TelaClasseSeveridade;
 
 /**
@@ -16,7 +16,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     private static TelaManterClasseSeveridade instance;
     private final DAO daoClasseSeveridade, daoDoenca;
-    private final ArrayList<Doenca> doencas;
+    private final DoencaLista doencas;
     private int id;
 
     private TelaManterClasseSeveridade() {
@@ -24,7 +24,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         getRootPane().setDefaultButton(jButtonSalvar);
         daoClasseSeveridade = new CreatorDAO().factoryMethod("Classe Severidade");
         daoDoenca = new CreatorDAO().factoryMethod("Doença");
-        doencas = daoDoenca.lerTodos();
+        doencas = (DoencaLista) daoDoenca.lerTodos();
         preencherComboBox();
     }
 
@@ -36,9 +36,10 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
+        DoencaIterator di = doencas.getDoencaIterator();
         jComboBoxDoenca.addItem("");
-        for (Doenca doenca : doencas) {
-            jComboBoxDoenca.addItem(doenca.getNome());
+        for (di.primeiro(); !di.isFinalizado(); di.proximo()) {
+            jComboBoxDoenca.addItem(di.getAtual().getNome());
         }
     }
 
@@ -216,11 +217,9 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Classe criada com sucesso!");
             }
-        } else {
-            if (daoClasseSeveridade.alterar(classeSeveridade)) {
-                TelaClasseSeveridade.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Classe alterada com sucesso!");
-            }
+        } else if (daoClasseSeveridade.alterar(classeSeveridade)) {
+            TelaClasseSeveridade.getInstance().preencherTabela();
+            JOptionPane.showMessageDialog(null, "Classe alterada com sucesso!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

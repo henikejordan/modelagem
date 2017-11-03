@@ -2,10 +2,10 @@ package visao.manter;
 
 import dao.CreatorDAO;
 import dao.DAO;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.Camera;
 import modelo.Amostragem;
+import modelo.iterator.CameraIterator;
+import modelo.iterator.CameraLista;
 import visao.inicio.TelaAmostragem;
 
 /**
@@ -16,7 +16,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
 
     private static TelaManterAmostragem instance;
     private final DAO daoAmostragem, daoCamera;
-    private final ArrayList<Camera> cameras;
+    private final CameraLista cameras;
     private int id;
 
     private TelaManterAmostragem() {
@@ -24,7 +24,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         getRootPane().setDefaultButton(jButtonSalvar);
         daoAmostragem = new CreatorDAO().factoryMethod("Amostragem");
         daoCamera = new CreatorDAO().factoryMethod("Câmera");
-        cameras = daoCamera.lerTodos();
+        cameras = (CameraLista) daoCamera.lerTodos();
         preencherComboBox();
     }
 
@@ -36,9 +36,10 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
+        CameraIterator ci = cameras.getCameraIterator();
         jComboBoxCamera.addItem("");
-        for (Camera camera : cameras) {
-            jComboBoxCamera.addItem(camera.getModelo());
+        for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
+            jComboBoxCamera.addItem(ci.getAtual().getModelo());
         }
     }
 
@@ -238,11 +239,9 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Amostragem cadastrada com sucesso!");
             }
-        } else {
-            if (daoAmostragem.alterar(amostragem)) {
-                TelaAmostragem.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Amostragem alterada com sucesso!");
-            }
+        } else if (daoAmostragem.alterar(amostragem)) {
+            TelaAmostragem.getInstance().preencherTabela();
+            JOptionPane.showMessageDialog(null, "Amostragem alterada com sucesso!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

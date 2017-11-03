@@ -2,10 +2,10 @@ package visao.manter;
 
 import dao.CreatorDAO;
 import dao.DAO;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.Cultura;
 import modelo.Doenca;
+import modelo.iterator.CulturaIterator;
+import modelo.iterator.CulturaLista;
 import visao.inicio.TelaDoenca;
 
 /**
@@ -16,7 +16,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
 
     private static TelaManterDoenca instance;
     private final DAO daoDoenca, daoCultura;
-    private final ArrayList<Cultura> culturas;
+    private final CulturaLista culturas;
     private int id;
 
     private TelaManterDoenca() {
@@ -24,7 +24,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         getRootPane().setDefaultButton(jButtonSalvar);
         daoDoenca = new CreatorDAO().factoryMethod("Doença");
         daoCultura = new CreatorDAO().factoryMethod("Cultura");
-        culturas = daoCultura.lerTodos();
+        culturas = (CulturaLista) daoCultura.lerTodos();
         preencherComboBox();
     }
 
@@ -36,9 +36,10 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
+        CulturaIterator ci = culturas.getCulturaIterator();
         jComboBoxCultura.addItem("");
-        for (Cultura cultura : culturas) {
-            jComboBoxCultura.addItem(cultura.getNome());
+        for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
+            jComboBoxCultura.addItem(ci.getAtual().getNome());
         }
     }
 
@@ -234,11 +235,9 @@ public class TelaManterDoenca extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
             }
-        } else {
-            if (daoDoenca.alterar(doenca)) {
-                TelaDoenca.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
-            }
+        } else if (daoDoenca.alterar(doenca)) {
+            TelaDoenca.getInstance().preencherTabela();
+            JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

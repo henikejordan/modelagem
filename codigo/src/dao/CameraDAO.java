@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Camera;
+import modelo.iterator.CameraLista;
 
 public class CameraDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Camera> cameras = new ArrayList();
+        CameraLista cameras = new CameraLista();
         ResultSet resultado = super.getConecta().executaSQL("select * from camera");
         try {
             resultado.first();

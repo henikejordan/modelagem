@@ -1,11 +1,6 @@
 package visao;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
 import javax.swing.JFileChooser;
 
 /**
@@ -14,7 +9,6 @@ import javax.swing.JFileChooser;
  */
 public class TelaBrowser extends javax.swing.JFrame {
 
-    private final String dirImg = "img/image.jpg";
     private String opc;
 
     /**
@@ -131,11 +125,12 @@ public class TelaBrowser extends javax.swing.JFrame {
     private void arquivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arquivosActionPerformed
         setVisible(false);
         if (JFileChooser.APPROVE_SELECTION.equals(evt.getActionCommand())) {
-            carregaImagem(arquivos.getSelectedFile().toString());
+            String dir = arquivos.getSelectedFile().toString();
+            //carregaImagem(arquivos.getSelectedFile().toString());
             if ("Quantificar".equals(opc)) {
-                TelaEditor.getInstance().setVisible(true);
+                new TelaEditor(dir).setVisible(true);
             } else {
-                TelaFiltro.getInstance().setVisible(true);
+                new TelaFiltro(dir).setVisible(true);
             }
         }
     }//GEN-LAST:event_arquivosActionPerformed
@@ -153,10 +148,7 @@ public class TelaBrowser extends javax.swing.JFrame {
         return arquivos;
     }
 
-    public String getDirImg() {
-        return dirImg;
-    }
-
+    /*
     private void carregaImagem(String diretorio) {
         try {
             FileInputStream origem;
@@ -180,7 +172,7 @@ public class TelaBrowser extends javax.swing.JFrame {
         } catch (IOException ex) {
             //
         }
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser arquivos;

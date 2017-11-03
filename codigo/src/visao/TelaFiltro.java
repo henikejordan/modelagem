@@ -12,20 +12,16 @@ import modelo.FiltroMediano;
  */
 public class TelaFiltro extends javax.swing.JFrame {
 
-    private static TelaFiltro instance;
+    private final String dir;
 
     /**
      * Creates new form NovoJFrame
+     *
+     * @param dir
      */
-    private TelaFiltro() {
+    public TelaFiltro(String dir) {
+        this.dir = dir;
         initComponents();
-    }
-
-    public static TelaFiltro getInstance() {
-        if (instance == null) {
-            instance = new TelaFiltro();
-        }
-        return instance;
     }
 
     /**
@@ -53,6 +49,8 @@ public class TelaFiltro extends javax.swing.JFrame {
                 jButtonNormalActionPerformed(evt);
             }
         });
+
+        panelImagem.setDir(dir);
 
         javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
         panelImagem.setLayout(panelImagemLayout);
@@ -135,26 +133,38 @@ public class TelaFiltro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
-        FiltroContext context = new FiltroContext(new FiltroNormalizado());
+        FiltroNormalizado filtroNormalizado = new FiltroNormalizado();
+        filtroNormalizado.setDir(dir);
+        FiltroContext context = new FiltroContext(filtroNormalizado);
         context.corrigirImagem();
+        panelImagem.setDir("img/image.jpg");
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonNormalActionPerformed
 
     private void jButtonGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGaussActionPerformed
-        FiltroContext context = new FiltroContext(new FiltroGaussiano());
+        FiltroGaussiano filtroGaussiano = new FiltroGaussiano();
+        filtroGaussiano.setDir(dir);
+        FiltroContext context = new FiltroContext(filtroGaussiano);
         context.corrigirImagem();
+        panelImagem.setDir("img/image.jpg");
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonGaussActionPerformed
 
     private void jButtonMedianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedianoActionPerformed
-        FiltroContext context = new FiltroContext(new FiltroMediano());
+        FiltroMediano filtroMediano = new FiltroMediano();
+        filtroMediano.setDir(dir);
+        FiltroContext context = new FiltroContext(filtroMediano);
         context.corrigirImagem();
+        panelImagem.setDir("img/image.jpg");
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonMedianoActionPerformed
 
     private void jButtonBilateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBilateralActionPerformed
-        FiltroContext context = new FiltroContext(new FiltroBilateral());
+        FiltroBilateral filtroBilateral = new FiltroBilateral();
+        filtroBilateral.setDir(dir);
+        FiltroContext context = new FiltroContext(filtroBilateral);
         context.corrigirImagem();
+        panelImagem.setDir("img/image.jpg");
         panelImagem.repaint();
     }//GEN-LAST:event_jButtonBilateralActionPerformed
 

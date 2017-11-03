@@ -9,9 +9,9 @@ public class FiltroNormalizado extends Filtro {
 
     @Override
     public void aplicarFiltro() {
-        Mat image = imread(getInput());
+        Mat image = imread(getDir());
         blur(image, image, new Size(5, 5));
-        imwrite(getInput(), image);
+        imwrite("img/image.jpg", image);
     }
 
 }

@@ -1,12 +1,8 @@
 package visao;
 
-import org.bytedeco.javacpp.opencv_core;
-import static org.bytedeco.javacpp.opencv_core.countNonZero;
-import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
-import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
-import static org.bytedeco.javacpp.opencv_imgproc.threshold;
+import static org.bytedeco.javacpp.opencv_core.*;
+import static org.bytedeco.javacpp.opencv_imgcodecs.*;
+import static org.bytedeco.javacpp.opencv_imgproc.*;
 
 /**
  *
@@ -14,21 +10,16 @@ import static org.bytedeco.javacpp.opencv_imgproc.threshold;
  */
 public class TelaEditor extends javax.swing.JFrame {
 
-    private static TelaEditor instance;
-    private final String input = "img/image.jpg";
+    private final String dir;
 
     /**
      * Creates new form NovoJFrame
+     *
+     * @param dir
      */
-    private TelaEditor() {
+    public TelaEditor(String dir) {
+        this.dir = dir;
         initComponents();
-    }
-
-    public static TelaEditor getInstance() {
-        if (instance == null) {
-            instance = new TelaEditor();
-        }
-        return instance;
     }
 
     /**
@@ -42,7 +33,7 @@ public class TelaEditor extends javax.swing.JFrame {
 
         jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        drawingPanel1 = new visao.DrawingPanel();
+        panelImagem = new visao.DrawingPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Imagem");
@@ -61,14 +52,16 @@ public class TelaEditor extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout drawingPanel1Layout = new javax.swing.GroupLayout(drawingPanel1);
-        drawingPanel1.setLayout(drawingPanel1Layout);
-        drawingPanel1Layout.setHorizontalGroup(
-            drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelImagem.setDir(dir);
+
+        javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
+        panelImagem.setLayout(panelImagemLayout);
+        panelImagemLayout.setHorizontalGroup(
+            panelImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        drawingPanel1Layout.setVerticalGroup(
-            drawingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelImagemLayout.setVerticalGroup(
+            panelImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 251, Short.MAX_VALUE)
         );
 
@@ -84,14 +77,14 @@ public class TelaEditor extends javax.swing.JFrame {
                 .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
@@ -103,18 +96,16 @@ public class TelaEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        opencv_core.Mat image = imread(input);
-        if (image != null) {
-            threshold(image, image, 200, 255, CV_THRESH_BINARY);
-            cvtColor(image, image, CV_BGR2GRAY);
-            int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-            image = imread(input);
+        Mat image = imread(dir);
+        threshold(image, image, 200, 255, CV_THRESH_BINARY);
+        cvtColor(image, image, CV_BGR2GRAY);
+        int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
 
-            threshold(image, image, 127, 255, CV_THRESH_BINARY);
-            cvtColor(image, image, CV_BGR2GRAY);
-            int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-            System.out.println("Porcentagem de doença:" + (float) doente / total * 100 + "%");
-        }
+        image = imread(dir);
+        threshold(image, image, 127, 255, CV_THRESH_BINARY);
+        cvtColor(image, image, CV_BGR2GRAY);
+        int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
+        System.out.println("Porcentagem de doença:" + (float) doente / total * 100 + "%");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -122,8 +113,8 @@ public class TelaEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private visao.DrawingPanel drawingPanel1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
+    private visao.DrawingPanel panelImagem;
     // End of variables declaration//GEN-END:variables
 }

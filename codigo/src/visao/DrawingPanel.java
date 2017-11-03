@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Stroke;
@@ -13,8 +12,9 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JPanel;
+import modelo.ImagemProxy;
 
 /**
  *
@@ -24,26 +24,33 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     private Rectangle selection;
     private Point anchor;
-    private final Toolkit tk = Toolkit.getDefaultToolkit();
-    private final Dimension d = tk.getScreenSize();
-    private final ImageIcon imagem = new ImageIcon("img/image.jpg");
-    private final Image image = imagem.getImage().getScaledInstance(d.width, d.height, Image.SCALE_SMOOTH);
+    private final Toolkit tk;
+    private final Dimension d;
+    private String dir;
+    private Icon imagem = new ImagemProxy(dir);
 
     public DrawingPanel() {
+        tk = Toolkit.getDefaultToolkit();
+        d = tk.getScreenSize();
         addMouseListener(this);
         addMouseMotionListener(this);
+    }
+
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
+        imagem = new ImagemProxy(dir);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        imagem.paintIcon(this, g, 0, 0);
 
-        Dimension dDesktop = this.getSize();
-        double width = dDesktop.getWidth();
-        double height = dDesktop.getHeight();
-        Image background = new ImageIcon(image.getScaledInstance((int) width, (int) height, 1)).getImage();
-        g.drawImage(background, 0, 0, this);
-
+        //desenhar o retângulo
         if (selection != null) {
             Graphics2D g2d = (Graphics2D) g;
 

@@ -76,6 +76,10 @@
       </Events>
     </Component>
     <Container class="visao.DrawingPanel" name="panelImagem">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="panelImagem.setDir(dir);"/>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="TelaFiltro_panelImagem"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

@@ -2,10 +2,14 @@ package modelo;
 
 public abstract class Filtro {
 
-    private final String input = "img/image.jpg";
+    private String dir;
 
-    public String getInput() {
-        return input;
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
     }
 
     public abstract void aplicarFiltro();

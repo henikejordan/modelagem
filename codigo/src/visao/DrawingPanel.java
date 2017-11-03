@@ -2,13 +2,11 @@ package visao;
 
 import java.awt.BasicStroke;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Stroke;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -28,15 +26,11 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     private Rectangle selection;
     private Point anchor;
-    private final Toolkit tk;
-    private final Dimension d;
     private String dir;
     private Icon imagem = new ImagemProxy(dir);
     private int x1, y1;
 
     public DrawingPanel() {
-        tk = Toolkit.getDefaultToolkit();
-        d = tk.getScreenSize();
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -111,26 +105,22 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
     }
 
     @Override
-    public void mouseMoved(MouseEvent e
-    ) {
+    public void mouseMoved(MouseEvent e) {
         //
     }
 
     @Override
-    public void mouseClicked(MouseEvent e
-    ) {
+    public void mouseClicked(MouseEvent e) {
         //
     }
 
     @Override
-    public void mouseEntered(MouseEvent e
-    ) {
+    public void mouseEntered(MouseEvent e) {
         //
     }
 
     @Override
-    public void mouseExited(MouseEvent e
-    ) {
+    public void mouseExited(MouseEvent e) {
         //
     }
 

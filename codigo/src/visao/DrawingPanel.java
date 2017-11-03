@@ -12,6 +12,10 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 import modelo.ImagemProxy;
@@ -28,6 +32,7 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
     private final Dimension d;
     private String dir;
     private Icon imagem = new ImagemProxy(dir);
+    private int x1, y1;
 
     public DrawingPanel() {
         tk = Toolkit.getDefaultToolkit();
@@ -66,6 +71,8 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
         anchor = e.getPoint();
         selection = new Rectangle(anchor);
         setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+        x1 = e.getX();
+        y1 = e.getY();
     }
 
     @Override
@@ -80,25 +87,50 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
         //selection = null;
         repaint();
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+        BufferedImage bi = new BufferedImage(imagem.getIconWidth(), imagem.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage out;
+        if (e.getX() > x1 && e.getY() > y1) {
+            out = bi.getSubimage(x1, y1, e.getX() - x1, e.getY() - y1);
+        } else if (e.getX() > x1 && e.getY() < y1) {
+            out = bi.getSubimage(x1, e.getY(), e.getX() - x1, y1 - e.getY());
+        } else if (e.getX() < x1 && e.getY() > y1) {
+            out = bi.getSubimage(e.getX(), y1, x1 - e.getX(), e.getY() - y1);
+        } else {
+            out = bi.getSubimage(e.getX(), e.getY(), x1 - e.getX(), y1 - e.getY());
+        }
+        Graphics g = bi.createGraphics();
+        imagem.paintIcon(null, g, 0, 0);
+        g.dispose();
+        File outputfile = new File("img/image.jpg");
+        try {
+            ImageIO.write(out, "jpg", outputfile);
+        } catch (IOException ex) {
+            //
+        }
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e
+    ) {
         //
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e
+    ) {
         //
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e
+    ) {
         //
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e
+    ) {
         //
     }
 

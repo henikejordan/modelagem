@@ -134,23 +134,19 @@ public class TelaFiltro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
-        FiltroNormalizado filtroNormalizado = new FiltroNormalizado();
-        aplicarFiltro(filtroNormalizado);
+        aplicarFiltro(new FiltroNormalizado());
     }//GEN-LAST:event_jButtonNormalActionPerformed
 
     private void jButtonGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGaussActionPerformed
-        FiltroGaussiano filtroGaussiano = new FiltroGaussiano();
-        aplicarFiltro(filtroGaussiano);
+        aplicarFiltro(new FiltroGaussiano());
     }//GEN-LAST:event_jButtonGaussActionPerformed
 
     private void jButtonMedianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedianoActionPerformed
-        FiltroMediano filtroMediano = new FiltroMediano();
-        aplicarFiltro(filtroMediano);
+        aplicarFiltro(new FiltroMediano());
     }//GEN-LAST:event_jButtonMedianoActionPerformed
 
     private void jButtonBilateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBilateralActionPerformed
-        FiltroBilateral filtroBilateral = new FiltroBilateral();
-        aplicarFiltro(filtroBilateral);
+        aplicarFiltro(new FiltroBilateral());
     }//GEN-LAST:event_jButtonBilateralActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

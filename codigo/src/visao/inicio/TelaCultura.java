@@ -63,6 +63,11 @@ public class TelaCultura extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Cadastrar cultura");
 
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabela);
 
         jButtonSair.setText("Sair");
@@ -191,6 +196,15 @@ public class TelaCultura extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
+            TelaManterCultura.getInstance().preencherCampos(id);
+            TelaManterCultura.getInstance().setVisible(true);
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
 
     public final void preencherTabela() {
         modelotabela = new ModeloTabelaCultura(dao.lerTodos(), new String[]{null, "Nome", "Descrição"});

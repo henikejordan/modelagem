@@ -16,7 +16,7 @@ public class ModeloTabelaCultura extends ModeloTabela {
     @Override
     public Object getValueAt(int numLin, int numCol) {
         Cultura cultura = (Cultura) getLinhas().get(numLin);
-        switch (numCol) {            
+        switch (numCol) {
             case 0:
                 return cultura.getIdCultura();
             case 1:

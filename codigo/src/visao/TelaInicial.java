@@ -20,11 +20,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private TelaInicial() {
         initComponents();
-
         //pegar resolução da tela
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
-
         //setar a posição e tamanho da label
         jLabelFundo.setBounds(0, 0, d.width - 12, d.height - 112);
         AtualizaHora.start(jLabelHorario);

@@ -15,4 +15,5 @@ public interface CulturaIterator {
     boolean isFinalizado();
 
     Cultura getAtual();
+
 }

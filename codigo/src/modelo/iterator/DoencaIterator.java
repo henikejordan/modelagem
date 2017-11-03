@@ -15,4 +15,5 @@ public interface DoencaIterator {
     boolean isFinalizado();
 
     Doenca getAtual();
+
 }

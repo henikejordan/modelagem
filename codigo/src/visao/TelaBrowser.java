@@ -126,7 +126,6 @@ public class TelaBrowser extends javax.swing.JFrame {
         setVisible(false);
         if (JFileChooser.APPROVE_SELECTION.equals(evt.getActionCommand())) {
             String dir = arquivos.getSelectedFile().toString();
-            //carregaImagem(arquivos.getSelectedFile().toString());
             if ("Quantificar".equals(opc)) {
                 new TelaEditor(dir).setVisible(true);
             } else {

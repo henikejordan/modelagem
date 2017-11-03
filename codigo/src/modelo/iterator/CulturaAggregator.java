@@ -7,4 +7,5 @@ package modelo.iterator;
 public interface CulturaAggregator {
 
     CulturaIterator getCulturaIterator();
+
 }

@@ -229,11 +229,9 @@ public class TelaManterCamera extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Câmera cadastrada com sucesso!");
             }
-        } else {
-            if (dao.alterar(camera)) {
-                TelaCamera.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Câmera alterada com sucesso!");
-            }
+        } else if (dao.alterar(camera)) {
+            TelaCamera.getInstance().preencherTabela();
+            JOptionPane.showMessageDialog(null, "Câmera alterada com sucesso!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

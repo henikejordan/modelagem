@@ -213,11 +213,9 @@ public class TelaManterCultura extends javax.swing.JFrame {
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
-        } else {
-            if (dao.alterar(cultura)) {
-                TelaCultura.getInstance().preencherTabela();
-                JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
-            }
+        } else if (dao.alterar(cultura)) {
+            TelaCultura.getInstance().preencherTabela();
+            JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 

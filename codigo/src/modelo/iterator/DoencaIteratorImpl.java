@@ -21,12 +21,12 @@ public class DoencaIteratorImpl implements DoencaIterator {
 
     @Override
     public void primeiro() {
-        this.contador = 0;
+        contador = 0;
     }
 
     @Override
     public void proximo() {
-        this.contador++;
+        contador++;
     }
 
     @Override
@@ -46,4 +46,5 @@ public class DoencaIteratorImpl implements DoencaIterator {
             throw new IllegalStateException("Iterador não possui mais elementos!");
         }
     }
+
 }

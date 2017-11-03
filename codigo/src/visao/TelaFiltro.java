@@ -1,7 +1,7 @@
 package visao;
 
+import modelo.Filtro;
 import modelo.FiltroBilateral;
-import modelo.FiltroContext;
 import modelo.FiltroNormalizado;
 import modelo.FiltroGaussiano;
 import modelo.FiltroMediano;
@@ -135,43 +135,34 @@ public class TelaFiltro extends javax.swing.JFrame {
 
     private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
         FiltroNormalizado filtroNormalizado = new FiltroNormalizado();
-        filtroNormalizado.setDir(dir);
-        FiltroContext context = new FiltroContext(filtroNormalizado);
-        context.corrigirImagem();
-        panelImagem.setDir(dirOut);
-        panelImagem.repaint();
+        aplicarFiltro(filtroNormalizado);
     }//GEN-LAST:event_jButtonNormalActionPerformed
 
     private void jButtonGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGaussActionPerformed
         FiltroGaussiano filtroGaussiano = new FiltroGaussiano();
-        filtroGaussiano.setDir(dir);
-        FiltroContext context = new FiltroContext(filtroGaussiano);
-        context.corrigirImagem();
-        panelImagem.setDir(dirOut);
-        panelImagem.repaint();
+        aplicarFiltro(filtroGaussiano);
     }//GEN-LAST:event_jButtonGaussActionPerformed
 
     private void jButtonMedianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedianoActionPerformed
         FiltroMediano filtroMediano = new FiltroMediano();
-        filtroMediano.setDir(dir);
-        FiltroContext context = new FiltroContext(filtroMediano);
-        context.corrigirImagem();
-        panelImagem.setDir(dirOut);
-        panelImagem.repaint();
+        aplicarFiltro(filtroMediano);
     }//GEN-LAST:event_jButtonMedianoActionPerformed
 
     private void jButtonBilateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBilateralActionPerformed
         FiltroBilateral filtroBilateral = new FiltroBilateral();
-        filtroBilateral.setDir(dir);
-        FiltroContext context = new FiltroContext(filtroBilateral);
-        context.corrigirImagem();
-        panelImagem.setDir(dirOut);
-        panelImagem.repaint();
+        aplicarFiltro(filtroBilateral);
     }//GEN-LAST:event_jButtonBilateralActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void aplicarFiltro(Filtro filtro) {
+        filtro.setDir(dir);
+        filtro.aplicarFiltro();
+        panelImagem.setDir(dirOut);
+        panelImagem.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBilateral;

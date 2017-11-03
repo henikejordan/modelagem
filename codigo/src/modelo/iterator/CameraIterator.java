@@ -15,4 +15,5 @@ public interface CameraIterator {
     boolean isFinalizado();
 
     Camera getAtual();
+
 }

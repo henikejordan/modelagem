@@ -39,5 +39,5 @@ public abstract class ModeloTabela extends AbstractTableModel {
     public String getColumnName(int numCol) {
         return colunas[numCol];
     }
-    
+
 }

@@ -79,10 +79,9 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        int x = e.getX(), y = e.getY();
         repaint();
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-
-        int x = e.getX(), y = e.getY();
 
         BufferedImage bi = new BufferedImage(imagem.getIconWidth(), imagem.getIconHeight(), BufferedImage.TYPE_INT_RGB);
         BufferedImage out = recortarImagem(bi, x, y);

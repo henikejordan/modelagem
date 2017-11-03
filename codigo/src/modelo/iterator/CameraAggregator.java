@@ -7,4 +7,5 @@ package modelo.iterator;
 public interface CameraAggregator {
 
     CameraIterator getCameraIterator();
+
 }

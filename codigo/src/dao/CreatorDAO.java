@@ -14,8 +14,6 @@ public class CreatorDAO {
                 return new CulturaDAO();
             case "Doença":
                 return new DoencaDAO();
-            case "Imagem":
-                return new ImagemDAO();
             default:
                 return null;
         }

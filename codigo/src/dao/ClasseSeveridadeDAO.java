@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import modelo.ClasseSeveridade;
 import modelo.Doenca;
 import modelo.CreatorQuantificacao;
+import modelo.iterator.ClasseSeveridadeLista;
 
 public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<ClasseSeveridade> classes = new ArrayList();
+        ClasseSeveridadeLista classes = new ClasseSeveridadeLista();
         ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade");
         try {
             resultado.first();

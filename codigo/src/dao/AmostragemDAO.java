@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Camera;
 import modelo.Amostragem;
+import modelo.iterator.AmostragemLista;
 
 public class AmostragemDAO extends DAO {
 
     @Override
     public ArrayList lerTodos() {
-        ArrayList<Amostragem> amostragens = new ArrayList();
+        AmostragemLista amostragens = new AmostragemLista();
         ResultSet resultado = super.getConecta().executaSQL("select * from amostragem");
         try {
             resultado.first();

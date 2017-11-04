@@ -29,7 +29,7 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
     private String dir;
     private final String dirOut = "img/image.jpg";
     private Icon imagem = new ImagemProxy(dir);
-    private int x1, y1;
+    private int x1, y1, x2, y2;
 
     public DrawingPanel() {
         addMouseListener(this);
@@ -63,11 +63,11 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     @Override
     public void mousePressed(MouseEvent e) {
+        x1 = e.getX();
+        y1 = e.getY();
         anchor = e.getPoint();
         selection = new Rectangle(anchor);
         setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-        x1 = e.getX();
-        y1 = e.getY();
     }
 
     @Override
@@ -79,12 +79,13 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x = e.getX(), y = e.getY();
+        x2 = e.getX();
+        y2 = e.getY();
         repaint();
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 
         BufferedImage bi = new BufferedImage(imagem.getIconWidth(), imagem.getIconHeight(), BufferedImage.TYPE_INT_RGB);
-        BufferedImage out = recortarImagem(bi, x, y);
+        BufferedImage out = recortarImagem(bi);
 
         Graphics g = bi.createGraphics();
         imagem.paintIcon(null, g, 0, 0);
@@ -117,42 +118,42 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
         //
     }
 
-    private BufferedImage recortarImagem(BufferedImage bi, int x, int y) {
-        if ((x > imagem.getIconWidth() && x1 > imagem.getIconWidth())
-                || (y > imagem.getIconHeight() && y1 > imagem.getIconHeight())) {
+    private BufferedImage recortarImagem(BufferedImage bi) {
+        if ((x2 > imagem.getIconWidth() && x1 > imagem.getIconWidth())
+                || (y2 > imagem.getIconHeight() && y1 > imagem.getIconHeight())) {
             return bi;
-        } else if (x > x1 && y > y1) {
-            if (x > imagem.getIconWidth()) {
-                x = imagem.getIconWidth();
+        } else if (x2 > x1 && y2 > y1) {
+            if (x2 > imagem.getIconWidth()) {
+                x2 = imagem.getIconWidth();
             }
-            if (y > imagem.getIconHeight()) {
-                y = imagem.getIconHeight();
+            if (y2 > imagem.getIconHeight()) {
+                y2 = imagem.getIconHeight();
             }
-            return bi.getSubimage(x1, y1, x - x1, y - y1);
-        } else if (x > x1 && y < y1) {
-            if (x > imagem.getIconWidth()) {
-                x = imagem.getIconWidth();
-            }
-            if (y1 > imagem.getIconHeight()) {
-                y1 = imagem.getIconHeight();
-            }
-            return bi.getSubimage(x1, y, x - x1, y1 - y);
-        } else if (x < x1 && y > y1) {
-            if (x1 > imagem.getIconWidth()) {
-                x1 = imagem.getIconWidth();
-            }
-            if (y > imagem.getIconHeight()) {
-                y = imagem.getIconHeight();
-            }
-            return bi.getSubimage(x, y1, x1 - x, y - y1);
-        } else if (x < x1 && y < y1) {
-            if (x1 > imagem.getIconWidth()) {
-                x1 = imagem.getIconWidth();
+            return bi.getSubimage(x1, y1, x2 - x1, y2 - y1);
+        } else if (x2 > x1 && y2 < y1) {
+            if (x2 > imagem.getIconWidth()) {
+                x2 = imagem.getIconWidth();
             }
             if (y1 > imagem.getIconHeight()) {
                 y1 = imagem.getIconHeight();
             }
-            return bi.getSubimage(x, y, x1 - x, y1 - y);
+            return bi.getSubimage(x1, y2, x2 - x1, y1 - y2);
+        } else if (x2 < x1 && y2 > y1) {
+            if (x1 > imagem.getIconWidth()) {
+                x1 = imagem.getIconWidth();
+            }
+            if (y2 > imagem.getIconHeight()) {
+                y2 = imagem.getIconHeight();
+            }
+            return bi.getSubimage(x2, y1, x1 - x2, y2 - y1);
+        } else if (x2 < x1 && y2 < y1) {
+            if (x1 > imagem.getIconWidth()) {
+                x1 = imagem.getIconWidth();
+            }
+            if (y1 > imagem.getIconHeight()) {
+                y1 = imagem.getIconHeight();
+            }
+            return bi.getSubimage(x2, y2, x1 - x2, y1 - y2);
         }
         return bi;
     }

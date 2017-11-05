@@ -1,5 +1,10 @@
 package visao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
@@ -11,16 +16,18 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
  */
 public class TelaEditor extends javax.swing.JFrame {
 
-    private final String dir;
-    private final String dirOut = "img/image.jpg";
+    private final String dirIn;
+    private String dirOut;
 
     /**
      * Creates new form NovoJFrame
      *
-     * @param dir
+     * @param dirIn
      */
-    public TelaEditor(String dir) {
-        this.dir = dir;
+    public TelaEditor(String dirIn) {
+        gerarNomeArquivo();
+        copiarArquivo(dirIn, dirOut);
+        this.dirIn = dirOut;
         initComponents();
     }
 
@@ -54,14 +61,14 @@ public class TelaEditor extends javax.swing.JFrame {
             }
         });
 
-        panelImagem.setRequestFocusEnabled(false);
-        panelImagem.setDir(dir);
+        panelImagem.setDirIn(dirIn);
+        panelImagem.setDirOut(dirOut);
 
         javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
         panelImagem.setLayout(panelImagemLayout);
         panelImagemLayout.setHorizontalGroup(
             panelImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelImagemLayout.setVerticalGroup(
             panelImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,26 +80,27 @@ public class TelaEditor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(78, 78, 78)
                 .addComponent(jButtonConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jButtonSair)
-                .addGap(81, 81, 81))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonSair))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonSair)
+                        .addContainerGap())))
         );
 
         panelImagem.getAccessibleContext().setAccessibleDescription("");
@@ -101,12 +109,12 @@ public class TelaEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        Mat image = imread(dirOut);
+        Mat image = imread(dirIn);
         threshold(image, image, 200, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
 
-        image = imread(dirOut);
+        image = imread(dirIn);
         threshold(image, image, 127, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
@@ -116,6 +124,44 @@ public class TelaEditor extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void gerarNomeArquivo() {
+        Random random = new Random();
+        dirOut = "img/";
+        for (int i = 0; i < 5; i++) {
+            dirOut += random.nextInt(10);
+        }
+        dirOut += ".jpg";
+    }
+
+    private void copiarArquivo(String entrada, String saida) {
+        apagarDiretorioImagens();
+        FileInputStream origem;
+        FileOutputStream destino;
+        FileChannel fcOrigem;
+        FileChannel fcDestino;
+        try {
+            origem = new FileInputStream(entrada);
+            destino = new FileOutputStream(saida);
+            fcOrigem = origem.getChannel();
+            fcDestino = destino.getChannel();
+            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+            origem.close();
+            destino.close();
+        } catch (Exception ex) {
+            //
+        }
+    }
+
+    private void apagarDiretorioImagens() {
+        File folder = new File("img/");
+        if (folder.isDirectory()) {
+            File[] sun = folder.listFiles();
+            for (File toDelete : sun) {
+                toDelete.delete();
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;

@@ -2,14 +2,22 @@ package modelo;
 
 public abstract class Filtro {
 
-    private String dir;
+    private String dirIn, dirOut;
 
-    public String getDir() {
-        return dir;
+    public String getDirIn() {
+        return dirIn;
     }
 
-    public void setDir(String dir) {
-        this.dir = dir;
+    public void setDirIn(String dirIn) {
+        this.dirIn = dirIn;
+    }
+
+    public String getDirOut() {
+        return dirOut;
+    }
+
+    public void setDirOut(String dirOut) {
+        this.dirOut = dirOut;
     }
 
     public abstract void aplicarFiltro();

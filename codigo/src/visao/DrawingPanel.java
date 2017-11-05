@@ -26,9 +26,8 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
     private Rectangle selection;
     private Point anchor;
-    private String dir;
-    private final String dirOut = "img/image.jpg";
-    private Icon imagem = new ImagemProxy(dir);
+    private String dirIn, dirOut;
+    private Icon imagem = new ImagemProxy(dirIn);
     private int x1, y1, x2, y2;
 
     public DrawingPanel() {
@@ -36,13 +35,21 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
         addMouseMotionListener(this);
     }
 
-    public String getDir() {
-        return dir;
+    public String getDirIn() {
+        return dirIn;
     }
 
-    public void setDir(String dir) {
-        this.dir = dir;
-        imagem = new ImagemProxy(dir);
+    public void setDirIn(String dirIn) {
+        this.dirIn = dirIn;
+        imagem = new ImagemProxy(dirIn);
+    }
+
+    public String getDirOut() {
+        return dirOut;
+    }
+
+    public void setDirOut(String dirOut) {
+        this.dirOut = dirOut;
     }
 
     @Override

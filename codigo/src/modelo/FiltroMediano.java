@@ -9,9 +9,9 @@ public class FiltroMediano extends Filtro {
 
     @Override
     public void aplicarFiltro() {
-        Mat image = imread(getDir());
+        Mat image = imread(getDirIn());
         medianBlur(image, image, 3);
-        imwrite("img/image.jpg", image);
+        imwrite(getDirOut(), image);
     }
 
 }

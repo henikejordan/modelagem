@@ -9,9 +9,9 @@ public class FiltroGaussiano extends Filtro {
 
     @Override
     public void aplicarFiltro() {
-        Mat image = imread(getDir());
+        Mat image = imread(getDirIn());
         GaussianBlur(image, image, new Size(5, 5), BORDER_DEFAULT);
-        imwrite("img/image.jpg", image);
+        imwrite(getDirOut(), image);
     }
 
 }

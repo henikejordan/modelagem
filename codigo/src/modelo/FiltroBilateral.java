@@ -9,9 +9,9 @@ public class FiltroBilateral extends Filtro {
 
     @Override
     public void aplicarFiltro() {
-        Mat image = imread(getDir()), dst = new Mat();
+        Mat image = imread(getDirIn()), dst = new Mat();
         bilateralFilter(image, dst, 3, 255, 255, BORDER_DEFAULT);
-        imwrite("img/image.jpg", dst);
+        imwrite(getDirOut(), dst);
     }
 
 }

@@ -1,5 +1,10 @@
 package visao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+import java.util.Random;
 import modelo.Filtro;
 import modelo.FiltroBilateral;
 import modelo.FiltroNormalizado;
@@ -12,16 +17,17 @@ import modelo.FiltroMediano;
  */
 public class TelaFiltro extends javax.swing.JFrame {
 
-    private final String dir;
-    private final String dirOut = "img/image.jpg";
+    private String dirIn, dirOut;
 
     /**
      * Creates new form NovoJFrame
      *
-     * @param dir
+     * @param dirIn
      */
-    public TelaFiltro(String dir) {
-        this.dir = dir;
+    public TelaFiltro(String dirIn) {
+        dirOut = gerarNomeArquivo();
+        copiarArquivo(dirIn, dirOut);
+        this.dirIn = dirOut;
         initComponents();
     }
 
@@ -51,7 +57,8 @@ public class TelaFiltro extends javax.swing.JFrame {
             }
         });
 
-        panelImagem.setDir(dir);
+        panelImagem.setDirIn(dirIn);
+        panelImagem.setDirOut(dirOut);
 
         javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
         panelImagem.setLayout(panelImagemLayout);
@@ -154,10 +161,54 @@ public class TelaFiltro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void aplicarFiltro(Filtro filtro) {
-        filtro.setDir(dir);
+        dirOut = gerarNomeArquivo();
+        filtro.setDirIn(dirIn);
+        filtro.setDirOut(dirOut);
         filtro.aplicarFiltro();
-        panelImagem.setDir(dirOut);
+        panelImagem.setDirIn(dirOut);
+        panelImagem.setDirOut(dirOut);
         panelImagem.repaint();
+        new File(dirIn).delete();
+        dirIn = dirOut;
+    }
+
+    private String gerarNomeArquivo() {
+        Random random = new Random();
+        String aux = "img/";
+        for (int i = 0; i < 5; i++) {
+            aux += random.nextInt(10);
+        }
+        aux += ".jpg";
+        return aux;
+    }
+
+    private void copiarArquivo(String entrada, String saida) {
+        apagarDiretorioImagens();
+        FileInputStream origem;
+        FileOutputStream destino;
+        FileChannel fcOrigem;
+        FileChannel fcDestino;
+        try {
+            origem = new FileInputStream(entrada);
+            destino = new FileOutputStream(saida);
+            fcOrigem = origem.getChannel();
+            fcDestino = destino.getChannel();
+            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+            origem.close();
+            destino.close();
+        } catch (Exception ex) {
+            //
+        }
+    }
+
+    private void apagarDiretorioImagens() {
+        File folder = new File("img/");
+        if (folder.isDirectory()) {
+            File[] sun = folder.listFiles();
+            for (File toDelete : sun) {
+                toDelete.delete();
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

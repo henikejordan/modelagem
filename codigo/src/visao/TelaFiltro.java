@@ -3,6 +3,7 @@ package visao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Random;
 import modelo.Filtro;
@@ -27,8 +28,9 @@ public class TelaFiltro extends javax.swing.JFrame {
     public TelaFiltro(String dirIn) {
         dirOut = gerarNomeArquivo();
         copiarArquivo(dirIn, dirOut);
-        this.dirIn = dirOut;
+        this.dirIn = dirIn;
         initComponents();
+        this.dirIn = dirOut;
     }
 
     /**
@@ -196,7 +198,7 @@ public class TelaFiltro extends javax.swing.JFrame {
             fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
             origem.close();
             destino.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             //
         }
     }

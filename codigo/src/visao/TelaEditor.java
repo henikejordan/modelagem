@@ -3,21 +3,21 @@ package visao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import static org.bytedeco.javacpp.opencv_core.*;
-import static org.bytedeco.javacpp.opencv_imgcodecs.*;
-import static org.bytedeco.javacpp.opencv_imgproc.*;
+import modelo.CreatorQuantificacao;
+import modelo.MedicaoDireta;
 
 /**
  *
  * @author henik
  */
 public class TelaEditor extends javax.swing.JFrame {
-
-    private final String dirIn;
-    private String dirOut;
+    
+    private String dirIn;
+    private final String dirOut;
 
     /**
      * Creates new form NovoJFrame
@@ -25,10 +25,11 @@ public class TelaEditor extends javax.swing.JFrame {
      * @param dirIn
      */
     public TelaEditor(String dirIn) {
-        gerarNomeArquivo();
+        dirOut = gerarNomeArquivo();
         copiarArquivo(dirIn, dirOut);
-        this.dirIn = dirOut;
+        this.dirIn = dirIn;
         initComponents();
+        this.dirIn = dirOut;
     }
 
     /**
@@ -109,31 +110,25 @@ public class TelaEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        Mat image = imread(dirIn);
-        threshold(image, image, 200, 255, CV_THRESH_BINARY);
-        cvtColor(image, image, CV_BGR2GRAY);
-        int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-
-        image = imread(dirIn);
-        threshold(image, image, 127, 255, CV_THRESH_BINARY);
-        cvtColor(image, image, CV_BGR2GRAY);
-        int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + (float) doente / total * 100 + "%");
+        MedicaoDireta medicaoDireta = (MedicaoDireta) new CreatorQuantificacao().factoryMethod("Medição Direta");
+        medicaoDireta.setDir(dirIn);
+        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada() + "%");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
-
-    private void gerarNomeArquivo() {
+    
+    private String gerarNomeArquivo() {
         Random random = new Random();
-        dirOut = "img/";
+        String aux = "img/";
         for (int i = 0; i < 5; i++) {
-            dirOut += random.nextInt(10);
+            aux += random.nextInt(10);
         }
-        dirOut += ".jpg";
+        aux += ".jpg";
+        return aux;
     }
-
+    
     private void copiarArquivo(String entrada, String saida) {
         apagarDiretorioImagens();
         FileInputStream origem;
@@ -148,11 +143,11 @@ public class TelaEditor extends javax.swing.JFrame {
             fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
             origem.close();
             destino.close();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             //
         }
     }
-
+    
     private void apagarDiretorioImagens() {
         File folder = new File("img/");
         if (folder.isDirectory()) {

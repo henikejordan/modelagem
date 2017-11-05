@@ -1,6 +1,6 @@
 package modelo;
 
-public class Incidencia extends MetodosDiretos {
+public class Incidencia extends Intensidade {
 
     private int totalOrgaos;
     private int totalOrgaosDoentes;

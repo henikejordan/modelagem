@@ -8,10 +8,10 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 public class FiltroGaussiano extends Filtro {
 
     @Override
-    public void aplicarFiltro() {
-        Mat image = imread(getDirIn());
+    public void aplicarFiltro(String dirIn, String dirOut) {
+        Mat image = imread(dirIn);
         GaussianBlur(image, image, new Size(5, 5), BORDER_DEFAULT);
-        imwrite(getDirOut(), image);
+        imwrite(dirOut, image);
     }
 
 }

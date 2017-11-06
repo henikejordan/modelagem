@@ -162,9 +162,7 @@ public class TelaFiltro extends javax.swing.JFrame {
 
     private void aplicarFiltro(Filtro filtro) {
         dirOut = gerarNomeArquivo();
-        filtro.setDirIn(dirIn);
-        filtro.setDirOut(dirOut);
-        filtro.aplicarFiltro();
+        filtro.aplicarFiltro(dirIn, dirOut);
         panelImagem.setDirIn(dirOut);
         panelImagem.setDirOut(dirOut);
         panelImagem.repaint();

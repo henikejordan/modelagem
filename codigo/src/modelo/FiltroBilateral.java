@@ -8,10 +8,10 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 public class FiltroBilateral extends Filtro {
 
     @Override
-    public void aplicarFiltro() {
-        Mat image = imread(getDirIn()), dst = new Mat();
+    public void aplicarFiltro(String dirIn, String dirOut) {
+        Mat image = imread(dirIn), dst = new Mat();
         bilateralFilter(image, dst, 3, 255, 255, BORDER_DEFAULT);
-        imwrite(getDirOut(), dst);
+        imwrite(dirOut, dst);
     }
 
 }

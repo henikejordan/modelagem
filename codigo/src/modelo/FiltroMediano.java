@@ -8,10 +8,10 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 public class FiltroMediano extends Filtro {
 
     @Override
-    public void aplicarFiltro() {
-        Mat image = imread(getDirIn());
+    public void aplicarFiltro(String dirIn, String dirOut) {
+        Mat image = imread(dirIn);
         medianBlur(image, image, 3);
-        imwrite(getDirOut(), image);
+        imwrite(dirOut, image);
     }
 
 }

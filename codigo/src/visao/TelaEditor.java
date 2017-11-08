@@ -15,7 +15,7 @@ import modelo.MedicaoDireta;
  * @author henik
  */
 public class TelaEditor extends javax.swing.JFrame {
-    
+
     private String dirIn;
     private final String dirOut;
 
@@ -111,14 +111,13 @@ public class TelaEditor extends javax.swing.JFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         MedicaoDireta medicaoDireta = (MedicaoDireta) new CreatorQuantificacao().factoryMethod("Medição Direta");
-        medicaoDireta.setDir(dirIn);
-        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada() + "%");
+        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada(dirIn) + "%");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
-    
+
     private String gerarNomeArquivo() {
         Random random = new Random();
         String aux = "img/";
@@ -128,7 +127,7 @@ public class TelaEditor extends javax.swing.JFrame {
         aux += ".jpg";
         return aux;
     }
-    
+
     private void copiarArquivo(String entrada, String saida) {
         apagarDiretorioImagens();
         FileInputStream origem;
@@ -147,7 +146,7 @@ public class TelaEditor extends javax.swing.JFrame {
             //
         }
     }
-    
+
     private void apagarDiretorioImagens() {
         File folder = new File("img/");
         if (folder.isDirectory()) {

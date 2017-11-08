@@ -27,10 +27,11 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
     private Rectangle selection;
     private Point anchor;
     private String dirIn, dirOut;
-    private Icon imagem = new ImagemProxy(dirIn);
+    private Icon imagem;
     private int x1, y1, x2, y2;
 
     public DrawingPanel() {
+        imagem = new ImagemProxy(dirIn);
         addMouseListener(this);
         addMouseMotionListener(this);
     }

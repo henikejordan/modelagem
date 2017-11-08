@@ -14,7 +14,7 @@ import modelo.MedicaoDireta;
  *
  * @author henik
  */
-public class TelaEditor extends javax.swing.JFrame {
+public class TelaQuantificacao extends javax.swing.JFrame {
 
     private String dirIn;
     private final String dirOut;
@@ -24,7 +24,7 @@ public class TelaEditor extends javax.swing.JFrame {
      *
      * @param dirIn
      */
-    public TelaEditor(String dirIn) {
+    public TelaQuantificacao(String dirIn) {
         dirOut = gerarNomeArquivo();
         copiarArquivo(dirIn, dirOut);
         this.dirIn = dirIn;

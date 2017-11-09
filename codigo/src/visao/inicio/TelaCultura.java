@@ -1,12 +1,9 @@
 package visao.inicio;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.CulturaControle;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import util.tabela.ModeloTabela;
-import util.tabela.ModeloTabelaCultura;
 import visao.manter.TelaManterCultura;
 
 /**
@@ -16,13 +13,12 @@ import visao.manter.TelaManterCultura;
 public class TelaCultura extends javax.swing.JFrame {
 
     private static TelaCultura instance;
-    private final DAO dao;
-    private ModeloTabela modelotabela;
+    private final CulturaControle culturaControle;
 
     private TelaCultura() {
+        culturaControle = new CulturaControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new CreatorDAO().factoryMethod("Cultura");
         preencherTabela();
     }
 
@@ -188,7 +184,7 @@ public class TelaCultura extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
-            dao.excluir(id);
+            culturaControle.excluir(id);
             preencherTabela();
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -207,8 +203,7 @@ public class TelaCultura extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     public final void preencherTabela() {
-        modelotabela = new ModeloTabelaCultura(dao.lerTodos(), new String[]{null, "Nome", "Descrição"});
-        tabela.setModel(modelotabela);
+        tabela.setModel(culturaControle.getModeloTabela());
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
         tabela.getColumnModel().getColumn(1).setResizable(false);

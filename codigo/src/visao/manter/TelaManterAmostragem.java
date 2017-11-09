@@ -1,11 +1,9 @@
 package visao.manter;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.AmostragemControle;
 import javax.swing.JOptionPane;
 import modelo.Amostragem;
 import modelo.iterator.CameraIterator;
-import modelo.iterator.CameraLista;
 import visao.inicio.TelaAmostragem;
 
 /**
@@ -15,16 +13,13 @@ import visao.inicio.TelaAmostragem;
 public class TelaManterAmostragem extends javax.swing.JFrame {
 
     private static TelaManterAmostragem instance;
-    private final DAO daoAmostragem, daoCamera;
-    private final CameraLista cameras;
+    private final AmostragemControle amostragemControle;
     private int id;
 
     private TelaManterAmostragem() {
+        amostragemControle = new AmostragemControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        daoAmostragem = new CreatorDAO().factoryMethod("Amostragem");
-        daoCamera = new CreatorDAO().factoryMethod("Câmera");
-        cameras = (CameraLista) daoCamera.lerTodos();
         preencherComboBox();
     }
 
@@ -36,7 +31,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        CameraIterator ci = cameras.getCameraIterator();
+        CameraIterator ci = amostragemControle.getCameras().getCameraIterator();
         jComboBoxCamera.addItem("");
         for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
             jComboBoxCamera.addItem(ci.getAtual().getModelo());
@@ -45,7 +40,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        Amostragem amostragem = (Amostragem) daoAmostragem.ler(id);
+        Amostragem amostragem = (Amostragem) amostragemControle.getAmostragem(id);
         jTextFieldTipo.setText(amostragem.getTipo());
         jTextFieldTamanho.setText(Integer.toString(amostragem.getTamanho()));
         jTextFieldLocal.setText(amostragem.getLocal());
@@ -232,14 +227,14 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         amostragem.setLocal(jTextFieldLocal.getText());
         amostragem.setEpoca(jTextFieldEpoca.getText());
         amostragem.setObjetivo(jTextFieldObjetivo.getText());
-        amostragem.setCamera(cameras.get(jComboBoxCamera.getSelectedIndex() - 1));
+        amostragem.setCamera(amostragemControle.getCameras().get(jComboBoxCamera.getSelectedIndex() - 1));
         if (id == 0) {
-            if (daoAmostragem.inserir(amostragem)) {
+            if (amostragemControle.inserir(amostragem)) {
                 TelaAmostragem.getInstance().preencherTabela();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Amostragem cadastrada com sucesso!");
             }
-        } else if (daoAmostragem.alterar(amostragem)) {
+        } else if (amostragemControle.alterar(amostragem)) {
             TelaAmostragem.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Amostragem alterada com sucesso!");
         }

@@ -1,12 +1,9 @@
 package visao.inicio;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.CameraControle;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import util.tabela.ModeloTabela;
-import util.tabela.ModeloTabelaCamera;
 import visao.manter.TelaManterCamera;
 
 /**
@@ -16,13 +13,12 @@ import visao.manter.TelaManterCamera;
 public class TelaCamera extends javax.swing.JFrame {
 
     private static TelaCamera instance;
-    private final DAO dao;
-    private ModeloTabela modelotabela;
+    private final CameraControle cameraControle;
 
     private TelaCamera() {
+        cameraControle = new CameraControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonNovo);
-        dao = new CreatorDAO().factoryMethod("Câmera");
         preencherTabela();
     }
 
@@ -188,7 +184,7 @@ public class TelaCamera extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
-            dao.excluir(id);
+            cameraControle.excluir(id);
             preencherTabela();
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -207,8 +203,7 @@ public class TelaCamera extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     public final void preencherTabela() {
-        modelotabela = new ModeloTabelaCamera(dao.lerTodos(), new String[]{null, "Marca", "Modelo"});
-        tabela.setModel(modelotabela);
+        tabela.setModel(cameraControle.getModeloTabela());
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
         tabela.getColumnModel().getColumn(1).setResizable(false);

@@ -1,11 +1,9 @@
 package visao.manter;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.ClasseSeveridadeControle;
 import javax.swing.JOptionPane;
 import modelo.ClasseSeveridade;
 import modelo.iterator.DoencaIterator;
-import modelo.iterator.DoencaLista;
 import visao.inicio.TelaClasseSeveridade;
 
 /**
@@ -15,16 +13,13 @@ import visao.inicio.TelaClasseSeveridade;
 public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     private static TelaManterClasseSeveridade instance;
-    private final DAO daoClasseSeveridade, daoDoenca;
-    private final DoencaLista doencas;
+    private final ClasseSeveridadeControle classeSeveridadeControle;
     private int id;
 
     private TelaManterClasseSeveridade() {
+        classeSeveridadeControle = new ClasseSeveridadeControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        daoClasseSeveridade = new CreatorDAO().factoryMethod("Classe Severidade");
-        daoDoenca = new CreatorDAO().factoryMethod("Doença");
-        doencas = (DoencaLista) daoDoenca.lerTodos();
         preencherComboBox();
     }
 
@@ -36,7 +31,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        DoencaIterator di = doencas.getDoencaIterator();
+        DoencaIterator di = classeSeveridadeControle.getDoencas().getDoencaIterator();
         jComboBoxDoenca.addItem("");
         for (di.primeiro(); !di.isFinalizado(); di.proximo()) {
             jComboBoxDoenca.addItem(di.getAtual().getNome());
@@ -45,7 +40,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        ClasseSeveridade classeSeveridade = (ClasseSeveridade) daoClasseSeveridade.ler(id);
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) classeSeveridadeControle.getClasseSeveridade(id);
         jTextFieldInferior.setText(Float.toString(classeSeveridade.getInferior()));
         jTextFieldSuperior.setText(Float.toString(classeSeveridade.getSuperior()));
         jTextAreaDesc.setText(classeSeveridade.getDescricao());
@@ -209,15 +204,15 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         classeSeveridade.setIdClasseSeveridade(id);
         classeSeveridade.setInferior(Float.parseFloat(jTextFieldInferior.getText()));
         classeSeveridade.setSuperior(Float.parseFloat(jTextFieldSuperior.getText()));
-        classeSeveridade.setDoenca(doencas.get(jComboBoxDoenca.getSelectedIndex() - 1));
+        classeSeveridade.setDoenca(classeSeveridadeControle.getDoencas().get(jComboBoxDoenca.getSelectedIndex() - 1));
         classeSeveridade.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
-            if (daoClasseSeveridade.inserir(classeSeveridade)) {
+            if (classeSeveridadeControle.inserir(classeSeveridade)) {
                 TelaClasseSeveridade.getInstance().preencherTabela();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Classe criada com sucesso!");
             }
-        } else if (daoClasseSeveridade.alterar(classeSeveridade)) {
+        } else if (classeSeveridadeControle.alterar(classeSeveridade)) {
             TelaClasseSeveridade.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Classe alterada com sucesso!");
         }

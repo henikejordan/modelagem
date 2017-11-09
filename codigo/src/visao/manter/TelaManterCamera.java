@@ -1,7 +1,6 @@
 package visao.manter;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.CameraControle;
 import javax.swing.JOptionPane;
 import modelo.Camera;
 import visao.inicio.TelaCamera;
@@ -13,13 +12,13 @@ import visao.inicio.TelaCamera;
 public class TelaManterCamera extends javax.swing.JFrame {
 
     private static TelaManterCamera instance;
-    private final DAO dao;
+    private final CameraControle cameraControle;
     private int id;
 
     private TelaManterCamera() {
+        cameraControle = new CameraControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new CreatorDAO().factoryMethod("Câmera");
     }
 
     public static TelaManterCamera getInstance() {
@@ -31,7 +30,7 @@ public class TelaManterCamera extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        Camera camera = (Camera) dao.ler(id);
+        Camera camera = (Camera) cameraControle.getCamera(id);
         jTextFieldMarca.setText(camera.getMarca());
         jTextFieldModelo.setText(camera.getModelo());
         jTextFieldDistFocal.setText(Float.toString(camera.getDistanciaFocal()));
@@ -224,12 +223,12 @@ public class TelaManterCamera extends javax.swing.JFrame {
         camera.setLarguraResolucao(Integer.parseInt(jTextFieldLargura.getText()));
         camera.setTipoLente(jTextFieldTipoLente.getText());
         if (id == 0) {
-            if (dao.inserir(camera)) {
+            if (cameraControle.inserir(camera)) {
                 TelaCamera.getInstance().preencherTabela();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Câmera cadastrada com sucesso!");
             }
-        } else if (dao.alterar(camera)) {
+        } else if (cameraControle.alterar(camera)) {
             TelaCamera.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Câmera alterada com sucesso!");
         }

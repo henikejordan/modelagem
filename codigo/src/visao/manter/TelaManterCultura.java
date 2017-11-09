@@ -1,7 +1,6 @@
 package visao.manter;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.CulturaControle;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
 import visao.inicio.TelaCultura;
@@ -13,13 +12,14 @@ import visao.inicio.TelaCultura;
 public class TelaManterCultura extends javax.swing.JFrame {
 
     private static TelaManterCultura instance;
-    private final DAO dao;
+    private Cultura cultura;
+    private final CulturaControle culturaControle;
     private int id;
 
     private TelaManterCultura() {
+        culturaControle = new CulturaControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        dao = new CreatorDAO().factoryMethod("Cultura");
         preencherComboBox();
     }
 
@@ -39,7 +39,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        Cultura cultura = (Cultura) dao.ler(id);
+        cultura = culturaControle.getCultura(id);
         jTextFieldNome.setText(cultura.getNome());
         jComboBoxTipo.setSelectedItem(cultura.getTipo());
         jTextFieldCor.setText(cultura.getCor());
@@ -201,19 +201,19 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        Cultura cultura = new Cultura();
+        cultura = new Cultura();
         cultura.setIdCultura(id);
         cultura.setNome(jTextFieldNome.getText());
         cultura.setTipo(jComboBoxTipo.getSelectedItem().toString());
         cultura.setCor(jTextFieldCor.getText());
         cultura.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
-            if (dao.inserir(cultura)) {
+            if (culturaControle.inserir(cultura)) {
                 TelaCultura.getInstance().preencherTabela();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
-        } else if (dao.alterar(cultura)) {
+        } else if (culturaControle.alterar(cultura)) {
             TelaCultura.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
         }

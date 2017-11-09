@@ -1,11 +1,9 @@
 package visao.manter;
 
-import dao.CreatorDAO;
-import dao.DAO;
+import controle.DoencaControle;
 import javax.swing.JOptionPane;
 import modelo.Doenca;
 import modelo.iterator.CulturaIterator;
-import modelo.iterator.CulturaLista;
 import visao.inicio.TelaDoenca;
 
 /**
@@ -15,16 +13,13 @@ import visao.inicio.TelaDoenca;
 public class TelaManterDoenca extends javax.swing.JFrame {
 
     private static TelaManterDoenca instance;
-    private final DAO daoDoenca, daoCultura;
-    private final CulturaLista culturas;
+    private final DoencaControle doencaControle;
     private int id;
 
     private TelaManterDoenca() {
+        doencaControle = new DoencaControle();
         initComponents();
         getRootPane().setDefaultButton(jButtonSalvar);
-        daoDoenca = new CreatorDAO().factoryMethod("Doença");
-        daoCultura = new CreatorDAO().factoryMethod("Cultura");
-        culturas = (CulturaLista) daoCultura.lerTodos();
         preencherComboBox();
     }
 
@@ -36,7 +31,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        CulturaIterator ci = culturas.getCulturaIterator();
+        CulturaIterator ci = doencaControle.getCulturas().getCulturaIterator();
         jComboBoxCultura.addItem("");
         for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
             jComboBoxCultura.addItem(ci.getAtual().getNome());
@@ -45,7 +40,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
 
     public void preencherCampos(int id) {
         this.id = id;
-        Doenca doenca = (Doenca) daoDoenca.ler(id);
+        Doenca doenca = (Doenca) doencaControle.getDoenca(id);
         jTextFieldNome.setText(doenca.getNome());
         jTextFieldTipo.setText(doenca.getTipo());
         jTextFieldCarac.setText(doenca.getCaracteristica());
@@ -227,15 +222,15 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         doenca.setNome(jTextFieldNome.getText());
         doenca.setTipo(jTextFieldTipo.getText());
         doenca.setCaracteristica(jTextFieldCarac.getText());
-        doenca.setCultura(culturas.get(jComboBoxCultura.getSelectedIndex() - 1));
+        doenca.setCultura(doencaControle.getCulturas().get(jComboBoxCultura.getSelectedIndex() - 1));
         doenca.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
-            if (daoDoenca.inserir(doenca)) {
+            if (doencaControle.inserir(doenca)) {
                 TelaDoenca.getInstance().preencherTabela();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
             }
-        } else if (daoDoenca.alterar(doenca)) {
+        } else if (doencaControle.alterar(doenca)) {
             TelaDoenca.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
         }

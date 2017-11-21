@@ -1,6 +1,7 @@
 package visao.manter;
 
 import controle.CulturaControle;
+import controle.ManterCultura;
 import javax.swing.JOptionPane;
 import modelo.Cultura;
 import visao.inicio.TelaCultura;
@@ -201,7 +202,7 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        cultura = new Cultura();
+        /*cultura = new Cultura();
         cultura.setIdCultura(id);
         cultura.setNome(jTextFieldNome.getText());
         cultura.setTipo(jComboBoxTipo.getSelectedItem().toString());
@@ -216,7 +217,9 @@ public class TelaManterCultura extends javax.swing.JFrame {
         } else if (culturaControle.alterar(cultura)) {
             TelaCultura.getInstance().preencherTabela();
             JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
-        }
+        */
+        ManterCultura.SalvarCultura(id, jTextFieldNome.getText(), jComboBoxTipo.getSelectedItem().toString(), jTextFieldCor.getText(), jTextAreaDesc.getText(), culturaControle);
+        limparCampos();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

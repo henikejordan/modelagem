@@ -1,21 +1,20 @@
 package modelo.iterator;
 
 import java.util.ArrayList;
-import modelo.Doenca;
 
 /**
  *
  * @author henik
  */
-public class DoencaIteratorImpl implements DoencaIterator {
+public class ConcreteIterator implements Iterator {
 
-    private final ArrayList<Doenca> doencas;
+    private final ArrayList objetos;
     private int contador = -1;
 
-    public DoencaIteratorImpl(DoencaLista doencas) {
-        this.doencas = new ArrayList<>();
-        for (Doenca d : doencas) {
-            this.doencas.add(d);
+    public ConcreteIterator(Lista objetos) {
+        this.objetos = new ArrayList();
+        for (Object obj : objetos) {
+            this.objetos.add(obj);
         }
     }
 
@@ -31,17 +30,17 @@ public class DoencaIteratorImpl implements DoencaIterator {
 
     @Override
     public boolean isFinalizado() {
-        return contador == doencas.size();
+        return contador == objetos.size();
     }
 
     @Override
-    public Doenca getAtual() {
+    public Object getAtual() {
         if (contador == -1) {
             throw new IllegalStateException("Iterador não inicializado!");
         }
 
         try {
-            return doencas.get(contador);
+            return objetos.get(contador);
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalStateException("Iterador não possui mais elementos!");
         }

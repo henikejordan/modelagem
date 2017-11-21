@@ -3,16 +3,15 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import modelo.Camera;
 import modelo.Amostragem;
-import modelo.iterator.AmostragemLista;
+import modelo.iterator.Lista;
 
 public class AmostragemDAO extends DAO {
 
     @Override
-    public ArrayList lerTodos() {
-        AmostragemLista amostragens = new AmostragemLista();
+    public Lista lerTodos() {
+        Lista amostragens = new Lista();
         ResultSet resultado = super.getConecta().executaSQL("select * from amostragem");
         try {
             resultado.first();

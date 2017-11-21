@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.ArrayList;
+import modelo.iterator.Lista;
 import util.ConectaBanco;
 
 public abstract class DAO {
@@ -11,7 +11,7 @@ public abstract class DAO {
         return conecta;
     }
 
-    public abstract ArrayList lerTodos();
+    public abstract Lista lerTodos();
 
     public abstract Object ler(int id);
 

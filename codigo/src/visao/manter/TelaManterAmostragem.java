@@ -3,7 +3,8 @@ package visao.manter;
 import controle.AmostragemControle;
 import javax.swing.JOptionPane;
 import modelo.Amostragem;
-import modelo.iterator.CameraIterator;
+import modelo.Camera;
+import modelo.iterator.Iterator;
 import visao.inicio.TelaAmostragem;
 
 /**
@@ -31,10 +32,11 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        CameraIterator ci = amostragemControle.getCameras().getCameraIterator();
+        Iterator ci = amostragemControle.getCameras().getIterator();
         jComboBoxCamera.addItem("");
         for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
-            jComboBoxCamera.addItem(ci.getAtual().getModelo());
+            Camera c = (Camera) ci.getAtual();
+            jComboBoxCamera.addItem(c.getModelo());
         }
     }
 
@@ -227,7 +229,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         amostragem.setLocal(jTextFieldLocal.getText());
         amostragem.setEpoca(jTextFieldEpoca.getText());
         amostragem.setObjetivo(jTextFieldObjetivo.getText());
-        amostragem.setCamera(amostragemControle.getCameras().get(jComboBoxCamera.getSelectedIndex() - 1));
+        amostragem.setCamera((Camera) amostragemControle.getCameras().get(jComboBoxCamera.getSelectedIndex() - 1));
         if (id == 0) {
             if (amostragemControle.inserir(amostragem)) {
                 TelaAmostragem.getInstance().preencherTabela();

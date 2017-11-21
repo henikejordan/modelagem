@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import modelo.CreatorQuantificacao;
+import modelo.ConcreteCreatorQuantificacao;
 import modelo.MedicaoDireta;
 
 /**
@@ -110,7 +110,7 @@ public class TelaQuantificacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        MedicaoDireta medicaoDireta = (MedicaoDireta) new CreatorQuantificacao().factoryMethod("Medição Direta");
+        MedicaoDireta medicaoDireta = (MedicaoDireta) new ConcreteCreatorQuantificacao().factoryMethod("Medição Direta");
         JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada(dirIn) + "%");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

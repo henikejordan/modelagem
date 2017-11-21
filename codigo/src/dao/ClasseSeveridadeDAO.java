@@ -3,17 +3,16 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import modelo.ClasseSeveridade;
 import modelo.Doenca;
-import modelo.CreatorQuantificacao;
-import modelo.iterator.ClasseSeveridadeLista;
+import modelo.ConcreteCreatorQuantificacao;
+import modelo.iterator.Lista;
 
 public class ClasseSeveridadeDAO extends DAO {
 
     @Override
-    public ArrayList lerTodos() {
-        ClasseSeveridadeLista classes = new ClasseSeveridadeLista();
+    public Lista lerTodos() {
+        Lista classes = new Lista();
         ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade");
         try {
             resultado.first();
@@ -28,7 +27,7 @@ public class ClasseSeveridadeDAO extends DAO {
 
     @Override
     public Object ler(int id) {
-        ClasseSeveridade classeSeveridade = (ClasseSeveridade) new CreatorQuantificacao().factoryMethod("Classe Severidade");
+        ClasseSeveridade classeSeveridade = (ClasseSeveridade) new ConcreteCreatorQuantificacao().factoryMethod("Classe Severidade");
         Doenca doenca = new Doenca();
         ResultSet resultClasse = super.getConecta().executaSQL("select * from classe_severidade where id_classe_severidade='" + id + "'");
         try {

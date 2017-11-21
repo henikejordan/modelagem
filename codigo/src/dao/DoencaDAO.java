@@ -3,16 +3,15 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import modelo.Cultura;
 import modelo.Doenca;
-import modelo.iterator.DoencaLista;
+import modelo.iterator.Lista;
 
 public class DoencaDAO extends DAO {
 
     @Override
-    public ArrayList lerTodos() {
-        DoencaLista doencas = new DoencaLista();
+    public Lista lerTodos() {
+        Lista doencas = new Lista();
         ResultSet resultado = super.getConecta().executaSQL("select * from doenca");
         try {
             resultado.first();

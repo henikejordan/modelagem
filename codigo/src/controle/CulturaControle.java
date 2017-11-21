@@ -1,6 +1,6 @@
 package controle;
 
-import dao.CreatorDAO;
+import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import modelo.Cultura;
 import util.tabela.ModeloTabela;
@@ -15,7 +15,7 @@ public class CulturaControle extends Controle {
     private final DAO daoCultura;
 
     public CulturaControle() {
-        daoCultura = new CreatorDAO().factoryMethod("Cultura");
+        daoCultura = new ConcreteCreatorDAO().factoryMethod("Cultura");
     }
 
     @Override

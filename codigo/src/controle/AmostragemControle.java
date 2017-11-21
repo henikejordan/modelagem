@@ -1,9 +1,9 @@
 package controle;
 
-import dao.CreatorDAO;
+import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import modelo.Amostragem;
-import modelo.iterator.CameraLista;
+import modelo.iterator.Lista;
 import util.tabela.ModeloTabela;
 import util.tabela.ModeloTabelaAmostragem;
 
@@ -14,12 +14,12 @@ import util.tabela.ModeloTabelaAmostragem;
 public class AmostragemControle extends Controle {
 
     private final DAO daoAmostragem, daoCamera;
-    private final CameraLista cameras;
+    private final Lista cameras;
 
     public AmostragemControle() {
-        daoAmostragem = new CreatorDAO().factoryMethod("Amostragem");
-        daoCamera = new CreatorDAO().factoryMethod("Câmera");
-        cameras = (CameraLista) daoCamera.lerTodos();
+        daoAmostragem = new ConcreteCreatorDAO().factoryMethod("Amostragem");
+        daoCamera = new ConcreteCreatorDAO().factoryMethod("Câmera");
+        cameras = daoCamera.lerTodos();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class AmostragemControle extends Controle {
         return (Amostragem) daoAmostragem.ler(id);
     }
 
-    public CameraLista getCameras() {
+    public Lista getCameras() {
         return cameras;
     }
 

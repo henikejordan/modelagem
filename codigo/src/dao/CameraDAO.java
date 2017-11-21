@@ -3,15 +3,14 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import modelo.Camera;
-import modelo.iterator.CameraLista;
+import modelo.iterator.Lista;
 
 public class CameraDAO extends DAO {
 
     @Override
-    public ArrayList lerTodos() {
-        CameraLista cameras = new CameraLista();
+    public Lista lerTodos() {
+        Lista cameras = new Lista();
         ResultSet resultado = super.getConecta().executaSQL("select * from camera");
         try {
             resultado.first();

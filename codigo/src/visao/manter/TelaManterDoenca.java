@@ -2,8 +2,9 @@ package visao.manter;
 
 import controle.DoencaControle;
 import javax.swing.JOptionPane;
+import modelo.Cultura;
 import modelo.Doenca;
-import modelo.iterator.CulturaIterator;
+import modelo.iterator.Iterator;
 import visao.inicio.TelaDoenca;
 
 /**
@@ -31,10 +32,11 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        CulturaIterator ci = doencaControle.getCulturas().getCulturaIterator();
+        Iterator ci = doencaControle.getCulturas().getIterator();
         jComboBoxCultura.addItem("");
         for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
-            jComboBoxCultura.addItem(ci.getAtual().getNome());
+            Cultura c = (Cultura) ci.getAtual();
+            jComboBoxCultura.addItem(c.getNome());
         }
     }
 
@@ -222,7 +224,7 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         doenca.setNome(jTextFieldNome.getText());
         doenca.setTipo(jTextFieldTipo.getText());
         doenca.setCaracteristica(jTextFieldCarac.getText());
-        doenca.setCultura(doencaControle.getCulturas().get(jComboBoxCultura.getSelectedIndex() - 1));
+        doenca.setCultura((Cultura) doencaControle.getCulturas().get(jComboBoxCultura.getSelectedIndex() - 1));
         doenca.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
             if (doencaControle.inserir(doenca)) {

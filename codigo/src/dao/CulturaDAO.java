@@ -3,15 +3,14 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import modelo.Cultura;
-import modelo.iterator.CulturaLista;
+import modelo.iterator.Lista;
 
 public class CulturaDAO extends DAO {
 
     @Override
-    public ArrayList lerTodos() {
-        CulturaLista culturas = new CulturaLista();
+    public Lista lerTodos() {
+        Lista culturas = new Lista();
         ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
         try {
             resultado.first();

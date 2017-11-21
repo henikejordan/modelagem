@@ -1,9 +1,9 @@
 package controle;
 
-import dao.CreatorDAO;
+import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import modelo.ClasseSeveridade;
-import modelo.iterator.DoencaLista;
+import modelo.iterator.Lista;
 import util.tabela.ModeloTabela;
 import util.tabela.ModeloTabelaClasseSeveridade;
 
@@ -14,12 +14,12 @@ import util.tabela.ModeloTabelaClasseSeveridade;
 public class ClasseSeveridadeControle extends Controle {
 
     private final DAO daoClasse, daoDoenca;
-    private final DoencaLista doencas;
+    private final Lista doencas;
 
     public ClasseSeveridadeControle() {
-        daoClasse = new CreatorDAO().factoryMethod("Classe Severidade");
-        daoDoenca = new CreatorDAO().factoryMethod("Doença");
-        doencas = (DoencaLista) daoDoenca.lerTodos();
+        daoClasse = new ConcreteCreatorDAO().factoryMethod("Classe Severidade");
+        daoDoenca = new ConcreteCreatorDAO().factoryMethod("Doença");
+        doencas = daoDoenca.lerTodos();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ClasseSeveridadeControle extends Controle {
         return (ClasseSeveridade) daoClasse.ler(id);
     }
 
-    public DoencaLista getDoencas() {
+    public Lista getDoencas() {
         return doencas;
     }
 

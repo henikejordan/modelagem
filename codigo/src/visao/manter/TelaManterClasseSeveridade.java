@@ -3,7 +3,8 @@ package visao.manter;
 import controle.ClasseSeveridadeControle;
 import javax.swing.JOptionPane;
 import modelo.ClasseSeveridade;
-import modelo.iterator.DoencaIterator;
+import modelo.Doenca;
+import modelo.iterator.Iterator;
 import visao.inicio.TelaClasseSeveridade;
 
 /**
@@ -31,10 +32,11 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }
 
     private void preencherComboBox() {
-        DoencaIterator di = classeSeveridadeControle.getDoencas().getDoencaIterator();
+        Iterator di = classeSeveridadeControle.getDoencas().getIterator();
         jComboBoxDoenca.addItem("");
         for (di.primeiro(); !di.isFinalizado(); di.proximo()) {
-            jComboBoxDoenca.addItem(di.getAtual().getNome());
+            Doenca d = (Doenca) di.getAtual();
+            jComboBoxDoenca.addItem(d.getNome());
         }
     }
 
@@ -204,7 +206,7 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         classeSeveridade.setIdClasseSeveridade(id);
         classeSeveridade.setInferior(Float.parseFloat(jTextFieldInferior.getText()));
         classeSeveridade.setSuperior(Float.parseFloat(jTextFieldSuperior.getText()));
-        classeSeveridade.setDoenca(classeSeveridadeControle.getDoencas().get(jComboBoxDoenca.getSelectedIndex() - 1));
+        classeSeveridade.setDoenca((Doenca) classeSeveridadeControle.getDoencas().get(jComboBoxDoenca.getSelectedIndex() - 1));
         classeSeveridade.setDescricao(jTextAreaDesc.getText());
         if (id == 0) {
             if (classeSeveridadeControle.inserir(classeSeveridade)) {

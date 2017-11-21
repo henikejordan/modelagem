@@ -1,6 +1,6 @@
 package controle;
 
-import dao.CreatorDAO;
+import dao.ConcreteCreatorDAO;
 import dao.DAO;
 import modelo.Camera;
 import util.tabela.ModeloTabela;
@@ -15,7 +15,7 @@ public class CameraControle extends Controle {
     private final DAO daoCamera;
 
     public CameraControle() {
-        daoCamera = new CreatorDAO().factoryMethod("Câmera");
+        daoCamera = new ConcreteCreatorDAO().factoryMethod("Câmera");
     }
 
     @Override

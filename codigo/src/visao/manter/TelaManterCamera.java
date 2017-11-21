@@ -2,9 +2,7 @@ package visao.manter;
 
 import controle.CameraControle;
 import controle.ManterCamera;
-import javax.swing.JOptionPane;
 import modelo.Camera;
-import visao.inicio.TelaCamera;
 
 /**
  *
@@ -215,26 +213,17 @@ public class TelaManterCamera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        /*Camera camera = new Camera();
-        camera.setIdCamera(id);
-        camera.setMarca(jTextFieldMarca.getText());
-        camera.setModelo(jTextFieldModelo.getText());
-        camera.setDistanciaFocal(Float.parseFloat(jTextFieldDistFocal.getText()));
-        camera.setAlturaResolucao(Integer.parseInt(jTextFieldAltura.getText()));
-        camera.setLarguraResolucao(Integer.parseInt(jTextFieldLargura.getText()));
-        camera.setTipoLente(jTextFieldTipoLente.getText());
+        ManterCamera.SalvarCamera(id,
+                jTextFieldMarca.getText(),
+                jTextFieldModelo.getText(),
+                Float.parseFloat(jTextFieldDistFocal.getText()),
+                Integer.parseInt(jTextFieldAltura.getText()),
+                Integer.parseInt(jTextFieldLargura.getText()),
+                jTextFieldTipoLente.getText(),
+                cameraControle);
         if (id == 0) {
-            if (cameraControle.inserir(camera)) {
-                TelaCamera.getInstance().preencherTabela();
-                limparCampos();
-                JOptionPane.showMessageDialog(null, "Câmera cadastrada com sucesso!");
-            }
-        } else if (cameraControle.alterar(camera)) {
-            TelaCamera.getInstance().preencherTabela();
-            JOptionPane.showMessageDialog(null, "Câmera alterada com sucesso!");
-        }*/
-        ManterCamera.SalvarCamera(id, jTextFieldMarca.getText(), jTextFieldModelo.getText(), Float.parseFloat(jTextFieldDistFocal.getText()), Integer.parseInt(jTextFieldAltura.getText()), Integer.parseInt(jTextFieldLargura.getText()), jTextFieldTipoLente.getText(), cameraControle);
-        this.limparCampos();
+            limparCampos();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

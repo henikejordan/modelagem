@@ -2,10 +2,9 @@ package visao.manter;
 
 import controle.DoencaControle;
 import controle.ManterDoenca;
-import javax.swing.JOptionPane;
+import modelo.Cultura;
 import modelo.Doenca;
-import modelo.iterator.CulturaIterator;
-import visao.inicio.TelaDoenca;
+import modelo.iterator.Iterator;
 
 /**
  *
@@ -31,11 +30,13 @@ public class TelaManterDoenca extends javax.swing.JFrame {
         return instance;
     }
 
-    private void preencherComboBox() {
-        CulturaIterator ci = doencaControle.getCulturas().getCulturaIterator();
+    public void preencherComboBox() {
+        Iterator ci = doencaControle.getCulturas().getIterator();
+        jComboBoxCultura.removeAllItems();
         jComboBoxCultura.addItem("");
         for (ci.primeiro(); !ci.isFinalizado(); ci.proximo()) {
-            jComboBoxCultura.addItem(ci.getAtual().getNome());
+            Cultura c = (Cultura) ci.getAtual();
+            jComboBoxCultura.addItem(c.getNome());
         }
     }
 
@@ -218,26 +219,16 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        /*Doenca doenca = new Doenca();
-        doenca.setIdDoenca(id);
-        doenca.setNome(jTextFieldNome.getText());
-        doenca.setTipo(jTextFieldTipo.getText());
-        doenca.setCaracteristica(jTextFieldCarac.getText());
-        doenca.setCultura(doencaControle.getCulturas().get(jComboBoxCultura.getSelectedIndex() - 1));
-        doenca.setDescricao(jTextAreaDesc.getText());
+        ManterDoenca.SalvarDoenca(id,
+                jTextFieldNome.getText(),
+                jTextFieldTipo.getText(),
+                jTextFieldCarac.getText(),
+                jComboBoxCultura.getSelectedIndex(),
+                jTextAreaDesc.getText(),
+                doencaControle);
         if (id == 0) {
-            if (doencaControle.inserir(doenca)) {
-                TelaDoenca.getInstance().preencherTabela();
-                limparCampos();
-                JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
-            }
-        } else if (doencaControle.alterar(doenca)) {
-            TelaDoenca.getInstance().preencherTabela();
-            JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
-        }*/
-        ManterDoenca.SalvarDoenca(id, jTextFieldNome.getText(), jTextFieldTipo.getText(), jTextFieldCarac.getText(), jComboBoxCultura.getSelectedIndex() - 1, jTextAreaDesc.getText(), doencaControle);
-        this.limparCampos();
-        
+            limparCampos();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

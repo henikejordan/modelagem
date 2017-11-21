@@ -28,17 +28,17 @@ public class CameraControle extends Controle {
     }
 
     @Override
-    public boolean inserir(Object obj) {
+    public boolean criar(Object obj) {
         return daoCamera.inserir(obj);
     }
 
     @Override
-    public boolean alterar(Object obj) {
+    public boolean atualizar(Object obj) {
         return daoCamera.alterar(obj);
     }
 
     @Override
-    public boolean excluir(int id) {
+    public boolean deletar(int id) {
         return daoCamera.excluir(id);
     }
 

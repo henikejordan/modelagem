@@ -184,7 +184,7 @@ public class TelaCamera extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente excluir?", "AVISO!", JOptionPane.YES_NO_OPTION) == 0) {
             int id = Integer.parseInt(tabela.getModel().getValueAt(tabela.getSelectedRow(), 0) + "");
-            cameraControle.excluir(id);
+            cameraControle.deletar(id);
             preencherTabela();
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed

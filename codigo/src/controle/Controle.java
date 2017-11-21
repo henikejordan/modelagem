@@ -10,10 +10,10 @@ public abstract class Controle {
 
     public abstract ModeloTabela getModeloTabela();
 
-    public abstract boolean inserir(Object obj);
+    public abstract boolean criar(Object obj);
 
-    public abstract boolean alterar(Object obj);
+    public abstract boolean atualizar(Object obj);
 
-    public abstract boolean excluir(int id);
+    public abstract boolean deletar(int id);
 
 }

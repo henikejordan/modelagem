@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controle;
 
 import javax.swing.JOptionPane;
-import static jdk.nashorn.internal.runtime.Debug.id;
 import modelo.Cultura;
 import visao.inicio.TelaCultura;
+import visao.manter.TelaManterDoenca;
 
 /**
  *
@@ -16,9 +11,7 @@ import visao.inicio.TelaCultura;
  */
 public class ManterCultura {
 
-
     public static void SalvarCultura(int id, String nome, String tipo, String cor, String areaDesc, CulturaControle culturaControle) {
-       
         Cultura cultura = new Cultura();
         cultura.setIdCultura(id);
         cultura.setNome(nome);
@@ -26,14 +19,14 @@ public class ManterCultura {
         cultura.setCor(cor);
         cultura.setDescricao(areaDesc);
         if (id == 0) {
-            if (culturaControle.inserir(cultura)) {
-                TelaCultura.getInstance().preencherTabela();
+            if (culturaControle.criar(cultura)) {
                 JOptionPane.showMessageDialog(null, "Cultura criada com sucesso!");
             }
-        } else if (culturaControle.alterar(cultura)) {
-            TelaCultura.getInstance().preencherTabela();
+        } else if (culturaControle.atualizar(cultura)) {
             JOptionPane.showMessageDialog(null, "Cultura alterada com sucesso!");
         }
+        TelaCultura.getInstance().preencherTabela();
+        TelaManterDoenca.getInstance().preencherComboBox();
     }
 
 }

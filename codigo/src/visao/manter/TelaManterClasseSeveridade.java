@@ -3,7 +3,8 @@ package visao.manter;
 import controle.ClasseSeveridadeControle;
 import controle.ManterClasseSeveridade;
 import modelo.ClasseSeveridade;
-import modelo.iterator.DoencaIterator;
+import modelo.Doenca;
+import modelo.iterator.Iterator;
 
 /**
  *
@@ -29,11 +30,13 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         return instance;
     }
 
-    private void preencherComboBox() {
-        DoencaIterator di = classeSeveridadeControle.getDoencas().getDoencaIterator();
+    public void preencherComboBox() {
+        Iterator di = classeSeveridadeControle.getDoencas().getIterator();
+        jComboBoxDoenca.removeAllItems();
         jComboBoxDoenca.addItem("");
         for (di.primeiro(); !di.isFinalizado(); di.proximo()) {
-            jComboBoxDoenca.addItem(di.getAtual().getNome());
+            Doenca d = (Doenca) di.getAtual();
+            jComboBoxDoenca.addItem(d.getNome());
         }
     }
 
@@ -199,25 +202,15 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-       /* ClasseSeveridade classeSeveridade = new ClasseSeveridade();
-        classeSeveridade.setIdClasseSeveridade(id);
-        classeSeveridade.setInferior(Float.parseFloat(jTextFieldInferior.getText()));
-        classeSeveridade.setSuperior(Float.parseFloat(jTextFieldSuperior.getText()));
-        classeSeveridade.setDoenca(classeSeveridadeControle.getDoencas().get(jComboBoxDoenca.getSelectedIndex() - 1));
-        classeSeveridade.setDescricao(jTextAreaDesc.getText());
+        ManterClasseSeveridade.salvarSeveridade(id,
+                Float.parseFloat(jTextFieldInferior.getText()),
+                Float.parseFloat(jTextFieldSuperior.getText()),
+                jComboBoxDoenca.getSelectedIndex(),
+                jTextAreaDesc.getText(),
+                classeSeveridadeControle);
         if (id == 0) {
-            if (classeSeveridadeControle.inserir(classeSeveridade)) {
-                TelaClasseSeveridade.getInstance().preencherTabela();
-                limparCampos();
-                JOptionPane.showMessageDialog(null, "Classe criada com sucesso!");
-            }
-        } else if (classeSeveridadeControle.alterar(classeSeveridade)) {
-            TelaClasseSeveridade.getInstance().preencherTabela();
-            JOptionPane.showMessageDialog(null, "Classe alterada com sucesso!");
-        }*/
-        ManterClasseSeveridade.salvarSeveridade(id, Float.parseFloat(jTextFieldInferior.getText()), Float.parseFloat(jTextFieldSuperior.getText()), jComboBoxDoenca.getSelectedIndex() - 1, jTextAreaDesc.getText(), classeSeveridadeControle);
-       this.limparCampos();
-       
+            limparCampos();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

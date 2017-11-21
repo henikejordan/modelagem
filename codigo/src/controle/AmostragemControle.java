@@ -14,12 +14,10 @@ import util.tabela.ModeloTabelaAmostragem;
 public class AmostragemControle extends Controle {
 
     private final DAO daoAmostragem, daoCamera;
-    private final Lista cameras;
 
     public AmostragemControle() {
         daoAmostragem = new ConcreteCreatorDAO().factoryMethod("Amostragem");
         daoCamera = new ConcreteCreatorDAO().factoryMethod("Câmera");
-        cameras = daoCamera.lerTodos();
     }
 
     @Override
@@ -32,21 +30,21 @@ public class AmostragemControle extends Controle {
     }
 
     public Lista getCameras() {
-        return cameras;
+        return daoCamera.lerTodos();
     }
 
     @Override
-    public boolean inserir(Object obj) {
+    public boolean criar(Object obj) {
         return daoAmostragem.inserir(obj);
     }
 
     @Override
-    public boolean alterar(Object obj) {
+    public boolean atualizar(Object obj) {
         return daoAmostragem.alterar(obj);
     }
 
     @Override
-    public boolean excluir(int id) {
+    public boolean deletar(int id) {
         return daoAmostragem.excluir(id);
     }
 

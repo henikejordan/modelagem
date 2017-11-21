@@ -14,12 +14,10 @@ import util.tabela.ModeloTabelaDoenca;
 public class DoencaControle extends Controle {
 
     private final DAO daoDoenca, daoCultura;
-    private final Lista culturas;
 
     public DoencaControle() {
         daoDoenca = new ConcreteCreatorDAO().factoryMethod("Doença");
         daoCultura = new ConcreteCreatorDAO().factoryMethod("Cultura");
-        culturas = daoCultura.lerTodos();
     }
 
     @Override
@@ -32,21 +30,21 @@ public class DoencaControle extends Controle {
     }
 
     public Lista getCulturas() {
-        return culturas;
+        return daoCultura.lerTodos();
     }
 
     @Override
-    public boolean inserir(Object obj) {
+    public boolean criar(Object obj) {
         return daoDoenca.inserir(obj);
     }
 
     @Override
-    public boolean alterar(Object obj) {
+    public boolean atualizar(Object obj) {
         return daoDoenca.alterar(obj);
     }
 
     @Override
-    public boolean excluir(int id) {
+    public boolean deletar(int id) {
         return daoDoenca.excluir(id);
     }
 

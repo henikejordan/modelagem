@@ -43,7 +43,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         this.id = id;
         Amostragem amostragem = (Amostragem) amostragemControle.getAmostragem(id);
         jTextFieldTipo.setText(amostragem.getTipo());
-        jTextFieldTamanho.setText(Integer.toString(amostragem.getTamanho()));
+        jIntegerFieldTamanho.setText(Integer.toString(amostragem.getTamanho()));
         jTextFieldLocal.setText(amostragem.getLocal());
         jTextFieldEpoca.setText(amostragem.getEpoca());
         jTextFieldObjetivo.setText(amostragem.getObjetivo());
@@ -53,7 +53,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     public void limparCampos() {
         id = 0;
         jTextFieldTipo.setText("");
-        jTextFieldTamanho.setText("");
+        jIntegerFieldTamanho.setText("");
         jTextFieldLocal.setText("");
         jTextFieldEpoca.setText("");
         jTextFieldObjetivo.setText("");
@@ -79,12 +79,12 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldLocal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldTamanho = new javax.swing.JTextField();
         jComboBoxCamera = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldObjetivo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldEpoca = new javax.swing.JTextField();
+        jIntegerFieldTamanho = new util.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manter amostragem");
@@ -145,22 +145,22 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextFieldTamanho)))
+                            .addComponent(jIntegerFieldTamanho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jTextFieldObjetivo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxCamera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldEpoca, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextFieldEpoca))))
+                            .addComponent(jComboBoxCamera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +175,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jIntegerFieldTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -223,7 +223,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         amostragemControle.salvarAmostragem(id,
                 jTextFieldTipo.getText(),
-                Integer.parseInt(jTextFieldTamanho.getText()),
+                Integer.parseInt(jIntegerFieldTamanho.getText()),
                 jTextFieldLocal.getText(),
                 jTextFieldEpoca.getText(),
                 jTextFieldObjetivo.getText(),
@@ -241,6 +241,7 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxCamera;
+    private util.JIntegerField jIntegerFieldTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -252,7 +253,6 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEpoca;
     private javax.swing.JTextField jTextFieldLocal;
     private javax.swing.JTextField jTextFieldObjetivo;
-    private javax.swing.JTextField jTextFieldTamanho;
     private javax.swing.JTextField jTextFieldTipo;
     // End of variables declaration//GEN-END:variables
 

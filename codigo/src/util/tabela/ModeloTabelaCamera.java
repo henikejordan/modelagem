@@ -20,9 +20,9 @@ public class ModeloTabelaCamera extends ModeloTabela {
             case 0:
                 return camera.getIdCamera();
             case 1:
-                return camera.getMarca();
-            case 2:
                 return camera.getModelo();
+            case 2:
+                return camera.getMarca();
             default:
                 return null;
         }

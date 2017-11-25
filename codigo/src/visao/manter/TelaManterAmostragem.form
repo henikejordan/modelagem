@@ -79,7 +79,7 @@
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jTextFieldTamanho" max="32767" attributes="0"/>
+                              <Component id="jIntegerFieldTamanho" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -89,17 +89,17 @@
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldObjetivo" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBoxCamera" max="32767" attributes="0"/>
+                              <Component id="jTextFieldEpoca" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jTextFieldEpoca" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jComboBoxCamera" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -120,7 +120,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextFieldTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jIntegerFieldTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -201,8 +201,6 @@
             <Property name="text" type="java.lang.String" value="Local:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldTamanho">
-        </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxCamera">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -226,6 +224,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldEpoca">
+        </Component>
+        <Component class="util.JIntegerField" name="jIntegerFieldTamanho">
         </Component>
       </SubComponents>
     </Container>

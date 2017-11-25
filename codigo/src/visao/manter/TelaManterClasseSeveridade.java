@@ -1,6 +1,7 @@
 package visao.manter;
 
 import controle.ClasseSeveridadeControle;
+import java.math.BigDecimal;
 import modelo.ClasseSeveridade;
 import modelo.Doenca;
 import modelo.iterator.Iterator;
@@ -42,16 +43,16 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     public void preencherCampos(int id) {
         this.id = id;
         ClasseSeveridade classeSeveridade = (ClasseSeveridade) classeSeveridadeControle.getClasseSeveridade(id);
-        jTextFieldInferior.setText(Float.toString(classeSeveridade.getInferior()));
-        jTextFieldSuperior.setText(Float.toString(classeSeveridade.getSuperior()));
+        jNumericFieldInferior.setText(new BigDecimal(classeSeveridade.getInferior()).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        jNumericFieldSuperior.setText(new BigDecimal(classeSeveridade.getSuperior()).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
         jTextAreaDesc.setText(classeSeveridade.getDescricao());
         jComboBoxDoenca.setSelectedItem(classeSeveridade.getDoenca().getNome());
     }
 
     public void limparCampos() {
         id = 0;
-        jTextFieldInferior.setText("");
-        jTextFieldSuperior.setText("");
+        jNumericFieldInferior.setText("");
+        jNumericFieldSuperior.setText("");
         jTextAreaDesc.setText("");
         jComboBoxDoenca.setSelectedItem("");
     }
@@ -67,7 +68,6 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldInferior = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,9 +75,10 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldSuperior = new javax.swing.JTextField();
         jComboBoxDoenca = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jNumericFieldInferior = new util.JNumericField();
+        jNumericFieldSuperior = new util.JNumericField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manter classe");
@@ -120,36 +121,31 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonSair))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextFieldInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTextFieldSuperior))))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBoxDoenca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel1)
                 .addGap(0, 150, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSair))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxDoenca, javax.swing.GroupLayout.Alignment.LEADING, 0, 191, Short.MAX_VALUE)
+                            .addComponent(jNumericFieldInferior, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jNumericFieldSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,8 +158,8 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jNumericFieldInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jNumericFieldSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -202,8 +198,8 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         classeSeveridadeControle.salvarClasse(id,
-                Float.parseFloat(jTextFieldInferior.getText()),
-                Float.parseFloat(jTextFieldSuperior.getText()),
+                Float.parseFloat(jNumericFieldInferior.getText()),
+                Float.parseFloat(jNumericFieldSuperior.getText()),
                 jComboBoxDoenca.getSelectedIndex(),
                 jTextAreaDesc.getText());
         if (id == 0) {
@@ -224,11 +220,11 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private util.JNumericField jNumericFieldInferior;
+    private util.JNumericField jNumericFieldSuperior;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDesc;
-    private javax.swing.JTextField jTextFieldInferior;
-    private javax.swing.JTextField jTextFieldSuperior;
     // End of variables declaration//GEN-END:variables
 
 }

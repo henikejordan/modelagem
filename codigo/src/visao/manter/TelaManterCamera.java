@@ -1,6 +1,7 @@
 package visao.manter;
 
 import controle.CameraControle;
+import java.math.BigDecimal;
 import modelo.Camera;
 
 /**
@@ -31,9 +32,9 @@ public class TelaManterCamera extends javax.swing.JFrame {
         Camera camera = (Camera) cameraControle.getCamera(id);
         jTextFieldMarca.setText(camera.getMarca());
         jTextFieldModelo.setText(camera.getModelo());
-        jTextFieldDistFocal.setText(Float.toString(camera.getDistanciaFocal()));
-        jTextFieldAltura.setText(Integer.toString(camera.getAlturaResolucao()));
-        jTextFieldLargura.setText(Integer.toString(camera.getLarguraResolucao()));
+        jNumericFieldDistFocal.setText(new BigDecimal(camera.getDistanciaFocal()).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        jIntegerFieldAltura.setText(Integer.toString(camera.getAlturaResolucao()));
+        jIntegerFieldLargura.setText(Integer.toString(camera.getLarguraResolucao()));
         jTextFieldTipoLente.setText(camera.getTipoLente());
     }
 
@@ -41,9 +42,9 @@ public class TelaManterCamera extends javax.swing.JFrame {
         id = 0;
         jTextFieldMarca.setText("");
         jTextFieldModelo.setText("");
-        jTextFieldDistFocal.setText("");
-        jTextFieldAltura.setText("");
-        jTextFieldLargura.setText("");
+        jNumericFieldDistFocal.setText("");
+        jIntegerFieldAltura.setText("");
+        jIntegerFieldLargura.setText("");
         jTextFieldTipoLente.setText("");
     }
 
@@ -63,15 +64,15 @@ public class TelaManterCamera extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldDistFocal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldModelo = new javax.swing.JTextField();
         jTextFieldTipoLente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextFieldLargura = new javax.swing.JTextField();
-        jTextFieldAltura = new javax.swing.JTextField();
+        jNumericFieldDistFocal = new util.JNumericField();
+        jIntegerFieldLargura = new util.JIntegerField();
+        jIntegerFieldAltura = new util.JIntegerField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manter câmera");
@@ -119,6 +120,10 @@ public class TelaManterCamera extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jIntegerFieldLargura, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jIntegerFieldAltura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -128,31 +133,27 @@ public class TelaManterCamera extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(0, 127, Short.MAX_VALUE))
-                            .addComponent(jTextFieldModelo))
-                        .addGap(26, 26, 26))
+                            .addComponent(jTextFieldModelo)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldDistFocal, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel7)
-                                .addComponent(jTextFieldLargura))
-                            .addComponent(jButtonSalvar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jButtonSalvar)
+                            .addComponent(jNumericFieldDistFocal, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSair))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldTipoLente, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButtonSair))
-                                    .addComponent(jTextFieldAltura, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldTipoLente))
-                                .addGap(26, 26, 26))))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel6))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,16 +174,16 @@ public class TelaManterCamera extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldDistFocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTipoLente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTipoLente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jNumericFieldDistFocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jIntegerFieldLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jIntegerFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvar)
@@ -215,9 +216,9 @@ public class TelaManterCamera extends javax.swing.JFrame {
         cameraControle.salvarCamera(id,
                 jTextFieldMarca.getText(),
                 jTextFieldModelo.getText(),
-                Float.parseFloat(jTextFieldDistFocal.getText()),
-                Integer.parseInt(jTextFieldAltura.getText()),
-                Integer.parseInt(jTextFieldLargura.getText()),
+                Float.parseFloat(jNumericFieldDistFocal.getText()),
+                Integer.parseInt(jIntegerFieldAltura.getText()),
+                Integer.parseInt(jIntegerFieldLargura.getText()),
                 jTextFieldTipoLente.getText());
         if (id == 0) {
             limparCampos();
@@ -231,6 +232,8 @@ public class TelaManterCamera extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
+    private util.JIntegerField jIntegerFieldAltura;
+    private util.JIntegerField jIntegerFieldLargura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -238,10 +241,8 @@ public class TelaManterCamera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private util.JNumericField jNumericFieldDistFocal;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldAltura;
-    private javax.swing.JTextField jTextFieldDistFocal;
-    private javax.swing.JTextField jTextFieldLargura;
     private javax.swing.JTextField jTextFieldMarca;
     private javax.swing.JTextField jTextFieldModelo;
     private javax.swing.JTextField jTextFieldTipoLente;

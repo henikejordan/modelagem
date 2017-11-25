@@ -17,11 +17,11 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.SimpleAttributeSet;
 
 /**
- * Component JNumericField
+ * Component JIntegerField
  *
  * @author Henike
  */
-public class JNumericField extends JFormattedTextField {
+public class JIntegerField extends JFormattedTextField {
 
     private static final long serialVersionUID = -5712106034509737967L;
     private static final SimpleAttributeSet nullAttribute = new SimpleAttributeSet();
@@ -29,15 +29,15 @@ public class JNumericField extends JFormattedTextField {
     /**
      * Creates a new instance of JNumericField
      */
-    public JNumericField() {
+    public JIntegerField() {
         this.setHorizontalAlignment(JTextField.LEFT);
-        this.setDocument(new NumericFieldDocument());
-        this.addFocusListener(new NumericFieldFocusListener());
-        this.setText("0.00");
+        this.setDocument(new IntegerFieldDocument());
+        this.addFocusListener(new IntegerFieldFocusListener());
+        this.setText("0");
         this.addCaretListener(new CaretListenerImpl());
     }
 
-    private final class NumericFieldFocusListener extends FocusAdapter {
+    private final class IntegerFieldFocusListener extends FocusAdapter {
 
         @Override
         public void focusGained(FocusEvent e) {
@@ -45,7 +45,7 @@ public class JNumericField extends JFormattedTextField {
         }
     }
 
-    private final class NumericFieldDocument extends PlainDocument {
+    private final class IntegerFieldDocument extends PlainDocument {
 
         /**
          *
@@ -56,7 +56,7 @@ public class JNumericField extends JFormattedTextField {
         public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
             String original = getText(0, getLength());
 
-            if (original.length() < 6) {
+            if (original.length() < 7) {
                 StringBuilder mascarado = new StringBuilder();
                 if (a != nullAttribute) {
                     //limpa o campo  
@@ -68,25 +68,13 @@ public class JNumericField extends JFormattedTextField {
                             mascarado.deleteCharAt(i);
                         }
                     }
-                    Long number = new Long(mascarado.toString());
 
+                    Integer number = new Integer(mascarado.toString());
                     mascarado.replace(0, mascarado.length(), number.toString());
 
-                    if (mascarado.length() < 3) {
-                        if (mascarado.length() == 1) {
-                            mascarado.insert(0, "0");
-                            mascarado.insert(0, ".");
-                            mascarado.insert(0, "0");
-                        } else if (mascarado.length() == 2) {
-                            mascarado.insert(0, ".");
-                            mascarado.insert(0, "0");
-                        }
-                    } else {
-                        mascarado.insert(mascarado.length() - 2, ".");
-                    }
                     super.insertString(0, mascarado.toString(), a);
                 } else if (original.length() == 0) {
-                    super.insertString(0, "0.00", a);
+                    super.insertString(0, "0", a);
                 }
             }
         }

@@ -13,7 +13,8 @@ public class ClasseSeveridadeDAO extends DAO {
     @Override
     public Lista pesquisar(String str) {
         Lista classes = new Lista();
-        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade where inferior >= " + str + " order by inferior");
+        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade where "
+                + "inferior >= " + str + " order by id_doenca");
         try {
             resultado.first();
             do {

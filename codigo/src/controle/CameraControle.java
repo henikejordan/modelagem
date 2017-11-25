@@ -43,7 +43,7 @@ public class CameraControle extends Controle {
 
     @Override
     public ModeloTabela getModeloTabela(String str) {
-        return new ModeloTabelaCamera(daoCamera.pesquisar(str), new String[]{null, "Marca", "Modelo"});
+        return new ModeloTabelaCamera(daoCamera.pesquisar(str), new String[]{null, "Modelo", "Marca"});
     }
 
     public Camera getCamera(int id) {

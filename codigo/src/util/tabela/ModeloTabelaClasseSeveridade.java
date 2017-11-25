@@ -1,5 +1,6 @@
 package util.tabela;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import modelo.ClasseSeveridade;
 
@@ -22,9 +23,9 @@ public class ModeloTabelaClasseSeveridade extends ModeloTabela {
             case 1:
                 return classeSeveridade.getDoenca().getNome();
             case 2:
-                return classeSeveridade.getInferior();
+                return new BigDecimal(classeSeveridade.getInferior()).setScale(2, BigDecimal.ROUND_HALF_UP);
             case 3:
-                return classeSeveridade.getSuperior();
+                return new BigDecimal(classeSeveridade.getSuperior()).setScale(2, BigDecimal.ROUND_HALF_UP);
             default:
                 return null;
         }

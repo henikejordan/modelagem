@@ -1,7 +1,6 @@
 package visao.manter;
 
 import controle.CulturaControle;
-import controle.ManterCultura;
 import modelo.Cultura;
 
 /**
@@ -200,12 +199,11 @@ public class TelaManterCultura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        ManterCultura.SalvarCultura(id,
+        culturaControle.salvarCultura(id,
                 jTextFieldNome.getText(),
                 jComboBoxTipo.getSelectedItem().toString(),
                 jTextFieldCor.getText(),
-                jTextAreaDesc.getText(),
-                culturaControle);
+                jTextAreaDesc.getText());
         if (id == 0) {
             limparCampos();
         }

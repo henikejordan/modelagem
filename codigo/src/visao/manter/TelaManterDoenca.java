@@ -1,7 +1,6 @@
 package visao.manter;
 
 import controle.DoencaControle;
-import controle.ManterDoenca;
 import modelo.Cultura;
 import modelo.Doenca;
 import modelo.iterator.Iterator;
@@ -219,13 +218,12 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        ManterDoenca.SalvarDoenca(id,
+        doencaControle.salvarDoenca(id,
                 jTextFieldNome.getText(),
                 jTextFieldTipo.getText(),
                 jTextFieldCarac.getText(),
                 jComboBoxCultura.getSelectedIndex(),
-                jTextAreaDesc.getText(),
-                doencaControle);
+                jTextAreaDesc.getText());
         if (id == 0) {
             limparCampos();
         }

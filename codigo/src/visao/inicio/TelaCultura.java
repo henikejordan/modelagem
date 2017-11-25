@@ -47,7 +47,6 @@ public class TelaCultura extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jTextFieldPesq = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButtonPesquisar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -87,9 +86,13 @@ public class TelaCultura extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Pesquisar cultura:");
+        jTextFieldPesq.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesqKeyReleased(evt);
+            }
+        });
 
-        jButtonPesquisar.setText("Pesquisar");
+        jLabel2.setText("Pesquisar cultura:");
 
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -118,10 +121,7 @@ public class TelaCultura extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonSair))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonPesquisar)))))
+                                .addComponent(jTextFieldPesq, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addComponent(jLabel1)))
@@ -135,9 +135,7 @@ public class TelaCultura extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
+                .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -146,7 +144,7 @@ public class TelaCultura extends javax.swing.JFrame {
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonExcluir))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,8 +200,12 @@ public class TelaCultura extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void jTextFieldPesqKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesqKeyReleased
+        preencherTabela();
+    }//GEN-LAST:event_jTextFieldPesqKeyReleased
+
     public final void preencherTabela() {
-        tabela.setModel(culturaControle.getModeloTabela());
+        tabela.setModel(culturaControle.getModeloTabela(jTextFieldPesq.getText()));
         tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
         tabela.getColumnModel().getColumn(1).setResizable(false);
@@ -218,7 +220,6 @@ public class TelaCultura extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
-    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

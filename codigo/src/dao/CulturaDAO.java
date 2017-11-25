@@ -9,9 +9,9 @@ import modelo.iterator.Lista;
 public class CulturaDAO extends DAO {
 
     @Override
-    public Lista lerTodos() {
+    public Lista pesquisar(String str) {
         Lista culturas = new Lista();
-        ResultSet resultado = super.getConecta().executaSQL("select * from cultura");
+        ResultSet resultado = super.getConecta().executaSQL("select * from cultura where nome ~* '" + str + "' order by nome");
         try {
             resultado.first();
             do {

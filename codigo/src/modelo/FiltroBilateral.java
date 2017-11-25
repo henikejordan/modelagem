@@ -5,7 +5,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 
-public class FiltroBilateral extends Filtro {
+public class FiltroBilateral implements Filtro {
 
     @Override
     public void aplicarFiltro(String dirIn, String dirOut) {

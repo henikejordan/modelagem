@@ -5,7 +5,7 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
 import static org.bytedeco.javacpp.opencv_imgcodecs.imwrite;
 
-public class FiltroGaussiano extends Filtro {
+public class FiltroGaussiano implements Filtro {
 
     @Override
     public void aplicarFiltro(String dirIn, String dirOut) {

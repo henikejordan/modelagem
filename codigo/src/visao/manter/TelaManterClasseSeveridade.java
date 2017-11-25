@@ -1,7 +1,6 @@
 package visao.manter;
 
 import controle.ClasseSeveridadeControle;
-import controle.ManterClasseSeveridade;
 import modelo.ClasseSeveridade;
 import modelo.Doenca;
 import modelo.iterator.Iterator;
@@ -202,12 +201,11 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        ManterClasseSeveridade.salvarSeveridade(id,
+        classeSeveridadeControle.salvarClasse(id,
                 Float.parseFloat(jTextFieldInferior.getText()),
                 Float.parseFloat(jTextFieldSuperior.getText()),
                 jComboBoxDoenca.getSelectedIndex(),
-                jTextAreaDesc.getText(),
-                classeSeveridadeControle);
+                jTextAreaDesc.getText());
         if (id == 0) {
             limparCampos();
         }

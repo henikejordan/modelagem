@@ -45,10 +45,9 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonNovo = new javax.swing.JButton();
-        jTextFieldPesq = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButtonPesquisar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jNumericField = new util.JNumericField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar classe");
@@ -89,12 +88,16 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
 
         jLabel2.setText("Pesquisar classe:");
 
-        jButtonPesquisar.setText("Pesquisar");
-
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jNumericField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jNumericFieldKeyReleased(evt);
             }
         });
 
@@ -117,11 +120,8 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
                                     .addComponent(jButtonExcluir)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonSair))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButtonPesquisar)))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jNumericField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addComponent(jLabel1)))
@@ -135,9 +135,7 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPesquisar))
+                .addComponent(jNumericField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -146,7 +144,7 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
                     .addComponent(jButtonNovo)
                     .addComponent(jButtonSair)
                     .addComponent(jButtonExcluir))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,12 +201,18 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void jNumericFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jNumericFieldKeyReleased
+        preencherTabela();
+    }//GEN-LAST:event_jNumericFieldKeyReleased
+
     public final void preencherTabela() {
-        tabela.setModel(classeSeveridadeControle.getModeloTabela());
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(203);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(202);
+        tabela.setModel(classeSeveridadeControle.getModeloTabela(jNumericField.getText()));
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(135);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(135);
+        tabela.getColumnModel().getColumn(3).setPreferredWidth(135);
         tabela.getColumnModel().getColumn(1).setResizable(false);
         tabela.getColumnModel().getColumn(2).setResizable(false);
+        tabela.getColumnModel().getColumn(3).setResizable(false);
         tabela.removeColumn(tabela.getColumnModel().getColumn(0));
         tabela.getTableHeader().setReorderingAllowed(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -219,13 +223,12 @@ public class TelaClasseSeveridade extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
-    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private util.JNumericField jNumericField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextFieldPesq;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 

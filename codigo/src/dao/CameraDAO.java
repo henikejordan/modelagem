@@ -9,9 +9,9 @@ import modelo.iterator.Lista;
 public class CameraDAO extends DAO {
 
     @Override
-    public Lista lerTodos() {
+    public Lista pesquisar(String str) {
         Lista cameras = new Lista();
-        ResultSet resultado = super.getConecta().executaSQL("select * from camera");
+        ResultSet resultado = super.getConecta().executaSQL("select * from camera where modelo ~* '" + str + "' order by modelo");
         try {
             resultado.first();
             do {

@@ -10,9 +10,9 @@ import modelo.iterator.Lista;
 public class AmostragemDAO extends DAO {
 
     @Override
-    public Lista lerTodos() {
+    public Lista pesquisar(String str) {
         Lista amostragens = new Lista();
-        ResultSet resultado = super.getConecta().executaSQL("select * from amostragem");
+        ResultSet resultado = super.getConecta().executaSQL("select * from amostragem where tipo ~* '" + str + "' order by tipo");
         try {
             resultado.first();
             do {

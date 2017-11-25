@@ -1,7 +1,6 @@
 package visao.manter;
 
 import controle.CameraControle;
-import controle.ManterCamera;
 import modelo.Camera;
 
 /**
@@ -213,14 +212,13 @@ public class TelaManterCamera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        ManterCamera.SalvarCamera(id,
+        cameraControle.salvarCamera(id,
                 jTextFieldMarca.getText(),
                 jTextFieldModelo.getText(),
                 Float.parseFloat(jTextFieldDistFocal.getText()),
                 Integer.parseInt(jTextFieldAltura.getText()),
                 Integer.parseInt(jTextFieldLargura.getText()),
-                jTextFieldTipoLente.getText(),
-                cameraControle);
+                jTextFieldTipoLente.getText());
         if (id == 0) {
             limparCampos();
         }

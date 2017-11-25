@@ -1,7 +1,6 @@
 package visao.manter;
 
 import controle.AmostragemControle;
-import controle.ManterAmostragem;
 import modelo.Amostragem;
 import modelo.Camera;
 import modelo.iterator.Iterator;
@@ -222,13 +221,12 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        ManterAmostragem.SalvarAmostragem(id,
+        amostragemControle.salvarAmostragem(id,
                 jTextFieldTipo.getText(),
                 Integer.parseInt(jTextFieldTamanho.getText()),
                 jTextFieldLocal.getText(),
                 jTextFieldEpoca.getText(),
                 jTextFieldObjetivo.getText(),
-                amostragemControle,
                 jComboBoxCamera.getSelectedIndex());
         if (id == 0) {
             limparCampos();

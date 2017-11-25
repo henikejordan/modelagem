@@ -2,10 +2,13 @@ package controle;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
+import javax.swing.JOptionPane;
 import modelo.Amostragem;
+import modelo.Camera;
 import modelo.iterator.Lista;
 import util.tabela.ModeloTabela;
 import util.tabela.ModeloTabelaAmostragem;
+import visao.inicio.TelaAmostragem;
 
 /**
  *
@@ -20,9 +23,28 @@ public class AmostragemControle extends Controle {
         daoCamera = new ConcreteCreatorDAO().factoryMethod("Câmera");
     }
 
+    public void salvarAmostragem(int id, String tipo, int tamanho, String local, String epoca, String objetivo, int index) {
+        Amostragem amostragem = new Amostragem();
+        amostragem.setIdAmostragem(id);
+        amostragem.setTipo(tipo);
+        amostragem.setTamanho(tamanho);
+        amostragem.setLocal(local);
+        amostragem.setEpoca(epoca);
+        amostragem.setObjetivo(objetivo);
+        amostragem.setCamera((Camera) getCameras().get(index - 1));
+        if (id == 0) {
+            if (criar(amostragem)) {
+                JOptionPane.showMessageDialog(null, "Amostragem cadastrada com sucesso!");
+            }
+        } else if (atualizar(amostragem)) {
+            JOptionPane.showMessageDialog(null, "Amostragem alterada com sucesso!");
+        }
+        TelaAmostragem.getInstance().preencherTabela();
+    }
+
     @Override
-    public ModeloTabela getModeloTabela() {
-        return new ModeloTabelaAmostragem(daoAmostragem.lerTodos(), new String[]{null, "Tipo", "Objetivo"});
+    public ModeloTabela getModeloTabela(String str) {
+        return new ModeloTabelaAmostragem(daoAmostragem.pesquisar(str), new String[]{null, "Tipo", "Objetivo"});
     }
 
     public Amostragem getAmostragem(int id) {
@@ -30,7 +52,7 @@ public class AmostragemControle extends Controle {
     }
 
     public Lista getCameras() {
-        return daoCamera.lerTodos();
+        return daoCamera.pesquisar("");
     }
 
     @Override

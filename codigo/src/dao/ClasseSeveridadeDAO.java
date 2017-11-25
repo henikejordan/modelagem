@@ -11,9 +11,9 @@ import modelo.iterator.Lista;
 public class ClasseSeveridadeDAO extends DAO {
 
     @Override
-    public Lista lerTodos() {
+    public Lista pesquisar(String str) {
         Lista classes = new Lista();
-        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade");
+        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade where inferior >= " + str + " order by inferior");
         try {
             resultado.first();
             do {

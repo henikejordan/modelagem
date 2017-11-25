@@ -1,12 +1,6 @@
 package visao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.util.Random;
-import modelo.Filtro;
+import controle.FiltroControle;
 import modelo.FiltroBilateral;
 import modelo.FiltroNormalizado;
 import modelo.FiltroGaussiano;
@@ -18,7 +12,7 @@ import modelo.FiltroMediano;
  */
 public class TelaFiltro extends javax.swing.JFrame {
 
-    private String dirIn, dirOut;
+    private final FiltroControle filtroControle;
 
     /**
      * Creates new form NovoJFrame
@@ -26,11 +20,10 @@ public class TelaFiltro extends javax.swing.JFrame {
      * @param dirIn
      */
     public TelaFiltro(String dirIn) {
-        dirOut = gerarNomeArquivo();
-        copiarArquivo(dirIn, dirOut);
-        this.dirIn = dirIn;
+        filtroControle = new FiltroControle(dirIn);
         initComponents();
-        this.dirIn = dirOut;
+        filtroControle.setDirIn(filtroControle.getDirOut());
+        preencherComboBox();
     }
 
     /**
@@ -42,25 +35,17 @@ public class TelaFiltro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonNormal = new javax.swing.JButton();
         panelImagem = new visao.DrawingPanel();
-        jButtonGauss = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
-        jButtonMediano = new javax.swing.JButton();
-        jButtonBilateral = new javax.swing.JButton();
+        jButtonAplicar = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
+        jComboBoxFiltro = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Imagem");
 
-        jButtonNormal.setText("Normalizado");
-        jButtonNormal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNormalActionPerformed(evt);
-            }
-        });
-
-        panelImagem.setDirIn(dirIn);
-        panelImagem.setDirOut(dirOut);
+        panelImagem.setDirIn(filtroControle.getDirIn());
+        panelImagem.setDirOut(filtroControle.getDirOut());
 
         javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
         panelImagem.setLayout(panelImagemLayout);
@@ -73,13 +58,6 @@ public class TelaFiltro extends javax.swing.JFrame {
             .addGap(0, 259, Short.MAX_VALUE)
         );
 
-        jButtonGauss.setText("Gaussiano");
-        jButtonGauss.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGaussActionPerformed(evt);
-            }
-        });
-
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,17 +65,17 @@ public class TelaFiltro extends javax.swing.JFrame {
             }
         });
 
-        jButtonMediano.setText("Mediano");
-        jButtonMediano.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAplicar.setText("Aplicar");
+        jButtonAplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMedianoActionPerformed(evt);
+                jButtonAplicarActionPerformed(evt);
             }
         });
 
-        jButtonBilateral.setText("Bilateral");
-        jButtonBilateral.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBilateralActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
@@ -109,15 +87,13 @@ public class TelaFiltro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jButtonNormal)
+                        .addGap(10, 10, 10)
+                        .addComponent(jComboBoxFiltro, 0, 180, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonGauss)
+                        .addComponent(jButtonSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonMediano)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBilateral)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAplicar)
+                        .addGap(22, 22, 22)
                         .addComponent(jButtonSair)
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
@@ -131,92 +107,57 @@ public class TelaFiltro extends javax.swing.JFrame {
                 .addComponent(panelImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonNormal)
-                    .addComponent(jButtonGauss)
                     .addComponent(jButtonSair)
-                    .addComponent(jButtonMediano)
-                    .addComponent(jButtonBilateral))
+                    .addComponent(jButtonAplicar)
+                    .addComponent(jButtonSalvar)
+                    .addComponent(jComboBoxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNormalActionPerformed
-        aplicarFiltro(new FiltroNormalizado());
-    }//GEN-LAST:event_jButtonNormalActionPerformed
+    private void preencherComboBox() {
+        jComboBoxFiltro.addItem("");
+        jComboBoxFiltro.addItem("Bilateral");
+        jComboBoxFiltro.addItem("Normalizado");
+        jComboBoxFiltro.addItem("Gaussiano");
+        jComboBoxFiltro.addItem("Mediano");
+    }
 
-    private void jButtonGaussActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGaussActionPerformed
-        aplicarFiltro(new FiltroGaussiano());
-    }//GEN-LAST:event_jButtonGaussActionPerformed
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        TelaSalvar telaSalvar = new TelaSalvar(filtroControle);
+        telaSalvar.setVisible(true);
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jButtonMedianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMedianoActionPerformed
-        aplicarFiltro(new FiltroMediano());
-    }//GEN-LAST:event_jButtonMedianoActionPerformed
-
-    private void jButtonBilateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBilateralActionPerformed
-        aplicarFiltro(new FiltroBilateral());
-    }//GEN-LAST:event_jButtonBilateralActionPerformed
+    private void jButtonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAplicarActionPerformed
+        switch (jComboBoxFiltro.getSelectedItem().toString()) {
+            case "Bilateral":
+                filtroControle.aplicarFiltro(new FiltroBilateral(), panelImagem);
+                break;
+            case "Normalizado":
+                filtroControle.aplicarFiltro(new FiltroNormalizado(), panelImagem);
+                break;
+            case "Gaussiano":
+                filtroControle.aplicarFiltro(new FiltroGaussiano(), panelImagem);
+                break;
+            case "Mediano":
+                filtroControle.aplicarFiltro(new FiltroMediano(), panelImagem);
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_jButtonAplicarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    private void aplicarFiltro(Filtro filtro) {
-        dirOut = gerarNomeArquivo();
-        filtro.aplicarFiltro(dirIn, dirOut);
-        panelImagem.setDirIn(dirOut);
-        panelImagem.setDirOut(dirOut);
-        panelImagem.repaint();
-        new File(dirIn).delete();
-        dirIn = dirOut;
-    }
-
-    private String gerarNomeArquivo() {
-        Random random = new Random();
-        String aux = "img/";
-        for (int i = 0; i < 5; i++) {
-            aux += random.nextInt(10);
-        }
-        aux += ".jpg";
-        return aux;
-    }
-
-    private void copiarArquivo(String entrada, String saida) {
-        apagarDiretorioImagens();
-        FileInputStream origem;
-        FileOutputStream destino;
-        FileChannel fcOrigem;
-        FileChannel fcDestino;
-        try {
-            origem = new FileInputStream(entrada);
-            destino = new FileOutputStream(saida);
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-            origem.close();
-            destino.close();
-        } catch (IOException ex) {
-            //
-        }
-    }
-
-    private void apagarDiretorioImagens() {
-        File folder = new File("img/");
-        if (folder.isDirectory()) {
-            File[] sun = folder.listFiles();
-            for (File toDelete : sun) {
-                toDelete.delete();
-            }
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBilateral;
-    private javax.swing.JButton jButtonGauss;
-    private javax.swing.JButton jButtonMediano;
-    private javax.swing.JButton jButtonNormal;
+    private javax.swing.JButton jButtonAplicar;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JComboBox<String> jComboBoxFiltro;
     private visao.DrawingPanel panelImagem;
     // End of variables declaration//GEN-END:variables
 }

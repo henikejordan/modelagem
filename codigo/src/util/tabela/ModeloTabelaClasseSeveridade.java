@@ -20,8 +20,10 @@ public class ModeloTabelaClasseSeveridade extends ModeloTabela {
             case 0:
                 return classeSeveridade.getIdClasseSeveridade();
             case 1:
-                return classeSeveridade.getInferior();
+                return classeSeveridade.getDoenca().getNome();
             case 2:
+                return classeSeveridade.getInferior();
+            case 3:
                 return classeSeveridade.getSuperior();
             default:
                 return null;

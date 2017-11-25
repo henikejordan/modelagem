@@ -2,10 +2,13 @@ package controle;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
+import javax.swing.JOptionPane;
 import modelo.ClasseSeveridade;
+import modelo.Doenca;
 import modelo.iterator.Lista;
 import util.tabela.ModeloTabela;
 import util.tabela.ModeloTabelaClasseSeveridade;
+import visao.inicio.TelaClasseSeveridade;
 
 /**
  *
@@ -20,9 +23,26 @@ public class ClasseSeveridadeControle extends Controle {
         daoDoenca = new ConcreteCreatorDAO().factoryMethod("Doença");
     }
 
+    public void salvarClasse(int id, float inferior, float superior, int index, String areaDesc) {
+        ClasseSeveridade classeSeveridade = new ClasseSeveridade();
+        classeSeveridade.setIdClasseSeveridade(id);
+        classeSeveridade.setInferior(inferior);
+        classeSeveridade.setSuperior(superior);
+        classeSeveridade.setDoenca((Doenca) getDoencas().get(index - 1));
+        classeSeveridade.setDescricao(areaDesc);
+        if (id == 0) {
+            if (criar(classeSeveridade)) {
+                JOptionPane.showMessageDialog(null, "Classe criada com sucesso!");
+            }
+        } else if (atualizar(classeSeveridade)) {
+            JOptionPane.showMessageDialog(null, "Classe alterada com sucesso!");
+        }
+        TelaClasseSeveridade.getInstance().preencherTabela();
+    }
+
     @Override
-    public ModeloTabela getModeloTabela() {
-        return new ModeloTabelaClasseSeveridade(daoClasse.lerTodos(), new String[]{null, "Inferior", "Superior"});
+    public ModeloTabela getModeloTabela(String str) {
+        return new ModeloTabelaClasseSeveridade(daoClasse.pesquisar(str), new String[]{null, "Doença", "Inferior", "Superior"});
     }
 
     public ClasseSeveridade getClasseSeveridade(int id) {
@@ -30,7 +50,7 @@ public class ClasseSeveridadeControle extends Controle {
     }
 
     public Lista getDoencas() {
-        return daoDoenca.lerTodos();
+        return daoDoenca.pesquisar("");
     }
 
     @Override

@@ -2,10 +2,14 @@ package controle;
 
 import dao.ConcreteCreatorDAO;
 import dao.DAO;
+import javax.swing.JOptionPane;
+import modelo.Cultura;
 import modelo.Doenca;
 import modelo.iterator.Lista;
 import util.tabela.ModeloTabela;
 import util.tabela.ModeloTabelaDoenca;
+import visao.inicio.TelaDoenca;
+import visao.manter.TelaManterClasseSeveridade;
 
 /**
  *
@@ -20,9 +24,28 @@ public class DoencaControle extends Controle {
         daoCultura = new ConcreteCreatorDAO().factoryMethod("Cultura");
     }
 
+    public void salvarDoenca(int id, String nome, String tipo, String caracteristica, int index, String areaDesc) {
+        Doenca doenca = new Doenca();
+        doenca.setIdDoenca(id);
+        doenca.setNome(nome);
+        doenca.setTipo(tipo);
+        doenca.setCaracteristica(caracteristica);
+        doenca.setCultura((Cultura) getCulturas().get(index - 1));
+        doenca.setDescricao(areaDesc);
+        if (id == 0) {
+            if (criar(doenca)) {
+                JOptionPane.showMessageDialog(null, "Doença criada com sucesso!");
+            }
+        } else if (atualizar(doenca)) {
+            JOptionPane.showMessageDialog(null, "Doença alterada com sucesso!");
+        }
+        TelaDoenca.getInstance().preencherTabela();
+        TelaManterClasseSeveridade.getInstance().preencherComboBox();
+    }
+
     @Override
-    public ModeloTabela getModeloTabela() {
-        return new ModeloTabelaDoenca(daoDoenca.lerTodos(), new String[]{null, "Nome", "Descrição"});
+    public ModeloTabela getModeloTabela(String str) {
+        return new ModeloTabelaDoenca(daoDoenca.pesquisar(str), new String[]{null, "Nome", "Descrição"});
     }
 
     public Doenca getDoenca(int id) {
@@ -30,7 +53,7 @@ public class DoencaControle extends Controle {
     }
 
     public Lista getCulturas() {
-        return daoCultura.lerTodos();
+        return daoCultura.pesquisar("");
     }
 
     @Override

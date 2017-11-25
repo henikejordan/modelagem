@@ -11,7 +11,7 @@ public abstract class DAO {
         return conecta;
     }
 
-    public abstract Lista lerTodos();
+    public abstract Lista pesquisar(String str);
 
     public abstract Object ler(int id);
 

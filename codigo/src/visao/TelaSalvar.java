@@ -1,5 +1,6 @@
 package visao;
 
+import controle.FiltroControle;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -7,36 +8,20 @@ import javax.swing.JFileChooser;
  *
  * @author Henike
  */
-public class TelaBrowser extends javax.swing.JFrame {
+public class TelaSalvar extends javax.swing.JFrame {
 
-    private String opc;
+    private final FiltroControle filtroControle;
 
     /**
      * Creates new form Browser
      *
-     * @param opc
+     * @param filtroControle
      */
-    public TelaBrowser(String opc) {
-        this.opc = opc;
+    public TelaSalvar(FiltroControle filtroControle) {
+        this.filtroControle = filtroControle;
         initComponents();
         txtDiretorio.setText(arquivos.getCurrentDirectory().getAbsolutePath());
         arquivos.setCurrentDirectory(null);
-        arquivos.setFileFilter(new javax.swing.filechooser.FileFilter() {
-            //Filtro, converte as letras em minúsculas antes de comparar
-            @Override
-            public boolean accept(File f) {
-                return f.getName().toLowerCase().endsWith(".jpg")
-                        || f.getName().toLowerCase().endsWith(".jpeg")
-                        || f.getName().toLowerCase().endsWith(".png")
-                        || f.isDirectory();
-            }
-
-            //Texto que será exibido para o usuário
-            @Override
-            public String getDescription() {
-                return "Arquivos de imagem (*.jpg; *.jpeg; *.png)";
-            }
-        });
     }
 
     /**
@@ -56,8 +41,9 @@ public class TelaBrowser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        arquivos.setApproveButtonText("Abrir");
-        arquivos.setCurrentDirectory(new java.io.File("J:\\segmentador2\\src\\segmentador\\grafico\\img"));
+        arquivos.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        arquivos.setCurrentDirectory(null);
+        arquivos.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         arquivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 arquivosActionPerformed(evt);
@@ -126,11 +112,7 @@ public class TelaBrowser extends javax.swing.JFrame {
         setVisible(false);
         if (JFileChooser.APPROVE_SELECTION.equals(evt.getActionCommand())) {
             String dir = arquivos.getSelectedFile().toString();
-            if ("Quantificar".equals(opc)) {
-                new TelaQuantificacao(dir).setVisible(true);
-            } else {
-                new TelaFiltro(dir).setVisible(true);
-            }
+            filtroControle.copiarArquivo(filtroControle.getDirOut(), dir + ".jpg");
         }
     }//GEN-LAST:event_arquivosActionPerformed
 
@@ -142,10 +124,6 @@ public class TelaBrowser extends javax.swing.JFrame {
     private void arquivosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_arquivosPropertyChange
         txtDiretorio.setText(arquivos.getCurrentDirectory().getAbsolutePath());
     }//GEN-LAST:event_arquivosPropertyChange
-
-    public JFileChooser getJFileChooser() {
-        return arquivos;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser arquivos;

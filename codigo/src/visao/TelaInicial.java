@@ -261,11 +261,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
     private void jMenuOpcQuantificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcQuantificarActionPerformed
-        new TelaBrowser("Quantificar").setVisible(true);
+        new TelaAbrir("Quantificar").setVisible(true);
     }//GEN-LAST:event_jMenuOpcQuantificarActionPerformed
 
     private void jMenuOpcFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcFiltroActionPerformed
-        new TelaBrowser("Corrigir").setVisible(true);
+        new TelaAbrir("Corrigir").setVisible(true);
     }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,7 +8,7 @@ import util.tabela.ModeloTabela;
  */
 public abstract class Controle {
 
-    public abstract ModeloTabela getModeloTabela();
+    public abstract ModeloTabela getModeloTabela(String str);
 
     public abstract boolean criar(Object obj);
 

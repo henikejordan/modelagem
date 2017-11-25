@@ -9,6 +9,7 @@ import visao.inicio.TelaAmostragem;
 import visao.inicio.TelaCamera;
 import visao.inicio.TelaClasseSeveridade;
 import visao.inicio.TelaDoenca;
+import visao.relatorio.TelaRelatorioDoenca;
 
 /**
  *
@@ -60,6 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuOpcQuantificar = new javax.swing.JMenuItem();
         jMenuOpcFiltro = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuRelDoenca = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -189,6 +191,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1.setMnemonic('R');
         jMenu1.setText("Relatórios");
         jMenu1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+
+        jMenuRelDoenca.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jMenuRelDoenca.setText("Doença");
+        jMenuRelDoenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelDoencaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuRelDoenca);
+
         jMenuBar.add(jMenu1);
 
         jMenuSair.setText("Sair");
@@ -268,6 +280,10 @@ public class TelaInicial extends javax.swing.JFrame {
         new TelaAbrir("Corrigir").setVisible(true);
     }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
+    private void jMenuRelDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelDoencaActionPerformed
+        TelaRelatorioDoenca.getInstance().setVisible(true);
+    }//GEN-LAST:event_jMenuRelDoencaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -285,6 +301,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuOpcFiltro;
     private javax.swing.JMenuItem jMenuOpcQuantificar;
+    private javax.swing.JMenuItem jMenuRelDoenca;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
 

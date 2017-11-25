@@ -280,7 +280,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       TelaRelatorioDoenca t= TelaRelatorioDoenca.getInstance();
+       TelaRelatorioDoenca.getInstance().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

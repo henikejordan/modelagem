@@ -13,7 +13,7 @@ import visao.manter.TelaManterDoenca;
  *
  * @author henike
  */
-public class CulturaControle extends Controle {
+public class CulturaControle {
 
     private final DAO daoCultura;
 
@@ -39,7 +39,6 @@ public class CulturaControle extends Controle {
         TelaManterDoenca.getInstance().preencherComboBox();
     }
 
-    @Override
     public ModeloTabela getModeloTabela(String str) {
         return new ModeloTabelaCultura(daoCultura.pesquisar(str), new String[]{null, "Nome", "Descrição"});
     }
@@ -48,17 +47,14 @@ public class CulturaControle extends Controle {
         return (Cultura) daoCultura.ler(id);
     }
 
-    @Override
-    public boolean criar(Object obj) {
-        return daoCultura.inserir(obj);
+    public boolean criar(Cultura cultura) {
+        return daoCultura.inserir(cultura);
     }
 
-    @Override
-    public boolean atualizar(Object obj) {
-        return daoCultura.alterar(obj);
+    public boolean atualizar(Cultura cultura) {
+        return daoCultura.alterar(cultura);
     }
 
-    @Override
     public boolean deletar(int id) {
         return daoCultura.excluir(id);
     }

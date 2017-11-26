@@ -15,7 +15,7 @@ import visao.manter.TelaManterClasseSeveridade;
  *
  * @author henike
  */
-public class DoencaControle extends Controle {
+public class DoencaControle {
 
     private final DAO daoDoenca, daoCultura;
 
@@ -43,7 +43,6 @@ public class DoencaControle extends Controle {
         TelaManterClasseSeveridade.getInstance().preencherComboBox();
     }
 
-    @Override
     public ModeloTabela getModeloTabela(String str) {
         return new ModeloTabelaDoenca(daoDoenca.pesquisar(str), new String[]{null, "Nome", "Descrição"});
     }
@@ -56,17 +55,14 @@ public class DoencaControle extends Controle {
         return daoCultura.pesquisar("");
     }
 
-    @Override
-    public boolean criar(Object obj) {
-        return daoDoenca.inserir(obj);
+    public boolean criar(Doenca doenca) {
+        return daoDoenca.inserir(doenca);
     }
 
-    @Override
-    public boolean atualizar(Object obj) {
-        return daoDoenca.alterar(obj);
+    public boolean atualizar(Doenca doenca) {
+        return daoDoenca.alterar(doenca);
     }
 
-    @Override
     public boolean deletar(int id) {
         return daoDoenca.excluir(id);
     }

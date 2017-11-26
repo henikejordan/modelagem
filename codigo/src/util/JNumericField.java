@@ -1,16 +1,10 @@
 package util;
 
-/**
- *
- * @author Henike
- */
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -34,7 +28,11 @@ public class JNumericField extends JFormattedTextField {
         this.setDocument(new NumericFieldDocument());
         this.addFocusListener(new NumericFieldFocusListener());
         this.setText("0.00");
-        this.addCaretListener(new CaretListenerImpl());
+        this.addCaretListener((CaretEvent e) -> {
+            if (e.getDot() != getText().length()) {
+                getCaret().setDot(getText().length());
+            }
+        });
     }
 
     private final class NumericFieldFocusListener extends FocusAdapter {
@@ -47,9 +45,6 @@ public class JNumericField extends JFormattedTextField {
 
     private final class NumericFieldDocument extends PlainDocument {
 
-        /**
-         *
-         */
         private static final long serialVersionUID = -3802846632709128803L;
 
         @Override
@@ -106,16 +101,4 @@ public class JNumericField extends JFormattedTextField {
         }
     }
 
-    private class CaretListenerImpl implements CaretListener {
-
-        public CaretListenerImpl() {
-        }
-
-        @Override
-        public void caretUpdate(CaretEvent e) {
-            if (e.getDot() != getText().length()) {
-                getCaret().setDot(getText().length());
-            }
-        }
-    }
 }

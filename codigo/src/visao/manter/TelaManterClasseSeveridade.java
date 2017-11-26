@@ -114,6 +114,12 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
 
         jLabel3.setText("Superior:");
 
+        jComboBoxDoenca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDoencaActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Doença:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -210,6 +216,18 @@ public class TelaManterClasseSeveridade extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jComboBoxDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDoencaActionPerformed
+        if (jComboBoxDoenca.getSelectedItem() != null) {
+            if (jComboBoxDoenca.getSelectedItem().toString().equals("")) {
+                jButtonSalvar.setEnabled(false);
+            } else {
+                jButtonSalvar.setEnabled(true);
+            }
+        } else {
+            jButtonSalvar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxDoencaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;

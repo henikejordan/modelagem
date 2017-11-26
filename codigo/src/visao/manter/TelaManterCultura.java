@@ -107,6 +107,12 @@ public class TelaManterCultura extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Tipo:");
 
         jLabel4.setText("Cor:");
@@ -212,6 +218,18 @@ public class TelaManterCultura extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoActionPerformed
+        if (jComboBoxTipo.getSelectedItem() != null) {
+            if (jComboBoxTipo.getSelectedItem().toString().equals("")) {
+                jButtonSalvar.setEnabled(false);
+            } else {
+                jButtonSalvar.setEnabled(true);
+            }
+        } else {
+            jButtonSalvar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;

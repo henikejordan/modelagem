@@ -117,6 +117,12 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
 
         jLabel4.setText("Local:");
 
+        jComboBoxCamera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCameraActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Época");
 
         jLabel7.setText("Câmera:");
@@ -236,6 +242,18 @@ public class TelaManterAmostragem extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jComboBoxCameraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCameraActionPerformed
+        if (jComboBoxCamera.getSelectedItem() != null) {
+            if (jComboBoxCamera.getSelectedItem().toString().equals("")) {
+                jButtonSalvar.setEnabled(false);
+            } else {
+                jButtonSalvar.setEnabled(true);
+            }
+        } else {
+            jButtonSalvar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxCameraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;

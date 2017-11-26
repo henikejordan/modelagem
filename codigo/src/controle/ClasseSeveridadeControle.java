@@ -14,7 +14,7 @@ import visao.inicio.TelaClasseSeveridade;
  *
  * @author henike
  */
-public class ClasseSeveridadeControle extends Controle {
+public class ClasseSeveridadeControle {
 
     private final DAO daoClasse, daoDoenca;
 
@@ -40,7 +40,6 @@ public class ClasseSeveridadeControle extends Controle {
         TelaClasseSeveridade.getInstance().preencherTabela();
     }
 
-    @Override
     public ModeloTabela getModeloTabela(String str) {
         return new ModeloTabelaClasseSeveridade(daoClasse.pesquisar(str), new String[]{null, "Doença", "Inferior", "Superior"});
     }
@@ -53,17 +52,14 @@ public class ClasseSeveridadeControle extends Controle {
         return daoDoenca.pesquisar("");
     }
 
-    @Override
-    public boolean criar(Object obj) {
-        return daoClasse.inserir(obj);
+    public boolean criar(ClasseSeveridade classeSeveridade) {
+        return daoClasse.inserir(classeSeveridade);
     }
 
-    @Override
-    public boolean atualizar(Object obj) {
-        return daoClasse.alterar(obj);
+    public boolean atualizar(ClasseSeveridade classeSeveridade) {
+        return daoClasse.alterar(classeSeveridade);
     }
 
-    @Override
     public boolean deletar(int id) {
         return daoClasse.excluir(id);
     }

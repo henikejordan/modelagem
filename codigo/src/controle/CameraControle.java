@@ -13,7 +13,7 @@ import visao.manter.TelaManterAmostragem;
  *
  * @author henike
  */
-public class CameraControle extends Controle {
+public class CameraControle {
 
     private final DAO daoCamera;
 
@@ -41,7 +41,6 @@ public class CameraControle extends Controle {
         TelaManterAmostragem.getInstance().preencherComboBox();
     }
 
-    @Override
     public ModeloTabela getModeloTabela(String str) {
         return new ModeloTabelaCamera(daoCamera.pesquisar(str), new String[]{null, "Modelo", "Marca"});
     }
@@ -50,17 +49,14 @@ public class CameraControle extends Controle {
         return (Camera) daoCamera.ler(id);
     }
 
-    @Override
-    public boolean criar(Object obj) {
-        return daoCamera.inserir(obj);
+    public boolean criar(Camera camera) {
+        return daoCamera.inserir(camera);
     }
 
-    @Override
-    public boolean atualizar(Object obj) {
-        return daoCamera.alterar(obj);
+    public boolean atualizar(Camera camera) {
+        return daoCamera.alterar(camera);
     }
 
-    @Override
     public boolean deletar(int id) {
         return daoCamera.excluir(id);
     }

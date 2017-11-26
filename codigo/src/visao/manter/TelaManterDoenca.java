@@ -119,6 +119,12 @@ public class TelaManterDoenca extends javax.swing.JFrame {
 
         jLabel4.setText("Característica:");
 
+        jComboBoxCultura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCulturaActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Cultura:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -232,6 +238,18 @@ public class TelaManterDoenca extends javax.swing.JFrame {
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jComboBoxCulturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCulturaActionPerformed
+        if (jComboBoxCultura.getSelectedItem() != null) {
+            if (jComboBoxCultura.getSelectedItem().toString().equals("")) {
+                jButtonSalvar.setEnabled(false);
+            } else {
+                jButtonSalvar.setEnabled(true);
+            }
+        } else {
+            jButtonSalvar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxCulturaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;

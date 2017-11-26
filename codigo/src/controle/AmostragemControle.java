@@ -14,7 +14,7 @@ import visao.inicio.TelaAmostragem;
  *
  * @author henike
  */
-public class AmostragemControle extends Controle {
+public class AmostragemControle {
 
     private final DAO daoAmostragem, daoCamera;
 
@@ -42,7 +42,6 @@ public class AmostragemControle extends Controle {
         TelaAmostragem.getInstance().preencherTabela();
     }
 
-    @Override
     public ModeloTabela getModeloTabela(String str) {
         return new ModeloTabelaAmostragem(daoAmostragem.pesquisar(str), new String[]{null, "Tipo", "Objetivo"});
     }
@@ -55,17 +54,14 @@ public class AmostragemControle extends Controle {
         return daoCamera.pesquisar("");
     }
 
-    @Override
-    public boolean criar(Object obj) {
-        return daoAmostragem.inserir(obj);
+    public boolean criar(Amostragem amostragem) {
+        return daoAmostragem.inserir(amostragem);
     }
 
-    @Override
-    public boolean atualizar(Object obj) {
-        return daoAmostragem.alterar(obj);
+    public boolean atualizar(Amostragem amostragem) {
+        return daoAmostragem.alterar(amostragem);
     }
 
-    @Override
     public boolean deletar(int id) {
         return daoAmostragem.excluir(id);
     }

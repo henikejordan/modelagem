@@ -77,7 +77,7 @@
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="panelImagem.setDirIn(dirIn);&#xa;panelImagem.setDirOut(dirOut);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="panelImagem.setDirIn(medicaoDiretaControle.getDirIn());&#xa;panelImagem.setDirOut(medicaoDiretaControle.getDirOut());"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
 

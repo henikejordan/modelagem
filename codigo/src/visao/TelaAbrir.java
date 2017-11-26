@@ -127,7 +127,7 @@ public class TelaAbrir extends javax.swing.JFrame {
         if (JFileChooser.APPROVE_SELECTION.equals(evt.getActionCommand())) {
             String dir = arquivos.getSelectedFile().toString();
             if ("Quantificar".equals(opc)) {
-                new TelaQuantificacao(dir).setVisible(true);
+                new TelaMedicaoDireta(dir).setVisible(true);
             } else {
                 new TelaFiltro(dir).setVisible(true);
             }

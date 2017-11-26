@@ -1,5 +1,6 @@
 package visao;
 
+import controle.MedicaoDiretaControle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,22 +15,19 @@ import modelo.MedicaoDireta;
  *
  * @author henik
  */
-public class TelaQuantificacao extends javax.swing.JFrame {
+public class TelaMedicaoDireta extends javax.swing.JFrame {
 
-    private String dirIn;
-    private final String dirOut;
+    private final MedicaoDiretaControle medicaoDiretaControle;
 
     /**
      * Creates new form NovoJFrame
      *
      * @param dirIn
      */
-    public TelaQuantificacao(String dirIn) {
-        dirOut = gerarNomeArquivo();
-        copiarArquivo(dirIn, dirOut);
-        this.dirIn = dirIn;
+    public TelaMedicaoDireta(String dirIn) {
+        medicaoDiretaControle = new MedicaoDiretaControle(dirIn);
         initComponents();
-        this.dirIn = dirOut;
+        medicaoDiretaControle.setDirIn(medicaoDiretaControle.getDirOut());
     }
 
     /**
@@ -62,8 +60,8 @@ public class TelaQuantificacao extends javax.swing.JFrame {
             }
         });
 
-        panelImagem.setDirIn(dirIn);
-        panelImagem.setDirOut(dirOut);
+        panelImagem.setDirIn(medicaoDiretaControle.getDirIn());
+        panelImagem.setDirOut(medicaoDiretaControle.getDirOut());
 
         javax.swing.GroupLayout panelImagemLayout = new javax.swing.GroupLayout(panelImagem);
         panelImagem.setLayout(panelImagemLayout);
@@ -110,52 +108,12 @@ public class TelaQuantificacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        MedicaoDireta medicaoDireta = (MedicaoDireta) new ConcreteCreatorQuantificacao().factoryMethod("Medição Direta");
-        JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada(dirIn) + "%");
+        medicaoDiretaControle.quantificar();
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
-
-    private String gerarNomeArquivo() {
-        Random random = new Random();
-        String aux = "img/";
-        for (int i = 0; i < 5; i++) {
-            aux += random.nextInt(10);
-        }
-        aux += ".jpg";
-        return aux;
-    }
-
-    private void copiarArquivo(String entrada, String saida) {
-        apagarDiretorioImagens();
-        FileInputStream origem;
-        FileOutputStream destino;
-        FileChannel fcOrigem;
-        FileChannel fcDestino;
-        try {
-            origem = new FileInputStream(entrada);
-            destino = new FileOutputStream(saida);
-            fcOrigem = origem.getChannel();
-            fcDestino = destino.getChannel();
-            fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
-            origem.close();
-            destino.close();
-        } catch (IOException ex) {
-            //
-        }
-    }
-
-    private void apagarDiretorioImagens() {
-        File folder = new File("img/");
-        if (folder.isDirectory()) {
-            File[] sun = folder.listFiles();
-            for (File toDelete : sun) {
-                toDelete.delete();
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;

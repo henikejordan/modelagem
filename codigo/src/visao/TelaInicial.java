@@ -169,7 +169,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
         jMenuOpcQuantificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuOpcQuantificar.setText("Quantificar Doença");
+        jMenuOpcQuantificar.setText("Quantificar Doença - Método Direto");
         jMenuOpcQuantificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuOpcQuantificarActionPerformed(evt);

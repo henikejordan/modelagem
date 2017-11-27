@@ -9,7 +9,8 @@ import visao.inicio.TelaAmostragem;
 import visao.inicio.TelaCamera;
 import visao.inicio.TelaClasseSeveridade;
 import visao.inicio.TelaDoenca;
-import visao.relatorio.TelaRelatorioDoenca;
+import visao.relatorio.TelaRelatorio;
+
 
 /**
  *
@@ -61,7 +62,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuOpcQuantificar = new javax.swing.JMenuItem();
         jMenuOpcFiltro = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuRelDoenca = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -169,7 +170,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
         jMenuOpcQuantificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuOpcQuantificar.setText("Quantificar Doença - Método Direto");
+        jMenuOpcQuantificar.setText("Quantificar Doença");
         jMenuOpcQuantificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuOpcQuantificarActionPerformed(evt);
@@ -192,14 +193,13 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1.setText("Relatórios");
         jMenu1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jMenuRelDoenca.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jMenuRelDoenca.setText("Doença");
-        jMenuRelDoenca.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Doença");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuRelDoencaActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuRelDoenca);
+        jMenu1.add(jMenuItem1);
 
         jMenuBar.add(jMenu1);
 
@@ -273,16 +273,16 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadDoencaActionPerformed
 
     private void jMenuOpcQuantificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcQuantificarActionPerformed
-        new TelaAbrir("Quantificar").setVisible(true);
+        new TelaBrowser("Quantificar").setVisible(true);
     }//GEN-LAST:event_jMenuOpcQuantificarActionPerformed
 
     private void jMenuOpcFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuOpcFiltroActionPerformed
-        new TelaAbrir("Corrigir").setVisible(true);
+        new TelaBrowser("Corrigir").setVisible(true);
     }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
-    private void jMenuRelDoencaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelDoencaActionPerformed
-        TelaRelatorioDoenca.getInstance().setVisible(true);
-    }//GEN-LAST:event_jMenuRelDoencaActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaRelatorio.getInstace().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialog1;
@@ -299,9 +299,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadCultura;
     private javax.swing.JMenuItem jMenuCadDoenca;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuOpcFiltro;
     private javax.swing.JMenuItem jMenuOpcQuantificar;
-    private javax.swing.JMenuItem jMenuRelDoenca;
     private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
 

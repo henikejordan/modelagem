@@ -1,7 +1,12 @@
 package modelo;
 
-public abstract class Relatorio {
+import java.util.ArrayList;
 
-    public abstract void gerarRelatorio();
+/**
+ *
+ * @author User
+ */
+public interface Relatorio {
 
+    public ArrayList gerarRelatorio();
 }

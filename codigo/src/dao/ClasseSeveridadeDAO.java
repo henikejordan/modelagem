@@ -26,6 +26,20 @@ public class ClasseSeveridadeDAO extends DAO {
         return classes;
     }
 
+    public Lista pesquisar(int idDoenca) {
+        Lista classes = new Lista();
+        ResultSet resultado = super.getConecta().executaSQL("select * from classe_severidade where id_doenca=" + idDoenca);
+        try {
+            resultado.first();
+            do {
+                classes.add((ClasseSeveridade) ler(resultado.getInt("id_classe_severidade")));
+            } while (resultado.next());
+        } catch (SQLException ex) {
+            //
+        }
+        return classes;
+    }
+
     @Override
     public Object ler(int id) {
         ClasseSeveridade classeSeveridade = (ClasseSeveridade) new ConcreteCreatorQuantificacao().factoryMethod("Classe Severidade");

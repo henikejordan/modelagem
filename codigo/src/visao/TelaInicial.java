@@ -9,7 +9,7 @@ import visao.inicio.TelaAmostragem;
 import visao.inicio.TelaCamera;
 import visao.inicio.TelaClasseSeveridade;
 import visao.inicio.TelaDoenca;
-import visao.relatorio.TelaRelatorio;
+import visao.relatorio.TelaRelatorioDoenca;
 
 /**
  *
@@ -280,7 +280,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuOpcFiltroActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        TelaRelatorio.getInstace().setVisible(true);
+        TelaRelatorioDoenca.getInstace().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

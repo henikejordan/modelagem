@@ -8,7 +8,6 @@ public class MedicaoDireta extends Severidade {
 
     private int numeroLesoes;
     private float diametroMedioLesoes;
-    private float indiceInfeccao;
 
     public float calculaAreaInfectada(String dir) {
         Mat image = imread(dir);
@@ -23,8 +22,17 @@ public class MedicaoDireta extends Severidade {
         return (float) doente / total * 100;
     }
 
-    public float calculaIndiceInfeccao() {
-        return 0;
+    public float calculaIndiceInfeccao(String dir) {
+        Mat image = imread(dir);
+        threshold(image, image, 200, 255, CV_THRESH_BINARY);
+        cvtColor(image, image, CV_BGR2GRAY);
+        numeroLesoes = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
+
+        image = imread(dir);
+        threshold(image, image, 127, 255, CV_THRESH_BINARY);
+        cvtColor(image, image, CV_BGR2GRAY);
+        diametroMedioLesoes = image.arrayHeight() * image.arrayWidth() - countNonZero(image) / numeroLesoes;
+        return (float) diametroMedioLesoes;
     }
 
 }

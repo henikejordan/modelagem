@@ -1,25 +1,43 @@
 package visao.relatorio;
 
+import modelo.RelatorioDoenca;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
  */
-public class TelaRelatorioDoenca extends javax.swing.JPanel {
+public class TelaRelatorioDoenca extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaRelatorioDOenca
+     * Creates new form TelaRelatorio
      */
     private static TelaRelatorioDoenca instance;
 
     public TelaRelatorioDoenca() {
+        this.setLocationRelativeTo(null);
         initComponents();
+        preencherTabela();
     }
 
-    public static TelaRelatorioDoenca getInstance() {
+    public static TelaRelatorioDoenca getInstace() {
         if (instance == null) {
             instance = new TelaRelatorioDoenca();
         }
         return instance;
+    }
+
+    private void preencherTabela() {
+        RelatorioDoenca r = new RelatorioDoenca();
+        ArrayList<String[]> texto = r.gerarRelatorio();
+
+        DefaultTableModel dtmRelatorio = (DefaultTableModel) jTable1.getModel();
+
+        for (int i = 0; i < texto.size(); i++) {
+            Object[] dados = {texto.get(i)[0], texto.get(i)[1], texto.get(i)[2], texto.get(i)[3], texto.get(i)[4]};
+            dtmRelatorio.addRow(dados);
+        }
     }
 
     /**
@@ -34,51 +52,44 @@ public class TelaRelatorioDoenca extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setMaximumSize(new java.awt.Dimension(845, 410));
-        setMinimumSize(new java.awt.Dimension(855, 410));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Relatório de Doença");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Tipo", "Decrição", "Caracteristica", "Cultura"
+                "Nome", "Tipo", "Descrição", "Caracteristica", "Cultura"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
         );
-    }// </editor-fold>//GEN-END:initComponents
 
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

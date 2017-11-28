@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaRelatorioDoenca extends javax.swing.JFrame {
 
     /**
-     * Creates new form TelaRelatorio
+     * Creates new form TelaRelatorioDoenca
      */
     private static TelaRelatorioDoenca instance;
 
@@ -21,7 +21,7 @@ public class TelaRelatorioDoenca extends javax.swing.JFrame {
         preencherTabela();
     }
 
-    public static TelaRelatorioDoenca getInstace() {
+    public static TelaRelatorioDoenca getInstance() {
         if (instance == null) {
             instance = new TelaRelatorioDoenca();
         }

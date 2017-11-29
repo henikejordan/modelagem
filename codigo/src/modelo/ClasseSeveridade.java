@@ -53,7 +53,7 @@ public class ClasseSeveridade extends MedicaoVisual {
         threshold(image, image, 127, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int doente = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
-        return (float) doente / total;
+        return (float) doente / total * 100;
     }
 
 }

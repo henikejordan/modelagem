@@ -15,6 +15,9 @@ public class Incidencia extends Intensidade {
         threshold(src, src, 200, 255, 1);
         findContours(src, contours, 1, 2);
         totalOrgaos = (int) contours.size();
+        if (totalOrgaos == 0) {
+            return 0;
+        }
 
         src = imread(dir, IMREAD_GRAYSCALE);
         contours = new MatVector();

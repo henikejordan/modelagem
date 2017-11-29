@@ -1,8 +1,7 @@
 package modelo;
 
-import org.bytedeco.javacpp.opencv_core.Mat;
-import org.bytedeco.javacpp.opencv_core.MatVector;
-import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
+import static org.bytedeco.javacpp.opencv_core.*;
+import static org.bytedeco.javacpp.opencv_imgcodecs.*;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 
 public class Incidencia extends Intensidade {
@@ -11,22 +10,17 @@ public class Incidencia extends Intensidade {
     private int totalOrgaosDoentes;
 
     public float calculaIncidencia(String dir) {
-        Mat src = imread(dir);
+        Mat src = imread(dir, IMREAD_GRAYSCALE);
         MatVector contours = new MatVector();
-        Mat hierarchy = new Mat();
-
-        threshold(src, src, 127, 255, THRESH_BINARY);
-        cvtColor(src, src, CV_BGR2GRAY);
-        findContours(src, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+        threshold(src, src, 200, 255, 1);
+        findContours(src, contours, 1, 2);
         totalOrgaos = (int) contours.size();
 
-        src = imread(dir);
+        src = imread(dir, IMREAD_GRAYSCALE);
         contours = new MatVector();
-        hierarchy = new Mat();
-
-        threshold(src, src, 200, 255, THRESH_BINARY);
-        cvtColor(src, src, CV_BGR2GRAY);
-        findContours(src, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+        threshold(src, src, 80, 255, 1);
+        erode(src, src, new Mat());
+        findContours(src, contours, 1, 2);
         totalOrgaosDoentes = (int) contours.size();
 
         return totalOrgaosDoentes / totalOrgaos * 100;

@@ -41,11 +41,11 @@ public class QuantificacaoControle {
         switch (metodo) {
             case "Incidência":
                 Incidencia incidencia = (Incidencia) quantificacao;
-                JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + incidencia.calculaIncidencia(dirIn) + "%");
+                JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + (incidencia.calculaIncidencia(dirIn) <= 100 ? incidencia.calculaIncidencia(dirIn) : 100) + "%");
                 break;
             case "Medição Direta":
                 MedicaoDireta medicaoDireta = (MedicaoDireta) quantificacao;
-                JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + medicaoDireta.calculaAreaInfectada(dirIn) + "%");
+                JOptionPane.showMessageDialog(null, "Porcentagem de doença: " + (medicaoDireta.calculaAreaInfectada(dirIn) <= 100 ? medicaoDireta.calculaAreaInfectada(dirIn) : 100) + "%");
                 break;
             case "Classe Severidade":
                 ClasseSeveridadeDAO daoClasse = (ClasseSeveridadeDAO) new ConcreteCreatorDAO().factoryMethod(metodo);

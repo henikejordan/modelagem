@@ -1,12 +1,8 @@
 package modelo;
 
-import org.bytedeco.javacpp.opencv_core;
-import static org.bytedeco.javacpp.opencv_core.countNonZero;
-import static org.bytedeco.javacpp.opencv_imgcodecs.imread;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_BGR2GRAY;
-import static org.bytedeco.javacpp.opencv_imgproc.CV_THRESH_BINARY;
-import static org.bytedeco.javacpp.opencv_imgproc.cvtColor;
-import static org.bytedeco.javacpp.opencv_imgproc.threshold;
+import static org.bytedeco.javacpp.opencv_core.*;
+import static org.bytedeco.javacpp.opencv_imgcodecs.*;
+import static org.bytedeco.javacpp.opencv_imgproc.*;
 
 public class ClasseSeveridade extends MedicaoVisual {
 
@@ -48,7 +44,7 @@ public class ClasseSeveridade extends MedicaoVisual {
     }
 
     public float calculaAreaInfectada(String dir) {
-        opencv_core.Mat image = imread(dir);
+        Mat image = imread(dir);
         threshold(image, image, 200, 255, CV_THRESH_BINARY);
         cvtColor(image, image, CV_BGR2GRAY);
         int total = image.arrayHeight() * image.arrayWidth() - countNonZero(image);
